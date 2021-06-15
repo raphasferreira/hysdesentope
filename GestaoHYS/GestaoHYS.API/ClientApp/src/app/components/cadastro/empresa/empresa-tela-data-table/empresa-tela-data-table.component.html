@@ -1,0 +1,59 @@
+<vex-scrollbar class="h-full relative">
+
+  <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary"></mat-progress-bar> 
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="Nome">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+          <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="NIPC">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> NIPC </mat-header-cell>
+          <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nipc || "-"}} </mat-cell>
+      </ng-container> 
+  
+      <ng-container matColumnDef="RazaoSocial">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Razão Social </mat-header-cell>
+          <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.razaoSocial || "-"}} </mat-cell>
+      </ng-container> 
+  
+      <ng-container matColumnDef="Contato">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Contato </mat-header-cell>
+          <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.contato || "-"}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="Email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+          <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.email || "-"}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Acoes">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+          <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+          <img (click)="openDialog(row, true)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+          <img (click)="openDialog(row, false)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png">
+          </mat-cell>
+      </ng-container>  
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  
+  
+    </vex-scrollbar>
+    
+    <mat-menu #contactMenu="matMenu" xPosition="before" yPosition="below">
+      <button mat-menu-item>
+        <mat-icon [icIcon]="icEdit"></mat-icon>
+        <span>Edit Contact</span>
+      </button>
+    
+      <button mat-menu-item>
+        <mat-icon [icIcon]="icDeleteForever"></mat-icon>
+        <span>Delete Contact</span>
+      </button>
+    </mat-menu>
+    

@@ -1,0 +1,76 @@
+<div style="padding-bottom: 5%;" [@stagger]="true" class="p-gutter" vexContainer>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+        <div  [formGroup]="form" @fadeInUp class="card" fxFlex="auto">
+            <div class="px-6 py-4" fxLayout="column">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Nome</mat-label>
+                        <input formControlName="nome" matInput required>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>NIPC</mat-label>
+                        <input formControlName="nipc" type="number" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Endereço</mat-label>
+                        <input formControlName="endereco" matInput>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Razão Social</mat-label>
+                        <input formControlName="razaoSocial" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" matInput>
+                    </mat-form-field>
+                    <mat-form-field >
+                        <mat-label>Telefone</mat-label>
+                        <input formControlName="contato" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto" class="example-full-width">
+                        <mat-label>Descrição Serviço</mat-label>
+                        <textarea formControlName="dsServico" matInput placeholder="Ex. 100 Main St" required></textarea>
+                      </mat-form-field>
+                </div>
+                <div style="margin-left: auto;" fxFlex="auto">
+                    <button *ngIf="!editar" [disabled]="form.invalid" (click)="salvar()" mat-raised-button color="primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <mat-menu #contactMenuTipoDoc="matMenu" xPosition="before" yPosition="below">
+    <button mat-menu-item  (click)="openDialog()">
+        <mat-icon [icIcon]="format_list_bulleted"></mat-icon>
+        <span>Listar</span>
+    </button>
+
+    <button mat-menu-item>
+        <mat-icon [icIcon]="icEdit"></mat-icon>
+        <span>Criar</span>
+    </button>
+</mat-menu>
+
+<mat-menu #contactMenuCliente="matMenu" xPosition="before" yPosition="below">
+    <button mat-menu-item (click)="openDialog()">
+        <mat-icon [icIcon]="format_list_bulleted"></mat-icon>
+        <span>Listar</span>
+    </button>
+
+    <button mat-menu-item>
+        <mat-icon [icIcon]="icEdit"></mat-icon>
+        <span>Criar</span>
+    </button>
+</mat-menu> -->

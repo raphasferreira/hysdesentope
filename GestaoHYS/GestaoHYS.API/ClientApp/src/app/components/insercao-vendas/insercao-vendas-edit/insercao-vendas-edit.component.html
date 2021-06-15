@@ -1,0 +1,165 @@
+<div [@stagger]="true" class="p-gutter" vexContainer>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+        <div @fadeInUp class="card" fxFlex="auto">
+            <div class="px-6 py-4" fxLayout="column">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Tipo de Documento</mat-label>
+                        <input matInput>
+                        <button (click)="$event.stopPropagation()" style="position: absolute;right:0;bottom:0;"
+                            [matMenuTriggerFor]="contactMenuTipoDoc" mat-icon-button type="button">
+                            <mat-icon [icIcon]="icMoreVert"></mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Série</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Número</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Data</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Referência</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput>
+                        <button (click)="$event.stopPropagation()" style="position: absolute;right:0;bottom:0;"
+                            [matMenuTriggerFor]="contactMenuCliente" mat-icon-button type="button">
+                            <mat-icon [icIcon]="icMoreVert"></mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Condição de Pagamento</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Desconto</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Data de Vencimento</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Método de Pagamento</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+                <h2 class="title m-0">Produtos e Serviços</h2>
+            </div>
+
+            <div class="px-6 py-4" fxLayout="column">
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <div @stagger class="overflow-y-auto" fxFlex="auto">
+                        <div class="p-gutter" vexContainer gdColumns="1fr " gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr"
+                            gdGap="24px">
+                            <vex-insercao-vendas-data-table (openContact)=" openContact($event)"
+                                (toggleStar)="toggleStar($event)" [columns]="tableColumns" [data]="tableData"
+                                [searchStr]="searchStr$ | async">
+                            </vex-insercao-vendas-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+                <h2 class="title m-0">Contactos</h2>
+            </div>
+            <div class="px-6 py-4" fxLayout="column">
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput>
+                        <mat-hint>e.g. david@example.com</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Cultura</mat-label>
+                        <mat-select>
+                            <mat-option>PT-PT</mat-option>
+                            <mat-option>PT-BR</mat-option>
+                            <mat-option>EN</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Telemóvel</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="auto">
+                        <mat-label>Website</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- <div class="px-6 py-4" style="position: fixed; background-color: white; width: 100%; margin-bottom: 1.5rem;">
+                <div fxLayout="row" fxLayoutAlign="start right">
+                    <div class="col"><p></p></div>    
+                    <button (click)="openContact($event)" class="ltr:ml-4 rtl:mr-4" color="primary" fxFlex="none" fxHide.xs
+                      mat-raised-button type="button" style="right:0rem;padding-bottom: 1rem;">
+                      <ic-icon [icon]="icEdit" class="ltr:mr-2 rtl:ml-2 ltr:-ml-1 rtl:-mr-1" inline="true" size="20px">
+                      </ic-icon>
+                      <span> Guardar e Enviar </span>
+                    </button>
+                  </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<mat-menu #contactMenuTipoDoc="matMenu" xPosition="before" yPosition="below">
+    <button mat-menu-item  (click)="openDialog()">
+        <mat-icon [icIcon]="format_list_bulleted"></mat-icon>
+        <span>Listar</span>
+    </button>
+
+    <button mat-menu-item>
+        <mat-icon [icIcon]="icEdit"></mat-icon>
+        <span>Criar</span>
+    </button>
+</mat-menu>
+
+<mat-menu #contactMenuCliente="matMenu" xPosition="before" yPosition="below">
+    <button mat-menu-item (click)="openDialog()">
+        <mat-icon [icIcon]="format_list_bulleted"></mat-icon>
+        <span>Listar</span>
+    </button>
+
+    <button mat-menu-item>
+        <mat-icon [icIcon]="icEdit"></mat-icon>
+        <span>Criar</span>
+    </button>
+</mat-menu>
