@@ -8,17 +8,17 @@
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.EntityFrameworkCore;
 
-//namespace GestaoHIS.API.Controllers
+//namespace GestaoHYS.Core.Models
 //{
 //    [Route("api/[controller]")]
 //    [ApiController]
-//    public class SalesOrderController : ControllerBase
+//    public class SalesInvoiceController : ControllerBase
 //    {
 
 //        private readonly GestaoHISContext _context;
 //        internal static AuthenticationProvider AuthenticationProvider { get; set; }
 
-//        public SalesOrderController(GestaoHISContext context)
+//        public SalesInvoiceController(GestaoHISContext context)
 //        {
 //            _context = context;
 
@@ -26,27 +26,27 @@
 //        }
 
 
-//        // GET: api/SalesOrder
+//        // GET: api/SalesInvoice
 //        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<SalesOrder>>> GetSalesOrder()
+//        public async Task<ActionResult<IEnumerable<SalesInvoice>>> GetSalesInvoice()
 //        {
-//            return await _context.SalesOrder.ToListAsync();
+//            return await _context.SalesInvoice.ToListAsync();
 //        }
 
-//        // GET: api/SalesOrder/5
+//        // GET: api/SalesInvoice/5
 //        [HttpGet("{id}")]
-//        public async Task<ActionResult<SalesOrder>> GetSalesOrder(string id)
+//        public async Task<ActionResult<SalesInvoice>> GetSalesInvoice(string id)
 //        {
 //            try
 //            {
-//                var SalesOrder = await _context.SalesOrder.FindAsync(id);
+//                var SalesInvoice = await _context.SalesInvoice.FindAsync(id);
 
-//                if (SalesOrder == null)
+//                if (SalesInvoice == null)
 //                {
 //                    return NotFound();
 //                }
 
-//                return SalesOrder;
+//                return SalesInvoice;
 //            }
 //            catch (Exception e)
 //            {
@@ -56,20 +56,20 @@
 
 //        }
 
-//        // GET: api/SalesOrder/5
-//        [HttpGet("GetSalesOrderAll")]
-//        public async Task<ActionResult<List<SalesOrder>>> GetSalesOrderAll()
+//        // GET: api/SalesInvoice/5
+//        [HttpGet("GetSalesInvoiceAll")]
+//        public async Task<ActionResult<List<SalesInvoice>>> GetSalesInvoiceAll()
 //        {
 //            try
 //            {
-//                var SalesOrders = await _context.SalesOrder.ToListAsync();
+//                var SalesInvoices = await _context.SalesInvoice.ToListAsync();
 
-//                if (SalesOrders == null)
+//                if (SalesInvoices == null)
 //                {
 //                    return NotFound();
 //                }
 
-//                return SalesOrders;
+//                return SalesInvoices;
 //            }
 //            catch (Exception e)
 //            {
@@ -81,18 +81,18 @@
 //        }
 
 
-//        // PUT: api/SalesOrder/5
+//        // PUT: api/SalesInvoice/5
 //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
 //        // more details see https://aka.ms/RazorPagesCRUD.
 //        [HttpPut("{id}")]
-//        public async Task<IActionResult> PutSalesOrder(string id, SalesOrder SalesOrder)
+//        public async Task<IActionResult> PutSalesInvoice(string id, SalesInvoice SalesInvoice)
 //        {
-//            if (id != SalesOrder.Id)
+//            if (id != SalesInvoice.Id)
 //            {
 //                return BadRequest();
 //            }
 
-//            _context.Entry(SalesOrder).State = EntityState.Modified;
+//            _context.Entry(SalesInvoice).State = EntityState.Modified;
 
 //            try
 //            {
@@ -100,7 +100,7 @@
 //            }
 //            catch (DbUpdateConcurrencyException)
 //            {
-//                if (!SalesOrderExists(id))
+//                if (!SalesInvoiceExists(id))
 //                {
 //                    return NotFound();
 //                }
@@ -113,37 +113,37 @@
 //            return NoContent();
 //        }
 
-//        // POST: api/SalesOrder
+//        // POST: api/SalesInvoice
 //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
 //        // more details see https://aka.ms/RazorPagesCRUD.
 //        [HttpPost]
-//        public async Task<ActionResult<SalesOrder>> PostSalesOrder(SalesOrder SalesOrder)
+//        public async Task<ActionResult<SalesInvoice>> PostSalesInvoice(SalesInvoice SalesInvoice)
 //        {
-//            _context.SalesOrder.Add(SalesOrder);
+//            _context.SalesInvoice.Add(SalesInvoice);
 //            await _context.SaveChangesAsync();
 
-//            return CreatedAtAction("GetSalesOrder", new { id = SalesOrder.Id }, SalesOrder);
+//            return CreatedAtAction("GetSalesInvoice", new { id = SalesInvoice.Id }, SalesInvoice);
 //        }
 
-//        // DELETE: api/SalesOrder/5
+//        // DELETE: api/SalesInvoice/5
 //        [HttpDelete("{id}")]
-//        public async Task<ActionResult<SalesOrder>> DeleteSalesOrder(string id)
+//        public async Task<ActionResult<SalesInvoice>> DeleteSalesInvoice(string id)
 //        {
-//            var SalesOrder = await _context.SalesOrder.FindAsync(id);
-//            if (SalesOrder == null)
+//            var SalesInvoice = await _context.SalesInvoice.FindAsync(id);
+//            if (SalesInvoice == null)
 //            {
 //                return NotFound();
 //            }
 
-//            _context.SalesOrder.Remove(SalesOrder);
+//            _context.SalesInvoice.Remove(SalesInvoice);
 //            await _context.SaveChangesAsync();
 
-//            return SalesOrder;
+//            return SalesInvoice;
 //        }
 
-//        private bool SalesOrderExists(string id)
+//        private bool SalesInvoiceExists(string id)
 //        {
-//            return _context.SalesOrder.Any(e => e.Id == id);
+//            return _context.SalesInvoice.Any(e => e.Id == id);
 //        }
 
 

@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestaoHYS.API", "GestaoHYS.API\GestaoHYS.API.csproj", "{6EB5AF61-B376-4044-B576-40C933B9C42E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoHYS.Core", "GestaoHYS.Core\GestaoHYS.Core.csproj", "{54291CEA-406F-47EE-822B-C1E035BBCDF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoHYS.Infrastructure", "GestaoHYS.Infrstrucrure\GestaoHYS.Infrastructure.csproj", "{CD566E65-AEFE-47E3-A1AE-1C265B241D4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6EB5AF61-B376-4044-B576-40C933B9C42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EB5AF61-B376-4044-B576-40C933B9C42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EB5AF61-B376-4044-B576-40C933B9C42E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54291CEA-406F-47EE-822B-C1E035BBCDF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54291CEA-406F-47EE-822B-C1E035BBCDF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54291CEA-406F-47EE-822B-C1E035BBCDF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54291CEA-406F-47EE-822B-C1E035BBCDF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD566E65-AEFE-47E3-A1AE-1C265B241D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD566E65-AEFE-47E3-A1AE-1C265B241D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD566E65-AEFE-47E3-A1AE-1C265B241D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD566E65-AEFE-47E3-A1AE-1C265B241D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GestaoHIS.API
+namespace GestaoHIS.Infrastructure
 {
     /// <summary>
     /// Constants
@@ -33,10 +33,9 @@ namespace GestaoHIS.API
         /// </summary>
         public static class Identity
         {
-            internal const string BaseUriKey = "https://identity.primaverabss.com";
+            internal const string BaseUriKey = "https://identity.primaverabss.com/";
             internal const string TokenUriKey = "connect/token";
             internal const string ApplicationScopes = "application"; // default scopes
-            public const string BaseUrlToken = "https://my.jasminsoftware.com/api/228150/228150-0001";
         }
 
         /// <summary>

@@ -14,9 +14,6 @@ namespace GestaoHIS.API
     {
         public static void Main(string[] args)
         {
-
-            AuthenticationProvider authenticationProvider = new AuthenticationProvider("", "");
-
             CreateHostBuilder(args).Build().Run();
         }
 

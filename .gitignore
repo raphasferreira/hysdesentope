@@ -103,3 +103,7 @@ dist
 # TernJS port file
 .tern-port
 /GestaoHYS/.vs
+GestaoHYS/GestaoHYS.Core/obj
+GestaoHYS/GestaoHYS.Core/bin
+GestaoHYS/GestaoHYS.Infrstrucrure/bin
+GestaoHYS/GestaoHYS.Infrstrucrure/obj

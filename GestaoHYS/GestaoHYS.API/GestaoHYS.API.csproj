@@ -15,7 +15,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="IdentityModel" Version="3.3.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.16" />
 		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.8" />
 	</ItemGroup>
 
@@ -62,6 +62,11 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.14" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
 		<PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GestaoHYS.Core\GestaoHYS.Core.csproj" />
+	  <ProjectReference Include="..\GestaoHYS.Infrstrucrure\GestaoHYS.Infrastructure.csproj" />
 	</ItemGroup>
 
 
