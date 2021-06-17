@@ -9,6 +9,7 @@ import { InsercaoVendasComponent } from './components/insercao-vendas/insercao-v
 import { ParceirosTelaComponent } from './components/cadastro/parceiro/parceiros-tela.component';
 import { EmpresaTelaComponent } from './components/cadastro/empresa/empresa-tela.component';
 import { ClienteTelaComponent } from './components/cadastro/cliente/cliente-tela.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
 // import { ParceiroComponent } from './components/cadastro/parceiro/parceiro.component';
 
 
@@ -23,6 +24,7 @@ const routes: VexRoutes = [
       { path: 'gestaohis/cadastro/parceiro', component: ParceirosTelaComponent },
       { path: 'gestaohis/cadastro/cliente/all', component: ClienteTelaComponent },
       { path: 'gestaohis/cadastro/empresa', component: EmpresaTelaComponent },
+      { path: 'gestaohis/cadastro/usuario', component: UsuarioComponent },
      
     ],
   },

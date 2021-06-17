@@ -98,8 +98,8 @@ export class AppComponent implements OnInit{
         children: [
           {
             type: 'link',
-            label: 'All-In-One Table',
-            route: '/gestaohis/apps/aio-table',
+            label: 'Usuarios',
+            route: '/gestaohis/cadastro/usuario',
             icon: icAssigment,
             gruop:'GestaoHis'
           },

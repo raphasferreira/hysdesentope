@@ -36,6 +36,7 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { LoginFinalComponent } from './pages/login-final/login-final.component';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -36,11 +36,11 @@ url: String = '/uc'
   // }
 
   get(urlName: string): Observable<any>{
-     return this.http.get(`${environment.API}${urlName}`,{observe: "response"});
+     return this.http.get(environment.API + urlName,{observe: "response"});
   }
 
   getById(urlName: string, id: number): Observable<any>{
-    return this.http.get(`${environment.API}${urlName}/id`,{observe: "response"});
+    return this.http.get(environment.API+urlName+'/id',{observe: "response"});
  }
   
   // post(urlName: string, body: string): Promise<any> {
@@ -50,15 +50,15 @@ url: String = '/uc'
   // }
 
   post(urlName: string, body: string): Observable<any>{
-    return this.http.post(`${environment.API}${urlName}`, body, { observe: "response", headers: this.headers });
+    return this.http.post(environment.API + urlName, body, { observe: "response", headers: this.headers });
   }
 
   delete(urlName: string): Observable<any> {
-    return this.http.delete(`${environment.API}${urlName}`, { observe: "response", headers: this.headers });
+    return this.http.delete(environment.API + urlName, { observe: "response", headers: this.headers });
   }
 
   put(urlName: string, body: string): Observable<any> {
-    return this.http.put(`${environment.API}${urlName}`, body, { observe: "response", headers: this.headers });
+    return this.http.put(environment.API + urlName, body, { observe: "response", headers: this.headers });
   }
 
 
