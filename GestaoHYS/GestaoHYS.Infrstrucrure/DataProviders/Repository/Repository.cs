@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GestaoHYS.Infrastructure.DataProviders.Repository
 {
@@ -13,21 +14,34 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
         {
             _unitOfWork = unitOfWork;
         }
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
             _unitOfWork.Context.Set<T>().Add(entity);
+            await _unitOfWork.Context.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
-            T existing = _unitOfWork.Context.Set<T>().Find(entity);
-            if (existing != null) _unitOfWork.Context.Set<T>().Remove(existing);
+            _unitOfWork.Context.Set<T>().Remove(entity);
+            await _unitOfWork.Context.SaveChangesAsync();
+            
         }
 
-        public void Update(T entity)
+        public async Task<List<T>> FindAll()
+        {
+            return await _unitOfWork.Context.Set<T>().ToListAsync();
+        }
+
+        public async Task<T> FindAsync(object id)
+        {
+            return await _unitOfWork.Context.Set<T>().FindAsync(id);
+        }
+
+        public async Task Update(T entity)
         {
             _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
             _unitOfWork.Context.Set<T>().Attach(entity);
+            await _unitOfWork.Context.SaveChangesAsync();
         }
     }
 }

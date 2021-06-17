@@ -21,6 +21,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace GestaoHIS.API
@@ -42,7 +43,22 @@ namespace GestaoHIS.API
             {
                 configuration.RootPath = "wwwroot";
             });
-            var key = Encoding.ASCII.GetBytes(Constants.clientSecret);
+
+
+
+            
+
+            var cnnString = Configuration.GetConnectionString("MySqlDbConnection");
+            services.AddDbContext<GestaoHISContext>(x => x.UseMySQL(cnnString));
+            services.AddScoped<IGestaoHISRepository, GestaoHISRepository>();
+
+            RegisterService(services);
+
+            var provider = services.BuildServiceProvider();
+            var configurationSystemReposiroty = provider.GetService<IConfigurationSystemRepository>();
+            var configurationSystem = configurationSystemReposiroty.FindAll().Result.FirstOrDefault();
+
+            var key = Encoding.ASCII.GetBytes(configurationSystem.ClientSecret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -61,19 +77,24 @@ namespace GestaoHIS.API
                  };
              });
 
-            services.AddTokenGenerator();
+            services.AddTokenGenerator(configurationSystem);
 
+            var urlBase = $"{configurationSystem.BaseAppUrl}/api/{configurationSystem.AccountKey}/{configurationSystem.SubscriptionKey}";
             //HttpClients
-            RegisterHttpClients.Register(services, Constants.Identity.BaseUrlToken);
+            RegisterHttpClients.Register(services, urlBase);
 
-            services.AddCors();
-
-            var cnnString = Configuration.GetConnectionString("MySqlDbConnection");
-            services.AddDbContext<GestaoHISContext>(x => x.UseMySQL(cnnString));
-
-            RegisterService(services);
-
-            services.AddScoped<IGestaoHISRepository, GestaoHISRepository>();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder
+                              .WithOrigins("http://localhost:4200")
+                              .AllowAnyMethod()
+                              .AllowAnyHeader()
+                              .AllowCredentials();
+                });
+  
+            });
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddSwaggerGen(c =>
             {
@@ -116,6 +137,7 @@ namespace GestaoHIS.API
             //Repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IConfigurationSystemRepository, ConfigurationSystemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +160,15 @@ namespace GestaoHIS.API
                 });
                 app.UseHsts();
             }
+
+            app.Use((context, next) =>
+            {
+                context.Response.Headers["Access-Control-Allow-Origin"] = "*";
+                return next.Invoke();
+            });
+
+            app.UseCors();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -145,8 +176,7 @@ namespace GestaoHIS.API
                 app.UseSpaStaticFiles();
             }
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
+           
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

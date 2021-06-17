@@ -1,5 +1,7 @@
 ﻿using GestaoHIS.Infrastructure;
 using GestaoHYS.Core.Models;
+using GestaoHYS.Core.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,11 @@ namespace GestaoHYS.API.Helpers
 {
     public class TokenServico
     {
-        public static string GenerateToken(Usuario usuario)
+        public static async Task<string> GenerateToken(Usuario usuario, IConfigurationSystemRepository systemRepository)
         {
+            var configurationSystem = (await systemRepository.FindAll()).FirstOrDefault();
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Constants.clientSecret);
+            var key = Encoding.ASCII.GetBytes(configurationSystem.ClientSecret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] {

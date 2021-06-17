@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GestaoHYS.Core.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        void Add(T entity);
-        void Delete(T entity);
-        void Update(T entity);
+        Task Add(T entity);
+        Task Delete(T entity);
+        Task Update(T entity);
+
+        Task<T> FindAsync(object id);
+        Task<List<T>> FindAll();
     }
 }

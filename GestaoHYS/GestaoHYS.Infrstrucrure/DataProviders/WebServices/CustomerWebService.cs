@@ -26,8 +26,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
             try
             {
                 var resultrefit = _client.GetAll().Result;
-                ODataResponse<Cliente> result = new ODataResponse<Cliente>();
-                return result.Items;
+                return resultrefit;
             }
             catch(Exception ex)
             {

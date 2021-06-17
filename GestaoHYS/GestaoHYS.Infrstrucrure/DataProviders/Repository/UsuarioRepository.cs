@@ -18,6 +18,13 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
             _unitOfWork = unitOfWork;
         }
 
+ 
+
+        public async Task<Usuario> FindByIdNoTracking(long idUser)
+        {
+            return await _unitOfWork.Context.Set<Usuario>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == idUser);
+        }
+
         public async Task<Usuario> FindUserByLogin(string email, string senha)
         {
             IQueryable<Usuario> query = _unitOfWork.Context.Set<Usuario>().Where(x => x.Email == email && x.Senha == senha);

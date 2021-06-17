@@ -1,4 +1,5 @@
 ﻿using GestaoHYS.API.Helpers;
+using GestaoHYS.Core.Repositories;
 using GestaoHYS.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +25,7 @@ namespace GestaoHYS.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<dynamic>> Autenticar(string email, string senha)
+        public async Task<ActionResult<dynamic>> Autenticar([FromServices] IConfigurationSystemRepository systemRepository, string email, string senha)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace GestaoHYS.API.Controllers
                     return NotFound(new { message = "Usuário ou email inválidos" });
                 }
 
-                var token = TokenServico.GenerateToken(registro);
+                var token = await TokenServico.GenerateToken(registro, systemRepository);
                 registro.Senha = null;
 
                 return new

@@ -19,5 +19,7 @@ namespace GestaoHIS.Infrastructure.Repository
         public DbSet<SalesInvoice> SalesInvoice { get; set; }
         public DbSet<SalesItem> SalesItem { get; set; }
         public DbSet<SalesOrder> SalesOrder { get; set; }
+
+        public DbSet<ConfigurationSystem> ConfigurationSystem { get; set; }
     }
 }

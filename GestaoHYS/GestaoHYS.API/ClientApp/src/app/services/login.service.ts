@@ -28,7 +28,7 @@ export class LoginService {
 // }
 
 public login(email:string, senha:string): Observable<any> {
-  return this.http.get(`${environment.API}Usuario/Login?email=${email}&senha=${senha}`, { observe: "response" })
+  return this.http.post(`${environment.API}Login?email=${email}&senha=${senha}`, { observe: "response" })
 }
 
 validaSessao(){

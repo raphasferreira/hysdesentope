@@ -70,7 +70,9 @@ login() {
   
   this.loginService.login(username, password).subscribe(response => {
       this.loginService.isAuthenticated.next(true);
-      localStorage.setItem("currentUser", JSON.stringify(response.nomeUsuario))
+      console.log(response.usuario.nome);
+      console.log(response.token);
+      localStorage.setItem("currentUser", JSON.stringify(response.usuario.nome))
       localStorage.setItem("token", response.token);
       this.router.navigate(['/']);
   },(error) => {

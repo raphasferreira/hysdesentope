@@ -6,6 +6,7 @@ import { Platform } from '@angular/cdk/platform';
 import { NavigationService } from '../@vex/services/navigation.service';
 import icLayers from '@iconify/icons-ic/twotone-layers';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
+import icSettings from '@iconify/icons-ic/twotone-settings';
 import icContactSupport from '@iconify/icons-ic/twotone-contact-support';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
 import icContacts from '@iconify/icons-ic/twotone-contacts';
@@ -181,6 +182,12 @@ export class AppComponent implements OnInit{
           }
         ]
       },
+      {
+        label: 'Configurações',
+        type: 'link',
+        route: '/gestaohis/configuracao/acessoJasminApi',
+        icon: icSettings,
+      }
     ];
   }
   ngOnInit(): void {

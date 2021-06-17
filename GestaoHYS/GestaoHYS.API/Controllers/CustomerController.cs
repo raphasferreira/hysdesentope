@@ -24,6 +24,7 @@ namespace GestaoHYS.API.Controllers
 
         [HttpGet("GetClienteAllJasmin")]
         [Produces(typeof(IList<Cliente>))]
+        [AllowAnonymous]
         public async Task<ActionResult> GetAllCustomerAsync()
         {
             try

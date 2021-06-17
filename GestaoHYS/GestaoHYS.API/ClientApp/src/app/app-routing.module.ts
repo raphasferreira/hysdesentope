@@ -23,6 +23,7 @@ const routes: VexRoutes = [
       { path: 'gestaohis/cadastro/parceiro', component: ParceirosTelaComponent },
       { path: 'gestaohis/cadastro/cliente/all', component: ClienteTelaComponent },
       { path: 'gestaohis/cadastro/empresa', component: EmpresaTelaComponent },
+     
     ],
   },
   { path: 'login', component: LoginFinalComponent }

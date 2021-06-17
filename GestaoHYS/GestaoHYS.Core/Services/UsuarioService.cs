@@ -17,9 +17,68 @@ namespace GestaoHYS.Core.Services
             _repository = repository;
         }
 
+        public async Task DeleteUsuario(long id)
+        {
+            var usuario = await _repository.FindAsync(id);
+            if (usuario != null)
+            {
+                await _repository.Delete(usuario);
+            }
+            else
+            {
+                throw new Exception("Usuario não encontrado");
+            }
+        }
+
+        public async Task<Usuario> FindUserById(long id)
+        {
+            return  await _repository.FindAsync(id); 
+        }
+
         public async Task<Usuario> FindUserByLogin(string email, string senha)
         {
-            return await _repository.FindUserByLogin(email, senha);
+            var senhaMd5Hash = Helpers.GerarHashMd5(senha);
+            return await _repository.FindUserByLogin(email, senhaMd5Hash);
+        }
+
+        public async Task<List<Usuario>> GetUsuarios()
+        {
+            return await _repository.FindAll();
+        }
+
+        public async Task<Usuario> InsertUser(Usuario usuario)
+        {
+            try
+            {
+                usuario.Senha = Helpers.GerarHashMd5(usuario.Senha);
+                await _repository.Add(usuario);
+                return usuario;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro ao inserir usuário no sistema.");
+            }
+        }
+
+        public async Task UpdateUser(Usuario usuario)
+        {
+            try
+            {
+                Usuario userDB = await _repository.FindByIdNoTracking(usuario.Id);
+                if(userDB != null)
+                {
+                    usuario.Senha = userDB.Senha;
+                    await _repository.Update(usuario);
+                }
+                else
+                {
+                    throw new Exception("Usuário não encontrado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao atualizar usuário no sistema.");
+            }
         }
     }
 }
