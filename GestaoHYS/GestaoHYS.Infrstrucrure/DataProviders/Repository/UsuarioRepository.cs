@@ -18,7 +18,13 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
             _unitOfWork = unitOfWork;
         }
 
- 
+
+        override
+        public async Task<List<Usuario>> FindAll()
+        {
+            return await _unitOfWork.Context.Set<Usuario>().Include(u => u.Perfil).ToListAsync();
+        }
+
 
         public async Task<Usuario> FindByIdNoTracking(long idUser)
         {

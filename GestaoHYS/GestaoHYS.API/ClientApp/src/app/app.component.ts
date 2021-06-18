@@ -98,11 +98,18 @@ export class AppComponent implements OnInit{
         children: [
           {
             type: 'link',
-            label: 'Usuarios',
+            label: 'Usuários',
             route: '/gestaohis/cadastro/usuario',
             icon: icAssigment,
             gruop:'GestaoHis'
           },
+          {
+            type: 'link',
+            label: 'Perfil de Usuário',
+            route: '/gestaohis/cadastro/perfil-usuario',
+            icon: icAssigment,
+            gruop:'GestaoHis'
+          }
         ]
       },
       {

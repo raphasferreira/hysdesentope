@@ -8,7 +8,7 @@ import icMoreVert from '@iconify/icons-ic/twotone-more-vert';
 import icEdit from '@iconify/icons-ic/twotone-edit';
 import icDeleteForever from '@iconify/icons-ic/twotone-delete-forever';
 import { MatTableDataSource } from '@angular/material/table';
-import { Usuario } from 'src/app/_models/Usuario';
+import { PerfilUsuario } from 'src/app/_models/PerfilUsuario';
 import { CommomService } from 'src/app/services/commom.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,9 +21,9 @@ import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { Contact } from 'src/static-data/contact';
 
 @Component({
-  selector: 'vex-usuario-tela-data-table',
-  templateUrl: './usuario-tela-data-table.component.html',
-  styleUrls: ['./usuario-tela-data-table.component.scss'],
+  selector: 'vex-perfil-usuario-tela-data-table',
+  templateUrl: './perfil-usuario-tela-data-table.component.html',
+  styleUrls: ['./perfil-usuario-tela-data-table.component.scss'],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -39,14 +39,14 @@ import { Contact } from 'src/static-data/contact';
   ]
 })
 
-export class UsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, AfterViewInit {
+export class PerfilUsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, AfterViewInit {
 
   @Input() data: T[];
   @Input() columns: TableColumn<T>[];
   @Input() pageSize = 20;
   @Input() pageSizeOptions = [10, 20, 50];
   @Input() searchStr: string;
-  
+
   visibleColumns: Array<keyof T | string>;
   // dataSource = new MatTableDataSource<T>();
 
@@ -60,16 +60,14 @@ export class UsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, Afte
   icEdit = icEdit;
 
   displayedColumns: string[] = [
-    "Nome",
-    "Email",
-    "Perfil",
+    "descricao",
     "Acoes"
   ];
 
   @Output() toggleStar = new EventEmitter<Contact['id']>();
 
-  dataSource: MatTableDataSource<Usuario>;
-  listTable: Usuario[] = [];
+  dataSource: MatTableDataSource<PerfilUsuario>;
+  listTable: PerfilUsuario[] = [];
   requisicao: boolean = false;
 
   constructor(private commomService: CommomService,
@@ -77,35 +75,35 @@ export class UsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, Afte
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.mostrarUsuarios();
+    this.mostrarPerfilUsuarios();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
   }
 
   ngAfterViewInit() {
   }
 
   openDialog(empresaSelecionado, editar) {
-    
+
   }
 
-  mostrarUsuarios(){
+  mostrarPerfilUsuarios() {
     this.requisicao = true
     this.listTable = [];
-    this.commomService.get(environment.usuarios)
-    .subscribe(response => {
-      this.listTable = response.body;  
-      this.dataSource = new MatTableDataSource(this.listTable)   
-      this.dataSource.paginator = this.paginator; 
-      this.dataSource.sort = this.sort; 
-      this.requisicao = false;
-    },
-    (error) => {
-      console.log(error.message);
-      this.snackBar.open(MessagesSnackBar.CRIAR_USUARIO_ERRO, 'Close', { duration: 4000 });
-    });
+    this.commomService.get(environment.perfilUsuario)
+      .subscribe(response => {
+        this.listTable = response.body;
+        this.dataSource = new MatTableDataSource(this.listTable)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.requisicao = false;
+      },
+        (error) => {
+          console.log(error.message);
+          this.snackBar.open(MessagesSnackBar.CRIAR_PERFIL_USUARIO_ERRO, 'Close', { duration: 4000 });
+        });
   }
 
   emitToggleStar(event: Event, id: Contact['id']) {

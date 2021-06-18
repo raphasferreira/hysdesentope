@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UsuarioComponent } from './usuario.component';
+import { PerfilUsuarioComponent } from './perfil-usuario.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,16 +31,15 @@ import { SecondaryToolbarModule } from 'src/@vex/components/secondary-toolbar/se
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { UsuarioTelaDataTableComponent } from './usuario-tela-data-table/usuario-tela-data-table.component';
+import { PerfilUsuarioTelaDataTableComponent } from './perfil-usuario-tela-data-table/perfil-usuario-tela-data-table.component';
 import { HighlightModule } from 'src/@vex/components/highlight/highlight.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
-  declarations: [UsuarioComponent, UsuarioTelaDataTableComponent],
+  declarations: [PerfilUsuarioComponent, PerfilUsuarioTelaDataTableComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -76,9 +75,8 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     MatExpansionModule,
     HighlightModule,
     MatProgressBarModule,
-    BrowserAnimationsModule,
-    NoopAnimationsModule
+    BrowserAnimationsModule
 
   ]
 })
-export class UsuarioModule { }
+export class PerfilUsuarioModule { }

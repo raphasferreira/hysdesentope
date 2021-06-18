@@ -23,5 +23,9 @@ namespace GestaoHYS.Core.Models
         [Column("Senha")]
         public string Senha { get; set; }
 
+        [Column("perfilId")]
+        public int PerfilId { get; set; }
+        public virtual PerfilUsuario Perfil { get; set; }
+
     }
 }

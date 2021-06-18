@@ -13,12 +13,11 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
             <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.email || "-"}} </mat-cell>
         </ng-container> 
-    
-        <ng-container matColumnDef="Ativo">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </mat-header-cell>
-            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.ativo || "-"}} </mat-cell>
-        </ng-container> 
 
+        <ng-container matColumnDef="Perfil">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Perfil </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.perfil.descricao || "-"}} </mat-cell>
+        </ng-container> 
         
         <ng-container matColumnDef="Acoes">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>

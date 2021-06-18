@@ -13,7 +13,7 @@ export const environment = {
   empresas: 'Empresa',
   parceiros: 'Parceiro',
   usuarios: 'Usuario',
-  
+  perfilUsuario: 'PerfilUsuario',
   ambiente: "dsv"
 
 };

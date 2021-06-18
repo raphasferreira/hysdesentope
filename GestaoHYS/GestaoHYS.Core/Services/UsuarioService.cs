@@ -43,7 +43,15 @@ namespace GestaoHYS.Core.Services
 
         public async Task<List<Usuario>> GetUsuarios()
         {
-            return await _repository.FindAll();
+            try
+            {
+                return await _repository.FindAll();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public async Task<Usuario> InsertUser(Usuario usuario)

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VexModule } from '../@vex/vex.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -35,6 +35,9 @@ import { GaugeModule, NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { LoginFinalComponent } from './pages/login-final/login-final.component';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { Router } from '@angular/router';
+import { CommomService } from './services/commom.service';
 
 
 @NgModule({
@@ -82,7 +85,13 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    {provide: HTTP_INTERCEPTORS,
+      useFactory: function(router: Router) {
+        return new AuthInterceptor(router);
+      },
+      multi: true,
+      deps: [Router]}
   ],
   bootstrap: [AppComponent]
 })

@@ -120,7 +120,9 @@ namespace GestaoHIS.API
                     }
                 });
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                    .AddNewtonsoftJson(options =>
+                              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
 
@@ -129,7 +131,8 @@ namespace GestaoHIS.API
             //Services
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICustomerService, CustomerService>();
-
+            services.AddScoped<IPerfilUsuarioService, PerfilUsuarioService>();
+            
             //WebServices
             services.AddScoped<ICustomerWebService, CustomerWebService>();
     
@@ -137,6 +140,7 @@ namespace GestaoHIS.API
             //Repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IPerfilUsuarioRepository, PerfilUsuarioRepository>();
             services.AddScoped<IConfigurationSystemRepository, ConfigurationSystemRepository>();
         }
 

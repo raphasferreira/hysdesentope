@@ -12,11 +12,14 @@ using System.Net.Http;
 using GestaoHIS.Infrastructure.Repository;
 using GestaoHYS.Core.Services.Interfaces;
 using GestaoHYS.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaoHIS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
+    [AllowAnonymous]
     public class UsuarioController : ControllerBase
     {
         private IUsuarioService _service;

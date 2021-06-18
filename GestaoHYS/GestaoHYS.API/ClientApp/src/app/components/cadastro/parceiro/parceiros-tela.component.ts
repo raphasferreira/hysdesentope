@@ -177,10 +177,11 @@ export class ParceirosTelaComponent implements OnInit {
    
   }
   boolGeralCliente = true;
-tocarEditeCliente(e){
-  console.log(e);
-  console.log(this.boolGeralCliente);
-  this.boolGeralCliente = this.boolGeralCliente?false:true;
-}
+  
+  tocarEditeCliente(e){
+    console.log(e);
+    console.log(this.boolGeralCliente);
+    this.boolGeralCliente = this.boolGeralCliente?false:true;
+  }
 
 }

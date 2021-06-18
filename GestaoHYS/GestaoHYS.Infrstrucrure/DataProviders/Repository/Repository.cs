@@ -27,7 +27,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
             
         }
 
-        public async Task<List<T>> FindAll()
+        public virtual async Task<List<T>> FindAll()
         {
             return await _unitOfWork.Context.Set<T>().ToListAsync();
         }

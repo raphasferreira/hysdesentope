@@ -24,6 +24,14 @@ export enum MessagesSnackBar {
     DELETAR_USUARIO_SUCESSO = 'Usuário deletado com sucesso',
     DELETAR_USUARIO_ERRO = 'Erro ao deletar usuário',
 
+    //MENSAGENS USUARIO
+    CRIAR_PERFIL_USUARIO_SUCESSO = 'Perfil usuário criado com sucesso',
+    CRIAR_PERFIL_USUARIO_ERRO = 'Erro ao criar perfil usuário',
+    EDITAR_PERFIL_USUARIO_SUCESSO = 'Perfil Usuário alterado com sucesso',
+    EDITAR_PERFIL_USUARIO_ERRO = 'Erro ao alterar perfil usuário',
+    DELETAR_PERFIL_USUARIO_SUCESSO = 'Perfil de usuário deletado com sucesso',
+    DELETAR_PERFIL_USUARIO_ERRO = 'Erro ao deletar perfil usuário',
+
   //MENSAGENS EMPRESA
     CRIAR_EMPRESA_SUCESSO = 'Empresa criada com sucesso',
     CRIAR_EMPRESA_ERRO = 'Erro ao criar empresa',
