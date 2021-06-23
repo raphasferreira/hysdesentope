@@ -11,9 +11,9 @@
         <ng-container matColumnDef="Acoes">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
             <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
-                <img (click)="openDialog(row, true)" style="cursor: pointer; max-width: 25px;"
+                <img (click)="updatePerfilUsuario(row)" style="cursor: pointer; max-width: 25px;"
                     src="../../../assets/edit.png">
-                <img (click)="openDialog(row, false)" style="cursor: pointer; max-width: 25px; margin-left: 15px;"
+                <img (click)="deletePerfilUsuario(row)" style="cursor: pointer; max-width: 25px; margin-left: 15px;"
                     src="../../../assets/Recycle_Bin_Full.png">
             </mat-cell>
         </ng-container>

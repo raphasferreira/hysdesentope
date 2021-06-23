@@ -49,7 +49,7 @@ url: String = '/uc'
   //   return promise
   // }
 
-  post(urlName: string, body: string): Observable<any>{
+  post(urlName: string, body: any): Observable<any>{
     return this.http.post(environment.API + urlName, body, { observe: "response", headers: this.headers });
   }
 
@@ -57,7 +57,7 @@ url: String = '/uc'
     return this.http.delete(environment.API + urlName, { observe: "response", headers: this.headers });
   }
 
-  put(urlName: string, body: string): Observable<any> {
+  put(urlName: string, body: any): Observable<any> {
     return this.http.put(environment.API + urlName, body, { observe: "response", headers: this.headers });
   }
 

@@ -36,6 +36,8 @@ import { HighlightModule } from 'src/@vex/components/highlight/highlight.module'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuarioCreateUpdateModule } from './usuario-create-update/usuario-create-update.module';
+import { UsuarioDeleteModule } from './usuario-delete/usuario-delete.module';
 
 
 
@@ -77,7 +79,9 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     HighlightModule,
     MatProgressBarModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    UsuarioCreateUpdateModule,
+    UsuarioDeleteModule
 
   ]
 })

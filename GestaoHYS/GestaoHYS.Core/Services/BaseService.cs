@@ -16,7 +16,7 @@ namespace GestaoHYS.Core.Services
             _repository = repository;
         }
 
-        public async Task Delete(long id)
+        public async Task Delete(object id)
         {
             var entidade = await _repository.FindAsync(id);
             if (entidade != null)

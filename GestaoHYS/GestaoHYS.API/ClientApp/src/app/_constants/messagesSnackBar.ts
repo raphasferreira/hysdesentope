@@ -23,6 +23,7 @@ export enum MessagesSnackBar {
     EDITAR_USUARIO_ERRO = 'Erro ao alterar usuário',
     DELETAR_USUARIO_SUCESSO = 'Usuário deletado com sucesso',
     DELETAR_USUARIO_ERRO = 'Erro ao deletar usuário',
+    BUSCAR_USUARIO_ERRO = 'Erro ao buscar usuários',
 
     //MENSAGENS USUARIO
     CRIAR_PERFIL_USUARIO_SUCESSO = 'Perfil usuário criado com sucesso',

@@ -36,6 +36,8 @@ import { HighlightModule } from 'src/@vex/components/highlight/highlight.module'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PerfilUsuarioDeleteModule } from './perfil-usuario-delete/perfil-usuario-delete.module';
+import { PerfilUsuarioCreateUpdateModule } from './perfil-usuario-create-update/perfil-usuario-create-update.module';
 
 
 @NgModule({
@@ -75,7 +77,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatExpansionModule,
     HighlightModule,
     MatProgressBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PerfilUsuarioDeleteModule,
+    PerfilUsuarioCreateUpdateModule
 
   ]
 })

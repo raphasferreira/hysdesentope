@@ -15,6 +15,10 @@ import { scaleIn400ms } from 'src/@vex/animations/scale-in.animation';
 import { fadeInRight400ms } from 'src/@vex/animations/fade-in-right.animation';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
+import icAdd from '@iconify/icons-ic/twotone-add';
+import { MatDialog } from '@angular/material/dialog';
+import { PerfilUsuarioCreateUpdateComponent } from './perfil-usuario-create-update/perfil-usuario-create-update.component';
+import { PerfilUsuario } from 'src/app/_models/PerfilUsuario';
 
 @Component({
   selector: 'vex-perfil-usuario',
@@ -32,6 +36,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   labelBotao:string='Criar Perfil de Usuário';
 
+  icAdd = icAdd;
   icSearch = icSearch;
   icPersonAdd = icPersonAdd;
   icCloudDownload = icCloudDownload;
@@ -46,7 +51,7 @@ export class PerfilUsuarioComponent implements OnInit {
     debounceTime(10)
   );
   
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -70,4 +75,8 @@ export class PerfilUsuarioComponent implements OnInit {
     // }
   }
 
+
+  createPerfilUsuario() {
+    this.dialog.open(PerfilUsuarioCreateUpdateComponent);
+  }
 }

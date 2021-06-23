@@ -10,7 +10,7 @@ namespace GestaoHYS.Core.Services.Interfaces
         Task<T> Insert(T entidade);
         Task Update(T entidade);
 
-        Task Delete(long id);
+        Task Delete(object id);
         Task<T> FindById(object id);
         Task<List<T>> FindAll();
 

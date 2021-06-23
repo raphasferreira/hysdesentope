@@ -39,8 +39,8 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
 
         public async Task Update(T entity)
         {
-            _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
             _unitOfWork.Context.Set<T>().Attach(entity);
+            _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
             await _unitOfWork.Context.SaveChangesAsync();
         }
     }

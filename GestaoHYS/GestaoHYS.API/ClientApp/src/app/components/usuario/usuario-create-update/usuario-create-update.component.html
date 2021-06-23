@@ -1,0 +1,70 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+
+
+    <h2 *ngIf="form.get('nome').value " class="headline m-0" fxFlex="auto">{{ form.get('nome').value}}</h2>
+    <h2 *ngIf="!form.get('nome').value" class="headline m-0" fxFlex="auto">Novo Usuario</h2>
+
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+
+  <mat-dialog-content fxLayout="column">
+<br/>
+    <mat-form-field class="flex-auto">
+      <mat-label>Nome</mat-label>
+      <input cdkFocusInitial formControlName="nome" matInput required>
+
+      <mat-icon [icIcon]="icPerson" class="mr-3" matPrefix></mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Email</mat-label>
+      <input cdkFocusInitial formControlName="email" matInput required>
+
+      <mat-icon [icIcon]="icMail" class="mr-3" matPrefix></mat-icon>
+    </mat-form-field>
+
+    <div *ngIf="isCreateMode()" class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Senha</mat-label>
+        <input [type]="inputType" formControlName="senha" matInput required>
+        <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
+          <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+          <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="sm:ml-6 flex-auto">
+        <mat-label>Senha (Confirme)</mat-label>
+        <input [type]="inputType" formControlName="senhaConfirm" matInput required [errorStateMatcher]="matcher">
+        <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
+          <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+          <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+        </button>
+        <mat-error *ngIf="form.hasError('notSame')">
+          As senhas não coincidem
+        </mat-error>  
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Perfil</mat-label>
+      <mat-select formControlName="perfilId" required>
+        <mat-option *ngFor="let item of listOfPerfies" [value]="item.id">{{item.descricao}}</mat-option>
+      </mat-select>
+      <mat-icon [icIcon]="icAssigment" class="mr-3" matPrefix></mat-icon>
+ 
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCEL</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-button type="submit" [disabled]="!form.valid">CRIAR USUÁRIO</button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-button type="submit" [disabled]="!form.valid">ATUALIZAR USUÁRIO</button>
+  </mat-dialog-actions>
+</form>

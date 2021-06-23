@@ -64,10 +64,10 @@ namespace GestaoHYS.API.Controllers
         // PUT: api/PerfilUsuario/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerfilUsuario(long id, PerfilUsuario perfil)
+        [HttpPut]
+        public async Task<IActionResult> PutPerfilUsuario( PerfilUsuario perfil)
         {
-            if (id != perfil.Id)
+            if (perfil.Id == 0)
             {
                 return BadRequest();
             }
@@ -75,7 +75,7 @@ namespace GestaoHYS.API.Controllers
             try
             {
                 await _service.Update(perfil);
-                return Ok("Perfil Usuario atualizado com sucesso.");
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -105,12 +105,12 @@ namespace GestaoHYS.API.Controllers
 
         // DELETE: api/PerfilUsuario/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeletePerfilUsuario(long id)
+        public async Task<ActionResult> DeletePerfilUsuario(int id)
         {
             try
             {
                 await _service.Delete(id);
-                return Ok("Perfil Usuário excluído com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {

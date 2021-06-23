@@ -19,6 +19,10 @@ import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { environment } from "src/environments/environment";
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { Contact } from 'src/static-data/contact';
+import { EventEmitterService } from 'src/app/services/event.service';
+import { UsuarioCreateUpdateComponent } from '../usuario-create-update/usuario-create-update.component';
+import { ReplaySubject } from 'rxjs';
+import { UsuarioDeleteComponent } from '../usuario-delete/usuario-delete.component';
 
 @Component({
   selector: 'vex-usuario-tela-data-table',
@@ -40,7 +44,8 @@ import { Contact } from 'src/static-data/contact';
 })
 
 export class UsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, AfterViewInit {
-
+  subject$: ReplaySubject<Usuario[]> = new ReplaySubject<Usuario[]>(1);
+  
   @Input() data: T[];
   @Input() columns: TableColumn<T>[];
   @Input() pageSize = 20;
@@ -77,6 +82,7 @@ export class UsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, Afte
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    EventEmitterService.get('buscarUsuarios').subscribe(()=>this.mostrarUsuarios());
     this.mostrarUsuarios();
   }
 
@@ -104,12 +110,26 @@ export class UsuarioTelaDataTableComponent<T> implements OnInit, OnChanges, Afte
     },
     (error) => {
       console.log(error.message);
-      this.snackBar.open(MessagesSnackBar.CRIAR_USUARIO_ERRO, 'Close', { duration: 4000 });
+      this.snackBar.open(MessagesSnackBar.BUSCAR_USUARIO_ERRO, 'Close', { duration: 4000 });
     });
   }
 
   emitToggleStar(event: Event, id: Contact['id']) {
     event.stopPropagation();
     this.toggleStar.emit(id);
+  }
+
+  updateUsuario(usuario) {
+
+    this.dialog.open(UsuarioCreateUpdateComponent, {
+      data: usuario
+    });
+  }
+
+  deleteUsuario(usuario) {
+
+    this.dialog.open(UsuarioDeleteComponent, {
+      data: usuario
+    });
   }
 }

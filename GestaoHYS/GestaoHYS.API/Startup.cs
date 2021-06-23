@@ -130,6 +130,8 @@ namespace GestaoHIS.API
         {
             //Services
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IEmpresaService, EmpresaService>();
+            services.AddScoped<IParceiroService, ParceiroService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IPerfilUsuarioService, PerfilUsuarioService>();
             
@@ -142,6 +144,8 @@ namespace GestaoHIS.API
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IPerfilUsuarioRepository, PerfilUsuarioRepository>();
             services.AddScoped<IConfigurationSystemRepository, ConfigurationSystemRepository>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IParceiroRepository, ParceiroRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -198,14 +202,14 @@ namespace GestaoHIS.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api GestãoHYS");
             });
 
-            //app.UseSpa(spa =>
-            //{
-            //    spa.Options.SourcePath = "ClientApp";
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseAngularCliServer(npmScript: "start");
-            //    }
-            //});
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
         }
     }
 }

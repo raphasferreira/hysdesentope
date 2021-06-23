@@ -22,46 +22,46 @@
 
 //        private readonly GestaoHISContext _context;
 //        private readonly IGestaoHISRepository _repo;
-//        //private readonly IConfiguration _config;
+//        private readonly IConfiguration _config;
 //        internal static AuthenticationProvider AuthenticationProvider { get; set; }
 
 //        public ClienteController(GestaoHISContext context, IGestaoHISRepository repo)//, IConfiguration config)
 //        {
 //            _context = context;
 //            _repo = repo;
-//            //_config = config;
+//            _config = config;
 //            AuthenticationProvider = new AuthenticationProvider("", "");
 //        }
 
 
 //        #region Public Properties
 
-//        /// <summary>
-//        /// Gets or sets the account key.
-//        /// </summary>
+//        / <summary>
+//        / Gets or sets the account key.
+//        / </summary>
 //        public static string AccountKey { get; set; }
 
-//        /// <summary>
-//        /// Gets or sets the subscription key.
-//        /// </summary>
+//        / <summary>
+//        / Gets or sets the subscription key.
+//        / </summary>
 //        public static string SubscriptionKey { get; set; }
 
-//        /// <summary>
-//        /// Gets or sets the culture key.
-//        /// </summary>
+//        / <summary>
+//        / Gets or sets the culture key.
+//        / </summary>
 //        public static string CultureKey { get; set; }
 
 
 //        #endregion
 
-//        // GET: api/Cliente
-//        [HttpGet]
+//        GET: api/Cliente
+//       [HttpGet]
 //        public async Task<ActionResult<IEnumerable<Cliente>>> GetCliente()
 //        {
 //            return await _context.Cliente.Where(w => w.IsDeleted == false).ToListAsync();
 //        }
 
-//        // GET: api/Cliente/5
+//        GET: api/Cliente/5
 //        [HttpGet("{id}")]
 //        public async Task<ActionResult<Cliente>> GetCliente(long id)
 //        {
@@ -113,20 +113,20 @@
 //        {
 //            try
 //            {
-//                // Create the HTTP client to perform the request
+//                Create the HTTP client to perform the request
 
 //                using HttpClient client = new HttpClient();
 //                await AuthenticationProvider.SetAccessTokenAsync(client);
 
-//                // Build the request
+//                Build the request
 
 //                string request = "salescore/customerParties";
 
-//                // build the odata expression
+//                build the odata expression
 
-//                //string odataExpression = "?$select=PartyKey, PaymentTerm&$top=1&$filter= IsActive eq true and IsSystem eq false and IsDeleted eq false&$orderby=CreatedOn desc";
+//                string odataExpression = "?$select=PartyKey, PaymentTerm&$top=1&$filter= IsActive eq true and IsSystem eq false and IsDeleted eq false&$orderby=CreatedOn desc";
 
-//                // full request 
+//                full request
 //                request = string.Concat(request);
 
 //                string resourceLocation = string.Format("{0}/api/{1}/{2}/{3}", Constants.baseAppUrl, Constants.AccountKey, Constants.SubscriptionKey, request);
@@ -135,16 +135,16 @@
 
 //                if (!silentMode)
 //                {
-//                    // Log Request
+//                    Log Request
 
 //                    Console.WriteLine("Request - GET");
 //                    Console.WriteLine("{0}", resourceLocation);
 //                }
 
-//                // Send
+//                Send
 
 //                using HttpResponseMessage responseContent = await client.GetAsync(resourceLocation);
-//                // Get the response
+//                Get the response
 
 //                if (responseContent.IsSuccessStatusCode)
 //                {
@@ -157,7 +157,7 @@
 
 //                    if (!silentMode)
 //                    {
-//                        //ConsoleHelper.WriteSuccessLine(string.Format("The last customer was found with success. ('{0}' - PaymentTerm:{1})", foundPartyKey, customers[0].PaymentTerm));
+//                        ConsoleHelper.WriteSuccessLine(string.Format("The last customer was found with success. ('{0}' - PaymentTerm:{1})", foundPartyKey, customers[0].PaymentTerm));
 //                        Console.WriteLine("");
 //                    }
 //                    return customers;
@@ -166,9 +166,9 @@
 //                {
 //                    if (!silentMode)
 //                    {
-//                        //ConsoleHelper.WriteErrorLine(string.Format("Failed. {0}", responseContent.ToString()));
+//                        ConsoleHelper.WriteErrorLine(string.Format("Failed. {0}", responseContent.ToString()));
 //                        string result = await ((StreamContent)responseContent.Content).ReadAsStringAsync();
-//                        //ConsoleHelper.WriteErrorLine(string.Format("Content: {0}", result));
+//                        ConsoleHelper.WriteErrorLine(string.Format("Content: {0}", result));
 
 //                        throw new Exception("Unable to get the last customer.");
 //                    }
@@ -176,8 +176,8 @@
 //            }
 //            catch (Exception)
 //            {
-//                //ConsoleHelper.WriteErrorLine("Error found!");
-//                //ConsoleHelper.WriteErrorLine(exception.Message);
+//                ConsoleHelper.WriteErrorLine("Error found!");
+//                ConsoleHelper.WriteErrorLine(exception.Message);
 //                throw new Exception("Error getting the last customer.");
 //            }
 
@@ -195,7 +195,7 @@
 //            }
 
 //            _repo.Update(cliente);
-//            //_context.Entry(cliente).State = EntityState.Modified;
+//            _context.Entry(cliente).State = EntityState.Modified;
 
 //            try
 //            {

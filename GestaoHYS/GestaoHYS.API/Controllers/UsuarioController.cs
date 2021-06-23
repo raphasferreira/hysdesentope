@@ -70,10 +70,10 @@ namespace GestaoHIS.API.Controllers
         // PUT: api/Usuario/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(long id, Usuario usuario)
+        [HttpPut]
+        public async Task<IActionResult> PutUsuario(Usuario usuario)
         {
-            if (id != usuario.Id)
+            if (usuario.Id == 0)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace GestaoHIS.API.Controllers
             try
             {
                 await _service.UpdateUser(usuario);
-                return Ok("Usuario atualizado com sucesso.");
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -116,7 +116,7 @@ namespace GestaoHIS.API.Controllers
             try
             {
                 await _service.DeleteUsuario(id);
-                return Ok("Usuário excluído com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {

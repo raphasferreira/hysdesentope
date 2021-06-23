@@ -15,6 +15,11 @@ import { fadeInRight400ms } from 'src/@vex/animations/fade-in-right.animation';
 import { stagger40ms } from 'src/@vex/animations/stagger.animation';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
+import { MatDialog } from '@angular/material/dialog';
+import { UsuarioCreateUpdateComponent } from './usuario-create-update/usuario-create-update.component';
+import { Usuario } from 'src/app/_models/Usuario';
+import { Observable, of, ReplaySubject } from 'rxjs';
+import icAdd from '@iconify/icons-ic/twotone-add';
 
 @Component({
   selector: 'vex-usuario',
@@ -30,8 +35,11 @@ import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
 })
 export class UsuarioComponent implements OnInit {
 
+  subject$: ReplaySubject<Usuario[]> = new ReplaySubject<Usuario[]>(1);
+
   labelBotao:string='Criar Usuario';
 
+  icAdd = icAdd;
   icSearch = icSearch;
   icPersonAdd = icPersonAdd;
   icCloudDownload = icCloudDownload;
@@ -41,12 +49,13 @@ export class UsuarioComponent implements OnInit {
   icMenu = icMenu;
   trackById = trackById;
   searchCtrl = new FormControl();
+  usuarios: Usuario[];
   
   searchStr$ = this.searchCtrl.valueChanges.pipe(
     debounceTime(10)
   );
   
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -69,5 +78,23 @@ export class UsuarioComponent implements OnInit {
     //   contact.starred = !contact.starred;
     // }
   }
+
+  createUsuario() {
+    this.dialog.open(UsuarioCreateUpdateComponent).afterClosed().subscribe((usuario: Usuario) => {
+      /**
+       * Usuario is the updated customer (if the user pressed Save - otherwise it's null)
+       */
+      if (usuario) {
+        /**
+         * Here we are updating our local array.
+         * You would probably make an HTTP request here.
+         */
+        this.usuarios.unshift(new Usuario(usuario));
+        this.subject$.next(this.usuarios);
+      }
+    });
+  }
+
+ 
 
 }

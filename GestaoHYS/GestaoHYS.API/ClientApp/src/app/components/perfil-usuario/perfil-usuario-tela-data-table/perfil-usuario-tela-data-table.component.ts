@@ -19,6 +19,9 @@ import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { environment } from "src/environments/environment";
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { Contact } from 'src/static-data/contact';
+import { PerfilUsuarioCreateUpdateComponent } from '../perfil-usuario-create-update/perfil-usuario-create-update.component';
+import { PerfilUsuarioDeleteComponent } from '../perfil-usuario-delete/perfil-usuario-delete.component';
+import { EventEmitterService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'vex-perfil-usuario-tela-data-table',
@@ -75,6 +78,7 @@ export class PerfilUsuarioTelaDataTableComponent<T> implements OnInit, OnChanges
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    EventEmitterService.get('buscarPerfilUsuarios').subscribe(()=>this.mostrarPerfilUsuarios());
     this.mostrarPerfilUsuarios();
   }
 
@@ -109,5 +113,19 @@ export class PerfilUsuarioTelaDataTableComponent<T> implements OnInit, OnChanges
   emitToggleStar(event: Event, id: Contact['id']) {
     event.stopPropagation();
     this.toggleStar.emit(id);
+  }
+
+  updatePerfilUsuario(usuario) {
+
+    this.dialog.open(PerfilUsuarioCreateUpdateComponent, {
+      data: usuario
+    });
+  }
+
+  deletePerfilUsuario(usuario) {
+
+    this.dialog.open(PerfilUsuarioDeleteComponent, {
+      data: usuario
+    });
   }
 }
