@@ -137,11 +137,11 @@ namespace GestaoHYS.Core.Models
 
         [Column("isExternallyManaged")]
         [JsonProperty("isExternallyManaged")]
-        public bool IsExternallyManaged { get; set; }
+        public string IsExternallyManaged { get; set; }
 
         [Column("isPerson")]
         [JsonProperty("isPerson")]
-        public bool IsPerson { get; set; }
+        public string IsPerson { get; set; }
 
         [Column("customerGroup")]
         [JsonProperty("customerGroup")]
@@ -321,19 +321,19 @@ namespace GestaoHYS.Core.Models
 
         [Column("isDraft")]
         [JsonProperty("isDraft")]
-        public bool IsDraft { get; set; }
+        public string IsDraft { get; set; }
 
         [Column("isActive")]
         [JsonProperty("isActive")]
-        public bool IsActive { get; set; }
+        public string IsActive { get; set; }
 
         [Column("isDeleted")]
         [JsonProperty("isDeleted")]
-        public bool IsDeleted { get; set; }
+        public string IsDeleted { get; set; }
 
         [Column("isSystem")]
         [JsonProperty("isSystem")]
-        public bool IsSystem { get; set; }
+        public string IsSystem { get; set; }
 
         [Column("createdBy")]
         [JsonProperty("createdBy")]

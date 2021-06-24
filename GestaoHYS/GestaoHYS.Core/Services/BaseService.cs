@@ -16,7 +16,7 @@ namespace GestaoHYS.Core.Services
             _repository = repository;
         }
 
-        public async Task Delete(object id)
+        public virtual async Task Delete(object id)
         {
             var entidade = await _repository.FindAsync(id);
             if (entidade != null)
@@ -29,7 +29,7 @@ namespace GestaoHYS.Core.Services
             }
         }
 
-        public async Task<List<T>> FindAll()
+        public  async Task<List<T>> FindAll()
         {
             return await _repository.FindAll();
         }
@@ -39,7 +39,7 @@ namespace GestaoHYS.Core.Services
             return await _repository.FindAsync(id);
         }
 
-        public async Task<T> Insert(T entidade)
+        public virtual async Task<T> Insert(T entidade)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace GestaoHYS.Core.Services
             }
         }
 
-        public async Task Update(T entidade)
+        public virtual async Task Update(T entidade)
         {
             try
             {

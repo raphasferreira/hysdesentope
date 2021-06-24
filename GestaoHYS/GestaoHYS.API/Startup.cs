@@ -50,7 +50,7 @@ namespace GestaoHIS.API
 
             var cnnString = Configuration.GetConnectionString("MySqlDbConnection");
             services.AddDbContext<GestaoHISContext>(x => x.UseMySQL(cnnString));
-            services.AddScoped<IGestaoHISRepository, GestaoHISRepository>();
+            //services.AddScoped<IGestaoHISRepository, GestaoHISRepository>();
 
             RegisterService(services);
 
@@ -146,6 +146,8 @@ namespace GestaoHIS.API
             services.AddScoped<IConfigurationSystemRepository, ConfigurationSystemRepository>();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
             services.AddScoped<IParceiroRepository, ParceiroRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -202,14 +204,14 @@ namespace GestaoHIS.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api GestãoHYS");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
         }
     }
 }
