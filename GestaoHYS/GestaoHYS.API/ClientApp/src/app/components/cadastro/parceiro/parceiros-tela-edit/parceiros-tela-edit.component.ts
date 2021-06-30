@@ -28,7 +28,6 @@ import { Country } from '@angular-material-extensions/select-country';
 import { Contact } from 'src/static-data/contact';
 import { Parceiro } from 'src/app/_models/Parceiro';
 import { environment } from 'src/environments/environment';
-import { predefinedCountries } from '../../cliente/cliente-tela-edit/Paises';
 import { EventEmitterService } from 'src/app/services/event.service';
 
 export interface CountryState {
@@ -189,7 +188,7 @@ export class ParceirosTelaEditComponent implements OnInit {
   }
   parceiroSelecionado = new Parceiro();
   editar = false;
-  predefinedCountries = predefinedCountries
+  predefinedCountries = null;
 
   constructor(private cd: ChangeDetectorRef,
               private router: Router,

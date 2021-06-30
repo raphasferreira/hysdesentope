@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ClienteTelaComponent } from './cliente-tela.component';
+import { ClienteComponent } from './cliente.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,18 +33,19 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HighlightModule } from 'src/@vex/components/highlight/highlight.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ClienteTelaEditComponent } from './cliente-tela-edit/cliente-tela-edit.component';
-import { ClienteTelaDataTableComponent, DialogDeleteComponent, DialogWithTableComponent } from './cliente-tela-data-table/cliente-tela-data-table.component';
-import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import {HttpClientModule} from '@angular/common/http';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ClienteCreateUpdateModule } from './cliente-create-update/cliente-create-update.module';
+import { ClienteDeleteModule } from './cliente-delete/cliente-delete.module';
+import { ClienteTelaDataTableComponent } from './cliente-tela-data-table/cliente-tela-data-table.component';
+
+
 
 @NgModule({
-  declarations: [ClienteTelaComponent, ClienteTelaDataTableComponent, ClienteTelaEditComponent, DialogWithTableComponent, DialogDeleteComponent],
+  declarations: [ClienteComponent, ClienteTelaDataTableComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    HttpClientModule,
-    MatSelectCountryModule,
     IconModule,
     MatButtonModule,
     MatTableModule,
@@ -75,7 +76,13 @@ import {HttpClientModule} from '@angular/common/http';
     MatSnackBarModule,
     MatStepperModule,
     MatExpansionModule,
-    HighlightModule
+    HighlightModule,
+    MatProgressBarModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    ClienteCreateUpdateModule,
+    ClienteDeleteModule
+
   ]
 })
-export class ClienteTelaModule { }
+export class ClienteModule { }

@@ -38,7 +38,7 @@ namespace GestaoHYS.Core.Services
             var entidade = await _repository.FindAsync(id);
             if (entidade != null)
             {
-                entidade.IsDeleted = "true";
+                entidade.IsDeleted = true;
                 await _repository.Update(entidade);
             }
             else

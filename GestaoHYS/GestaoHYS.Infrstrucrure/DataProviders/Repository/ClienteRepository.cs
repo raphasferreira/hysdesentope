@@ -20,7 +20,15 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
 
         public async Task<List<Cliente>> FindAllAtivo()
         {
-            return await _unitOfWork.Context.Set<Cliente>().Where(w => w.IsDeleted.ToLower().Equals("false") || w.IsDeleted.ToLower().Equals("0")).ToListAsync();
+            try
+            {
+                return await _unitOfWork.Context.Set<Cliente>().Where(w => (!w.IsDeleted)).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }

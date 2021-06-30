@@ -1,0 +1,133 @@
+<div style="padding-bottom: 5%;" [@stagger]="true" class="p-gutter" vexContainer>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+    <form (ngSubmit)="save()" [formGroup]="form" fxFlex="auto">
+      <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+
+
+        <h2 *ngIf="form.get('name').value " class="headline m-0" fxFlex="auto">{{ form.get('name').value}}</h2>
+        <h2 *ngIf="!form.get('name').value" class="headline m-0" fxFlex="auto">Novo Cliente</h2>
+
+        <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+          <mat-icon [icIcon]="icClose"></mat-icon>
+        </button>
+      </div>
+
+      <mat-divider class="-mx-6 text-border"></mat-divider>
+
+      <mat-dialog-content fxLayout="column">
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>NIF</mat-label>
+            <input cdkFocusInitial formControlName="companyTaxID" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Nome</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>País</mat-label>
+            <input formControlName="country" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Moeda</mat-label>
+            <input formControlName="currency" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Termo de Pesquisa</mat-label>
+            <input formControlName="searchTerm" matInput>
+          </mat-form-field>
+
+          <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+            <mat-checkbox formControlName="isPerson" matInput> Pessoa</mat-checkbox>
+          </div>
+          
+
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="mt-6 mb-4 text-secondary" fxFlex="none">
+            Endereço
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Rua</mat-label>
+            <input formControlName="streetName" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6">
+            <mat-label>Número da Porta</mat-label>
+            <input formControlName="buildingNumber" matInput required>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 ">
+            <mat-label>Código Postal</mat-label>
+            <input formControlName="buildingNumber" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Localidade</mat-label>
+            <input formControlName="streetName" matInput required>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="mt-6 mb-4 text-secondary" fxFlex="none">
+            Contactos
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Telefone</mat-label>
+            <input formControlName="telephone" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6">
+            <mat-label>Email</mat-label>
+            <input formControlName="electronicMail" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6">
+            <mat-label>Cultura</mat-label>
+            <input formControlName="culture" matInput required>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 ">
+            <mat-label>Telemóvel</mat-label>
+            <input formControlName="mobile" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Website</mat-label>
+            <input formControlName="websiteUrl" matInput required>
+          </mat-form-field>
+        </div>
+
+        
+
+      </mat-dialog-content>
+
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close type="button">CANCEL</button>
+        <button *ngIf="isCreateMode()" color="primary" mat-button type="submit" [disabled]="!form.valid">CRIAR
+          CLIENTE</button>
+        <button *ngIf="isUpdateMode()" color="primary" mat-button type="submit" [disabled]="!form.valid">ATUALIZAR
+          CLIENTE</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</div>

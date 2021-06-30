@@ -1,54 +1,55 @@
+
 <vex-scrollbar class="h-full relative">
 
-  
-  <mat-table [dataSource]="dataSource" matSort>
+    <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary"></mat-progress-bar> 
+      <mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="Entidade">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Entidade </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.partyKey || "-"}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="Nome">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
-        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.name || "-"}} </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="Nome">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.name || "-"}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="NIF">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> NIF </mat-header-cell>
-        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.companyTaxID || "-"}} </mat-cell>
-    </ng-container> 
+        <ng-container matColumnDef="NIF">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> NIF </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.companyTaxID || "-"}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="Pais">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> País </mat-header-cell>
-        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.country || "-"}} </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="Pais">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> País </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.country || "-"}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Telefone">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.telephone || "-"}} </mat-cell>
+        </ng-container> 
 
-    <ng-container matColumnDef="Celular">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Celular </mat-header-cell>
-        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.mobile || "-"}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Acoes">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
-        <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
-        <img (click)="openDialog(row, true)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
-        <img (click)="openDialog(row, false)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png">
-        </mat-cell>
-    </ng-container>  
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-</mat-table>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
-
-  </vex-scrollbar>
-  
-  <!-- <mat-menu #contactMenu="matMenu" xPosition="before" yPosition="below">
-    <button mat-menu-item>
-      <mat-icon [icIcon]="icEdit"></mat-icon>
-      <span>Edit Contact</span>
-    </button>
-  
-    <button mat-menu-item>
-      <mat-icon [icIcon]="icDeleteForever"></mat-icon>
-      <span>Delete Contact</span>
-    </button>
-  </mat-menu> -->
-  
+        <ng-container matColumnDef="Email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.electronicMail || "-"}} </mat-cell>
+        </ng-container> 
+        
+        <ng-container matColumnDef="Acoes">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+            <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <img (click)="updateCliente(row)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+            <img (click)="deleteCliente(row)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png">
+            </mat-cell>
+        </ng-container>  
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    
+    
+      </vex-scrollbar>
+      
+      
+      

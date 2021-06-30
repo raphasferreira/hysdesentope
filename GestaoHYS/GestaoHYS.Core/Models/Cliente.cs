@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestaoHYS.Core.Models
 {
-    [Table("Cliente")]
+    [Table("customer")]
     public class Cliente
     {
         [Column("Id")]
@@ -24,7 +24,7 @@ namespace GestaoHYS.Core.Models
 
         [Column("IdReferencia")]
         [JsonProperty("id")]
-        public Guid IdReferencia { get; set; }
+        public string IdReferencia { get; set; }
 
         [Column("versionByte")]
         [JsonProperty("versionByte")]
@@ -36,15 +36,15 @@ namespace GestaoHYS.Core.Models
 
         [Column("locked")]
         [JsonProperty("locked")]
-        public bool Locked { get; set; }
+        public Boolean Locked { get; set; }
 
         [Column("oneTimeCustomer")]
         [JsonProperty("oneTimeCustomer")]
-        public bool OneTimeCustomer { get; set; }
+        public Boolean OneTimeCustomer { get; set; }
 
         [Column("endCustomer")]
         [JsonProperty("endCustomer")]
-        public bool EndCustomer { get; set; }
+        public Boolean EndCustomer { get; set; }
 
         [Column("partyKey")]
         [JsonProperty("partyKey")]
@@ -137,11 +137,11 @@ namespace GestaoHYS.Core.Models
 
         [Column("isExternallyManaged")]
         [JsonProperty("isExternallyManaged")]
-        public string IsExternallyManaged { get; set; }
+        public Boolean IsExternallyManaged { get; set; }
 
         [Column("isPerson")]
         [JsonProperty("isPerson")]
-        public string IsPerson { get; set; }
+        public Boolean IsPerson { get; set; }
 
         [Column("customerGroup")]
         [JsonProperty("customerGroup")]
@@ -321,19 +321,19 @@ namespace GestaoHYS.Core.Models
 
         [Column("isDraft")]
         [JsonProperty("isDraft")]
-        public string IsDraft { get; set; }
+        public Boolean IsDraft { get; set; }
 
         [Column("isActive")]
         [JsonProperty("isActive")]
-        public string IsActive { get; set; }
+        public Boolean IsActive { get; set; }
 
         [Column("isDeleted")]
         [JsonProperty("isDeleted")]
-        public string IsDeleted { get; set; }
+        public Boolean IsDeleted { get; set; }
 
         [Column("isSystem")]
         [JsonProperty("isSystem")]
-        public string IsSystem { get; set; }
+        public Boolean IsSystem { get; set; }
 
         [Column("createdBy")]
         [JsonProperty("createdBy")]
@@ -361,7 +361,7 @@ namespace GestaoHYS.Core.Models
 
         [Column("state")]
         [JsonProperty("state")]
-        public bool State { get; set; }
+        public Boolean State { get; set; }
 
     }
 }

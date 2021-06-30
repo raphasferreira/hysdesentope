@@ -14,33 +14,25 @@ namespace GestaoHYS.Core.Models
         [Required]
         public long Id { get; set; }
 
-        [Column("Logradouro")]
-        public string Logradouro { get; set; }
+        [Column("Rua")]
+        public string Rua { get; set; }
 
         [Column("Numero")]
         public string Numero { get; set; }
+        [Column("CodigoPostal")]
+        public string CodigoPostal { get; set; }
 
-        [Column("Complemento")]
-        public string Complemento { get; set; }
+        [Column("Localidade")]
+        public string Localidade { get; set; }
 
-        [Column("Bairro")]
-        public string Bairro { get; set; }
+        [Column("Titulo")]
+        public string Titulo { get; set; }
 
-        [Column("Cidade")]
-        public string Cidade { get; set; }
+        [Column("Contato")]
+        public string Contato { get; set; }
 
-        [Column("UF")]
-        public string UF { get; set; }
 
-        [Column("CEP")]
-        public string CEP { get; set; }
 
-        [Column("Latitude")]
-        [StringLength(20)]
-        public string Latitude { get; set; }
 
-        [Column("Longitude")]
-        [StringLength(20)]
-        public string Longitude { get; set; }
     }
 }

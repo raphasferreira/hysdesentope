@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using GestaoHIS.Infrastructure;
 using GestaoHYS.Infrastructure.Configurations;
 using Microsoft.AspNetCore.Http;
+using GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Platform;
 
 namespace GestaoHYS.Infrastructure.DataProviders.WebServices
 {
@@ -32,7 +33,18 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
 
                 })
             });
-            
+
+            services.Register<ICountriesClient>("Countries", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
 
 
         }

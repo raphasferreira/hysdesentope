@@ -158,7 +158,7 @@ requisicao: boolean = false;
   selector: 'vex-components-overview-demo-dialog',
   template: `
       <div mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
-          <div>Editar Parceiro</div>
+          <div>Editar Empresa</div>
           <button type="button" mat-icon-button (click)="close('No answer')" tabindex="-1">
               <mat-icon [icIcon]="icClose"></mat-icon>
           </button>

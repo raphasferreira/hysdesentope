@@ -14,6 +14,7 @@ export const environment = {
   parceiros: 'Parceiro',
   usuarios: 'Usuario',
   perfilUsuario: 'PerfilUsuario',
+  countries: "Countries",
   ambiente: "dsv"
 
 };
