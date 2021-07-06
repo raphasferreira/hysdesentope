@@ -9,7 +9,7 @@ namespace GestaoHYS.Core.Repositories
     {
         Task Add(T entity);
         Task Delete(T entity);
-        Task Update(T entity);
+        Task Update(T entity);        
 
         Task<T> FindAsync(object id);
         Task<List<T>> FindAll();

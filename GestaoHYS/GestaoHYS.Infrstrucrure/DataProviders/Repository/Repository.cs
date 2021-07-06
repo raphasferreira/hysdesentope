@@ -1,7 +1,9 @@
-﻿using GestaoHYS.Core.Repositories;
+﻿using GestaoHYS.Core.Models;
+using GestaoHYS.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +43,14 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
         {
             _unitOfWork.Context.Set<T>().Attach(entity);
             _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
+            await SetUpdate(entity);
+        }
+
+        public async Task SetUpdate(T entity)
+        {
             await _unitOfWork.Context.SaveChangesAsync();
         }
+
+        
     }
 }

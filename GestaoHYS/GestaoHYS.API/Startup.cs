@@ -134,11 +134,15 @@ namespace GestaoHIS.API
             services.AddScoped<IParceiroService, ParceiroService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICountriesService, CountriesService>();
+            services.AddScoped<ICurrenciesService, CurrenciesService>();
+            services.AddScoped<ICulturesService, CulturesService>();
             services.AddScoped<IPerfilUsuarioService, PerfilUsuarioService>();
 
             //WebServices
             services.AddScoped<ICustomerWebService, CustomerWebService>();
             services.AddScoped<ICountriesWebService, CountriesWebService>();
+            services.AddScoped<ICurrenciesWebService, CurrenciesWebService>();
+            services.AddScoped<ICulturesWebService, CulturesWebService>();
 
 
             //Repositories

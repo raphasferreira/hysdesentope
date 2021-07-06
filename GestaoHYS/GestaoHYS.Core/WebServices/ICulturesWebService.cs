@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace GestaoHYS.Core.WebServices
 {
-    public interface ICustomerWebService
+    public interface ICulturesWebService
     {
-        Task<IList<Cliente>> GetAll();
-
-        Task<Cliente> Insert(Cliente cliente);
-        Task Update(Cliente cliente);
+        Task<IList<Cultures>> GetAll();
     }
 }

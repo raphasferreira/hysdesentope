@@ -13,22 +13,22 @@ namespace GestaoHYS.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CountriesController : ControllerBase
+    public class CurrenciesController : ControllerBase
     {
-        private ICountriesService _service;
+        private ICurrenciesService _service;
 
-        public CountriesController(ICountriesService service)
+        public CurrenciesController(ICurrenciesService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Produces(typeof(IList<Countries>))]
+        [Produces(typeof(IList<Currencies>))]
         public async Task<ActionResult> GetAllCustomerAsync()
         {
             try
             {
-                var list = await _service.GetAllCountries();
+                var list = await _service.GetAllCurrencies();
                 if (list.Count() == 0)
                     return NoContent();
 

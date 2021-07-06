@@ -7,16 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestaoHYS.Core.Models
 {
     [Table("customer")]
-    public class Cliente
+    public class Cliente : IIdentifier
     {
-        [Column("Id")]
-        [Key]
-        [DatabaseGenerated
-        (DatabaseGeneratedOption.Identity)]
-        [Required]
-        [JsonIgnore]
-      
-        public long Id { get; set; }
+        
 
         [NotMapped]
         [JsonProperty("version")]
@@ -363,5 +356,15 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("state")]
         public Boolean State { get; set; }
 
+        [Column("isIntegration")]
+        [JsonProperty("isIntegration")]
+        public Boolean isIntegration { get; set; }
+
+
+        [Column("isIntegrated")]
+        [JsonProperty("isIntegrated")]
+        public Boolean isIntegrated { get; set; }
+
+  
     }
 }

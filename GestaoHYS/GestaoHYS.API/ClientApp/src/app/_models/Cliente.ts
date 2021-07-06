@@ -1,3 +1,7 @@
+import { Countries } from "./Countries";
+import { Cultures } from "./Cultures";
+import { Currencies } from "./Currencies";
+
 export class Cliente {
     versionByte: string;
     settlementDiscountPercent: number;
@@ -61,9 +65,11 @@ export class Cliente {
     currency: string;
     currencyId: string;
     currencyDescription: string;
+    moeda: Currencies;
     country: string;
     countryId: string;
     countryDescription: string;
+    pais: Countries;
     address: string;
     addressId: string;
     contact: string;
@@ -71,9 +77,11 @@ export class Cliente {
     culture: string;
     cultureId: string;
     cultureDescription: string;
+    cultura: Cultures;
     baseEntityId: string;
     isDraft: boolean;
-    id: string;
+    idBaseLocal: string;
+    idReferencia: string;
     isActive: boolean;
     isDeleted: boolean;
     isSystem: boolean;
@@ -84,6 +92,8 @@ export class Cliente {
     draftId: string;
     subscriptionId?: string;
     _state: number;
+    isIntegration: boolean;
+    isIntegrated: boolean;
 
     constructor(cliente){
         this.versionByte= cliente.versionByte;
@@ -160,7 +170,7 @@ export class Cliente {
         this.cultureDescription= cliente.cultureDescription;
         this.baseEntityId= cliente.baseEntityId;
         this.isDraft= cliente.isDraft;
-        this.id= cliente.id;
+        this.idBaseLocal= cliente.idBaseLocal;
         this.isActive= cliente.isActive;
         this.isDeleted= cliente.isDeleted;
         this.isSystem= cliente.isSystem;
@@ -171,6 +181,12 @@ export class Cliente {
         this.draftId= cliente.draftId;
         this.subscriptionId = cliente.subscriptionId;
         this._state= cliente._state;
+        console.log("construtor");
+        this.pais = new Countries(this.countryId, this.countryDescription, this.country);
+        console.log( this.pais);
+
+        this.moeda = new Currencies(this.currencyId, this.currencyDescription, this.currency);
+        this.cultura = new Cultures(this.cultureId, this.cultureDescription, this.culture);
     }
  
 }

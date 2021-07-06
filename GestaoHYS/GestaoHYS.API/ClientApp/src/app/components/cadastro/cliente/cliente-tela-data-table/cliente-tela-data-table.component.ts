@@ -123,7 +123,7 @@ export class ClienteTelaDataTableComponent<T> implements OnInit, OnChanges, Afte
   }
 
   updateCliente(cliente) {
-
+    console.log(cliente);
     this.dialog.open(ClienteCreateUpdateComponent, {
       data: cliente
     });

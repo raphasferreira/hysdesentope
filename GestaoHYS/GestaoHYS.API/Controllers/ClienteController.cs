@@ -46,7 +46,8 @@ namespace GestaoHYS.API.Controllers
         {
             try
             {
-                return Ok(await _service.FindAllAtivo());
+                var list = await _service.FindAllAtivo();
+                return Ok(list);
             }
             catch (Exception ex)
             {
@@ -105,6 +106,7 @@ namespace GestaoHYS.API.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
             try

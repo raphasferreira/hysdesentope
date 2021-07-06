@@ -30,5 +30,36 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
             }
             
         }
+
+        public async Task<Cliente> FindPartyKey(string partyKey)
+        {
+            try
+            {
+                return await _unitOfWork.Context.Set<Cliente>().FirstOrDefaultAsync(w => w.PartyKey.Equals(partyKey));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task UpdateAttached(Cliente entity)
+        {
+            this.DetachLocal(entity);
+            await base.SetUpdate(entity);
+
+        }
+
+        public void DetachLocal(Cliente entity)
+        {
+            var local = _unitOfWork.Context.Set<Cliente>().Local
+                .FirstOrDefault(entry => entry.Id.Equals(entry.Id));
+
+            if (local != null)
+            {
+                _unitOfWork.Context.Entry(local).State = EntityState.Detached;
+            }
+            _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
+        }
     }
 }

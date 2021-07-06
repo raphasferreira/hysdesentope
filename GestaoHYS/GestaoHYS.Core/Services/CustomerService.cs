@@ -21,6 +21,121 @@ namespace GestaoHYS.Core.Services
             _repository = repository;
         }
 
+
+        override
+        public async Task<Cliente> Insert(Cliente cliente)
+        {
+            try
+            {
+                var isPartKeyUnica = await VerificaPartyKeyIsUnica(cliente.PartyKey);
+
+
+                if (!isPartKeyUnica)
+                {
+                    throw new Exception("Nome de entidade deve ser única. Entidade informada cadastrada.");
+                }
+
+                await InsertBaseLocal(cliente);
+
+                if (cliente.isIntegration)
+                {
+                    cliente = await IntegrarCliente(cliente);
+
+                }
+
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        override
+        public async Task Update(Cliente cliente)
+        {
+            try
+            {
+                await UpdateBaseLocal(cliente);
+
+                if (cliente.isIntegration)
+                {
+                    if (cliente.isIntegrated)
+                    {
+                        await AtualizarCliente(cliente);
+                    }
+                    else
+                    {
+                        await IntegrarCliente(cliente);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private async Task AtualizarCliente(Cliente cliente)
+        {
+            try
+            {
+               await _webService.Update(cliente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao atualizar cliente com Jasmin. Ex.: " + ex.Message);
+            }
+        }
+
+        private async Task UpdateBaseLocal(Cliente cliente)
+        {
+            await _repository.UpdateAttached(cliente);
+        }
+
+        private async Task<Cliente> IntegrarCliente(Cliente cliente)
+        {
+            try
+            {
+
+                cliente = await _webService.Insert(cliente);
+                await AtualizarClienteIntegrado(cliente);
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao integrar cliente com Jasmin. Ex.: "+ ex.Message);
+            }
+           
+        }
+
+        private async Task<Boolean> VerificaPartyKeyIsUnica(string partyKey)
+        {
+            return await _repository.FindPartyKey(partyKey) == null;
+        }
+
+        private async Task AtualizarClienteIntegrado(Cliente cliente)
+        {
+            cliente.isIntegrated = true;
+            await _repository.UpdateAttached(cliente);
+        }
+
+        private async Task InsertBaseLocal(Cliente cliente)
+        {
+            try
+            {
+                cliente.isIntegrated = false;
+                await _repository.Add(cliente);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro ao inserir cliente na base local. Ex.: " + ex.Message);
+            }
+           
+        }
+
         public async Task<IList<Cliente>> GetAllCustomer()
         {
             IList<Cliente> customerResult = await _webService.GetAll();

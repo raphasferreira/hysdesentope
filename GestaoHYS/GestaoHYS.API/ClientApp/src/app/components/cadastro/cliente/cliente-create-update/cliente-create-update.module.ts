@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { ClienteCreateUpdateComponent } from './cliente-create-update.component';
@@ -13,8 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { IconModule } from '@visurel/iconify-angular';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -22,6 +21,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     ReactiveFormsModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatInputModule,
     MatButtonModule,
     MatIconModule,
     MatRadioModule,
@@ -30,8 +30,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     IconModule,
     MatDividerModule,
     MatCheckboxModule,
-    BrowserAnimationsModule,
-    NoopAnimationsModule,
+    MatProgressBarModule
   ],
   declarations: [ClienteCreateUpdateComponent],
   entryComponents: [ClienteCreateUpdateComponent],
