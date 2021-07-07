@@ -119,6 +119,7 @@ namespace GestaoHYS.Core.Services
         private async Task AtualizarClienteIntegrado(Cliente cliente)
         {
             cliente.isIntegrated = true;
+            cliente.isIntegration = true;
             await _repository.UpdateAttached(cliente);
         }
 

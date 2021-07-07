@@ -77,7 +77,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
             where T : class
         {
             return services.AddHttpClient<T>(name, client => client.BaseAddress = new Uri(baseAddress))
-    
+                
                 .AddTypedClient<T>((c, ServiceProvider) =>
                 {
                     var httpContextAccessor = ServiceProvider.GetService<IHttpContextAccessor>();

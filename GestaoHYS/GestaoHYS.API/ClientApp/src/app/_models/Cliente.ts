@@ -1,6 +1,7 @@
 import { Countries } from "./Countries";
 import { Cultures } from "./Cultures";
 import { Currencies } from "./Currencies";
+import { CustomerGroups } from "./CustomerGroup";
 
 export class Cliente {
     versionByte: string;
@@ -35,6 +36,7 @@ export class Cliente {
     customerGroup: string;
     customerGroupId: string;
     customerGroupDescription: string;
+    grupoCliente: CustomerGroups;
     priceList: string;
     priceListId: string;
     priceListDescription: string;
@@ -181,12 +183,12 @@ export class Cliente {
         this.draftId= cliente.draftId;
         this.subscriptionId = cliente.subscriptionId;
         this._state= cliente._state;
-        console.log("construtor");
+ 
         this.pais = new Countries(this.countryId, this.countryDescription, this.country);
-        console.log( this.pais);
-
         this.moeda = new Currencies(this.currencyId, this.currencyDescription, this.currency);
         this.cultura = new Cultures(this.cultureId, this.cultureDescription, this.culture);
+        this.grupoCliente = new CustomerGroups(this.customerGroupId, this.countryDescription, this.customerGroup);
+
     }
  
 }

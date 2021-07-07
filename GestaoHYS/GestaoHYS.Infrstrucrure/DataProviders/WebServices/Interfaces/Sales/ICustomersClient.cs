@@ -19,7 +19,9 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Sales
         [Get("/salesCore/customerParties/{id}")]
         Task<Cliente> FindById(string id);
 
-        [Put("/salescore/customerParties")]
-        Task<ApiResponse<string>> Update(Cliente cliente);
+
+        [Put("/businesscore/parties/{id}/{propriedade}")]
+        Task<ApiResponse<ActionResult>> Update(string id, string propriedade, [Body(BodySerializationMethod.Json)] string valor);
+
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,11 +66,20 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
         {
             try
             {
-                var resultrefit = _client.Update(cliente).Result;
-
-                if (!resultrefit.IsSuccessStatusCode)
+                
+                foreach (var prop in cliente.GetType().BaseType.GetProperties())
                 {
-                    throw new Exception($"Erro ao atualizar cliente no Jasmin. { resultrefit.Error.Content }");
+                    var valorItem = prop.GetValue(cliente, null);
+     
+                    
+                    var resultrefit = _client.Update(cliente.PartyKey, prop.Name, valorItem?.ToString()).Result;
+
+                    if (!resultrefit.IsSuccessStatusCode)
+                    {
+                        throw new Exception($"Erro ao atualizar cliente no Jasmin. { resultrefit.Error.Content }");
+                    }
+             
+
                 }
 
             }

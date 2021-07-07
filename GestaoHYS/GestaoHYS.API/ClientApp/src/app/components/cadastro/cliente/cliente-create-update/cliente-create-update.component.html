@@ -15,137 +15,228 @@
     <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary">
     </mat-progress-bar>
     <br>
-    
+
   </div>
 
 
   <mat-divider class="-mx-6 text-border"></mat-divider>
 
-  
-  
+
+
 
   <mat-dialog-content fxLayout="column">
 
-    <div class="flex flex-col sm:flex-row">
-      <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
-        <mat-checkbox formControlName="isIntegration">Integrar cliente com Jasmin</mat-checkbox>
-      </div>  
-    </div>
-   
-    <div class="flex flex-col sm:flex-row">
-      <mat-form-field class="mt-6 flex-auto">
-        <mat-label>NIF</mat-label>
-        <input cdkFocusInitial formControlName="companyTaxID" matInput>
-      </mat-form-field>
+    <mat-tab-group>
+      <mat-tab label="Geral">
+        <div class="flex flex-col sm:flex-row">
+          <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+            <mat-checkbox formControlName="isIntegration">Integrar cliente com Jasmin</mat-checkbox>
+          </div>
+        </div>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-        <mat-label>Entidade</mat-label>
-        <input formControlName="partyKey" matInput required>
-      </mat-form-field>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>NIF</mat-label>
+            <input cdkFocusInitial formControlName="companyTaxID" matInput>
+          </mat-form-field>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-        <mat-label>Nome</mat-label>
-        <input formControlName="name" matInput required>
-      </mat-form-field>
-    </div>
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Entidade</mat-label>
+            <input formControlName="partyKey" matInput required>
+          </mat-form-field>
 
-    <div class="flex flex-col sm:flex-row">
-      <mat-form-field class="mt-6 flex-auto">
-        <mat-label>País</mat-label>
-        <mat-select formControlName="pais" required>
-          <mat-option *ngFor="let item of listOfCountries" [value]="item">{{item.countryKey}} - {{item.name}}
-           
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Nome</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+        </div>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-        <mat-label>Moeda</mat-label>
-        <mat-select formControlName="moeda" required>
-          <mat-option *ngFor="let item of listOfCurrencies" [value]="item">{{item.currencyKey}} -
-            {{item.description}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>País</mat-label>
+            <mat-select formControlName="pais" required>
+              <mat-option *ngFor="let item of listOfCountries" [value]="item">{{item.countryKey}} - {{item.name}}
 
-      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-        <mat-label>Termo de Pesquisa</mat-label>
-        <input formControlName="searchTerm" matInput>
-      </mat-form-field>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-      <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
-        <mat-checkbox formControlName="isPerson">Pessoa</mat-checkbox>
-      </div>
-    </div>
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Moeda</mat-label>
+            <mat-select formControlName="moeda" required>
+              <mat-option *ngFor="let item of listOfCurrencies" [value]="item">{{item.currencyKey}} -
+                {{item.description}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-    <div class="flex flex-col sm:flex-row">
-      <p class="mt-6 mb-4 text-secondary" fxFlex="none">
-        Endereço
-      </p>
-    </div>
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Termo de Pesquisa</mat-label>
+            <input formControlName="searchTerm" matInput>
+          </mat-form-field>
 
-    <div class="flex flex-col sm:flex-row">
+          <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+            <mat-checkbox formControlName="isPerson">Pessoa</mat-checkbox>
+          </div>
+        </div>
 
-      <mat-form-field class="mt-6 flex-auto">
-        <mat-label>Rua</mat-label>
-        <input formControlName="streetName" matInput>
-      </mat-form-field>
+        <div class="flex flex-col sm:flex-row">
+          <p class="mt-6 mb-4 text-secondary" fxFlex="none">
+            Endereço
+          </p>
+        </div>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6">
-        <mat-label>Número da Porta</mat-label>
-        <input formControlName="buildingNumber" matInput>
-      </mat-form-field>
-    </div>
+        <div class="flex flex-col sm:flex-row">
 
-    <div class="flex flex-col sm:flex-row">
-      <mat-form-field class="mt-6 ">
-        <mat-label>Código Postal</mat-label>
-        <input formControlName="buildingNumber" matInput >
-      </mat-form-field>
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Rua</mat-label>
+            <input formControlName="streetName" matInput>
+          </mat-form-field>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-        <mat-label>Localidade</mat-label>
-        <input formControlName="streetName" matInput >
-      </mat-form-field>
-    </div>
+          <mat-form-field class="sm:mt-6 sm:ml-6">
+            <mat-label>Número da Porta</mat-label>
+            <input formControlName="buildingNumber" matInput>
+          </mat-form-field>
+        </div>
 
-    <div class="flex flex-col sm:flex-row">
-      <p class="mt-6 mb-4 text-secondary" fxFlex="none">
-        Contactos
-      </p>
-    </div>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 ">
+            <mat-label>Código Postal</mat-label>
+            <input formControlName="postalZone" matInput>
+          </mat-form-field>
 
-    <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Localidade</mat-label>
+            <input formControlName="cityName" matInput>
+          </mat-form-field>
+        </div>
 
-      <mat-form-field class="mt-6 flex-auto">
-        <mat-label>Telefone</mat-label>
-        <input formControlName="telephone" matInput >
-      </mat-form-field>
+        <div class="flex flex-col sm:flex-row">
+          <p class="mt-6 mb-4 text-secondary" fxFlex="none">
+            Contactos
+          </p>
+        </div>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6">
-        <mat-label>Email</mat-label>
-        <input formControlName="electronicMail" matInput >
-      </mat-form-field>
+        <div class="flex flex-col sm:flex-row">
 
-      <mat-form-field class="sm:mt-6 sm:ml-6">
-        <mat-label>Cultura</mat-label>
-        <mat-select formControlName="cultura" >
-          <mat-option *ngFor="let item of listOfCultures" [value]="item">{{item.cultureKey}} - {{item.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Telefone</mat-label>
+            <input formControlName="telephone" matInput>
+          </mat-form-field>
 
-    <div class="flex flex-col sm:flex-row">
-      <mat-form-field class="mt-6 ">
-        <mat-label>Telemóvel</mat-label>
-        <input formControlName="mobile" matInput >
-      </mat-form-field>
+          <mat-form-field class="sm:mt-6 sm:ml-6">
+            <mat-label>Email</mat-label>
+            <input formControlName="electronicMail" matInput>
+          </mat-form-field>
 
-      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-        <mat-label>Website</mat-label>
-        <input formControlName="websiteUrl" matInput >
-      </mat-form-field>
-    </div>
+          <mat-form-field class="sm:mt-6 sm:ml-6">
+            <mat-label>Cultura</mat-label>
+            <mat-select formControlName="cultura">
+              <mat-option *ngFor="let item of listOfCultures" [value]="item">{{item.cultureKey}} - {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 ">
+            <mat-label>Telemóvel</mat-label>
+            <input formControlName="mobile" matInput>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Website</mat-label>
+            <input formControlName="websiteUrl" matInput>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+      <mat-tab label="Geral">
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Grupo de Clientes</mat-label>
+            <mat-select formControlName="pais" required>
+              <mat-option *ngFor="let item of listOfCountries" [value]="item">{{item.countryKey}} - {{item.name}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Método de Pagamento</mat-label>
+            <input formControlName="partyKey" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Condição de Pagamento</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Condição de Envio</mat-label>
+            <input formControlName="partyKey" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Desconto</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Regime de Imposto</mat-label>
+            <input formControlName="partyKey" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Tipo de Retenção</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Lista de Preços</mat-label>
+            <input formControlName="partyKey" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Vendedor</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Entidade de Faturação</mat-label>
+            <mat-select formControlName="pais" required>
+              <mat-option *ngFor="let item of listOfCountries" [value]="item">{{item.countryKey}} - {{item.name}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <div class="mt-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+            <mat-checkbox formControlName="isPerson">Cliente Indiferenciado</mat-checkbox>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <div class="mt-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+            <mat-checkbox formControlName="isPerson">Cliente Final </mat-checkbox>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+          <div class="mt-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+            <mat-checkbox formControlName="isPerson">Bloqueado </mat-checkbox>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Cliente">
+        
+      </mat-tab>
+    </mat-tab-group>
+
+
 
   </mat-dialog-content>
 

@@ -122,7 +122,8 @@ export class ClienteCreateUpdateComponent implements OnInit {
       isIntegration: [this.defaults.isIntegration || false, [Validators.required]],
       moeda: [this.defaults.moeda || null, [Validators.required]],
       cultura: [this.defaults.cultura || null, []],
-
+      cityName: [this.defaults.cityName || null, []],
+      postalZone: [this.defaults.postalZone || null, []]
     });
 
     this.requisicao = true;
@@ -314,6 +315,8 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.defaults.isIntegration= this.form.controls['isIntegration'].value;
     this.defaults.moeda= this.form.controls['moeda'].value;
     this.defaults.cultura= this.form.controls['cultura'].value;   
+    this.defaults.postalZone= this.form.controls['postalZone'].value;   
+    this.defaults.cityName= this.form.controls['cityName'].value;   
   }
 }
 

@@ -7,9 +7,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestaoHYS.Core.Models
 {
     [Table("customer")]
-    public class Cliente : IIdentifier
+    public class Cliente : ClientePropriedadesAtualizacao
     {
-        
+        [Column("Id")]
+        [Key]
+        [DatabaseGenerated
+        (DatabaseGeneratedOption.Identity)]
+        [Required]
+        [JsonProperty("idBaseLocal")]
+
+        public long Id { get; set; }
 
         [NotMapped]
         [JsonProperty("version")]
@@ -51,33 +58,8 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("partyKeySequenceId")]
         public string PartyKeySequenceId { get; set; }
 
-        [Column("searchTerm")]
-        [JsonProperty("searchTerm")]
-        public string SearchTerm { get; set; }
 
-        [Column("name")]
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [Column("companyTaxID")]
-        [JsonProperty("companyTaxID")]
-        public string CompanyTaxID { get; set; }
-
-        [Column("electronicMail")]
-        [JsonProperty("electronicMail")]
-        public string ElectronicMail { get; set; }
-
-        [Column("telephone")]
-        [JsonProperty("telephone")]
-        public string Telephone { get; set; }
-
-        [Column("mobile")]
-        [JsonProperty("mobile")]
-        public string Mobile { get; set; }
-
-        [Column("websiteUrl")]
-        [JsonProperty("websiteUrl")]
-        public string WebsiteUrl { get; set; }
+       
 
         [Column("notes")]
         [JsonProperty("notes")]
@@ -92,29 +74,7 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("pictureThumbnail")]
         public string PictureThumbnail { get; set; }
 
-        [Column("streetName")]
-        [JsonProperty("streetName")]
-        public string StreetName { get; set; }
-
-        [Column("buildingNumber")]
-        [JsonProperty("buildingNumber")]
-        public string BuildingNumber { get; set; }
-
-        [Column("postalZone")]
-        [JsonProperty("postalZone")]
-        public string PostalZone { get; set; }
-
-        [Column("cityName")]
-        [JsonProperty("cityName")]
-        public string CityName { get; set; }
-
-        [Column("contactName")]
-        [JsonProperty("contactName")]
-        public string ContactName { get; set; }
-
-        [Column("contactTitle")]
-        [JsonProperty("contactTitle")]
-        public string ContactTitle { get; set; }
+   
 
         [Column("username")]
         [JsonProperty("username")]
@@ -132,9 +92,7 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("isExternallyManaged")]
         public Boolean IsExternallyManaged { get; set; }
 
-        [Column("isPerson")]
-        [JsonProperty("isPerson")]
-        public Boolean IsPerson { get; set; }
+
 
         [Column("customerGroup")]
         [JsonProperty("customerGroup")]
@@ -256,9 +214,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("accountingPartyDescription")]
         public string AccountingPartyDescription { get; set; }
 
-        [Column("currency")]
-        [JsonProperty("currency")]
-        public string Currency { get; set; }
 
         [Column("currencyId")]
         [JsonProperty("currencyId")]
@@ -268,9 +223,7 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("currencyDescription")]
         public string CurrencyDescription { get; set; }
 
-        [Column("country")]
-        [JsonProperty("country")]
-        public string Country { get; set; }
+   
 
         [Column("countryId")]
         [JsonProperty("countryId")]
@@ -295,10 +248,6 @@ namespace GestaoHYS.Core.Models
         [Column("contactId")]
         [JsonProperty("contactId")]
         public string ContactId { get; set; }
-
-        [Column("culture")]
-        [JsonProperty("culture")]
-        public string Culture { get; set; }
 
         [Column("cultureId")]
         [JsonProperty("cultureId")]
