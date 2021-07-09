@@ -11,7 +11,7 @@
   </div>
 
   <div *ngIf="requisicao">
-    <mat-hint>Buscando no Jasmin Países, Moedas e Culturas ...</mat-hint>
+    <mat-hint>Buscando dados cadastrais complementares no Jasmin ...</mat-hint>
     <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary">
     </mat-progress-bar>
     <br>
@@ -26,7 +26,8 @@
 
   <mat-dialog-content fxLayout="column">
 
-    <mat-tab-group>
+    <mat-tab-group dynamicHeight>
+      
       <mat-tab label="Geral">
         <div class="flex flex-col sm:flex-row">
           <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
@@ -149,12 +150,12 @@
           </mat-form-field>
         </div>
       </mat-tab>
-      <mat-tab label="Geral">
+      <mat-tab label="Cliente">
         <div class="flex flex-col sm:flex-row">
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Grupo de Clientes</mat-label>
-            <mat-select formControlName="pais" required>
-              <mat-option *ngFor="let item of listOfCountries" [value]="item">{{item.countryKey}} - {{item.name}}
+            <mat-select formControlName="grupoCliente" required>
+              <mat-option *ngFor="let item of listOfCustomerGroup" [value]="item">{{item.customerGroupKey}} - {{item.description}}
 
               </mat-option>
             </mat-select>
@@ -163,27 +164,36 @@
         <div class="flex flex-col sm:flex-row">
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Método de Pagamento</mat-label>
-            <input formControlName="partyKey" matInput required>
+            <mat-select formControlName="metodoPagamento" required>
+              <mat-option *ngFor="let item of listOfPaymentMethods" [value]="item">{{item.paymentMethodsKey}} - {{item.description}}
+
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Condição de Pagamento</mat-label>
-            <input formControlName="name" matInput required>
-          </mat-form-field>
-        </div>
-        <div class="flex flex-col sm:flex-row">
-          <mat-form-field class="mt-6 flex-auto">
-            <mat-label>Condição de Envio</mat-label>
-            <input formControlName="partyKey" matInput required>
+            <mat-select formControlName="condicaoPagamento" required>
+              <mat-option *ngFor="let item of listOfPaymentTerms" [value]="item">{{item.paymentTermsKey}} - {{item.description}}
+
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-            <mat-label>Desconto</mat-label>
-            <input formControlName="name" matInput required>
+            <mat-label>Condição de Envio</mat-label>
+            <input formControlName="partyKey" matInput required>
           </mat-form-field>
         </div>
         <div class="flex flex-col sm:flex-row">
+          
+
           <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Desconto</mat-label>
+            <input formControlName="name" matInput required>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Regime de Imposto</mat-label>
             <input formControlName="partyKey" matInput required>
           </mat-form-field>
@@ -193,6 +203,7 @@
             <input formControlName="name" matInput required>
           </mat-form-field>
         </div>
+   
         <div class="flex flex-col sm:flex-row">
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Lista de Preços</mat-label>
@@ -230,9 +241,6 @@
             <mat-checkbox formControlName="isPerson">Bloqueado </mat-checkbox>
           </div>
         </div>
-      </mat-tab>
-      <mat-tab label="Cliente">
-        
       </mat-tab>
     </mat-tab-group>
 

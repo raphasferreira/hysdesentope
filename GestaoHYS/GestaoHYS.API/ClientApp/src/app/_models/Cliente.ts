@@ -43,6 +43,7 @@ export class Cliente {
     paymentMethod: string;
     paymentMethodId: string;
     paymentMethodDescription: string;
+    metodoPagamento: string;
     paymentTerm: string;
     paymentTermId: string;
     paymentTermDescription: string;
@@ -136,6 +137,7 @@ export class Cliente {
         this.paymentMethod= cliente.paymentMethod;
         this.paymentMethodId= cliente.paymentMethodId;
         this.paymentMethodDescription= cliente.paymentMethodDescription;
+        this.metodoPagamento = cliente.metodoPagamento;
         this.paymentTerm= cliente.paymentTerm;
         this.paymentTermId= cliente.paymentTermId;
         this.paymentTermDescription= cliente.paymentTermDescription;

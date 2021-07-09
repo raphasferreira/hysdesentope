@@ -17,6 +17,9 @@ export const environment = {
   countries: 'Countries',
   currencies: 'Currencies',
   cultures: 'Cultures',
+  customerGroup: 'CustomerGroup',
+  paymentMethods: 'PaymentMethods',
+  paymentTerms: 'PaymentTerms',
   ambiente: "dsv"
 
 };

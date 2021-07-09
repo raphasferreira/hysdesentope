@@ -28,6 +28,9 @@ import { stagger60ms } from '../../../../../@vex/animations/stagger.animation';
 import { Countries } from 'src/app/_models/Countries';
 import { Currencies } from 'src/app/_models/Currencies';
 import { Cultures } from 'src/app/_models/Cultures';
+import { CustomerGroups } from 'src/app/_models/CustomerGroup';
+import { PaymentMethods } from 'src/app/_models/PaymentMethods';
+import { PaymentTerms } from 'src/app/_models/PaymentTerms';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -78,11 +81,18 @@ export class ClienteCreateUpdateComponent implements OnInit {
   listOfCountries = new Array<Countries>();
   listOfCurrencies = new Array<Currencies>();
   listOfCultures = new Array<Cultures>();
+  listOfCustomerGroup = new Array<CustomerGroups>();
+  listOfPaymentMethods = new Array<PaymentMethods>();
+  listOfPaymentTerms = new Array<PaymentTerms>();
 
   requisicao: boolean = false;
   isRetornoCountries: boolean = false;
   isRetornoCurrency: boolean = false;
   isRetornoCultures: boolean = false;
+  isRetornoCustomerGroup: boolean = false;
+  isRetornoPaymentMethods: boolean = false;
+  isRetornoPaymentTerms: boolean = false;
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public defaults: any,
     private dialogRef: MatDialogRef<ClienteCreateUpdateComponent>,
@@ -123,14 +133,23 @@ export class ClienteCreateUpdateComponent implements OnInit {
       moeda: [this.defaults.moeda || null, [Validators.required]],
       cultura: [this.defaults.cultura || null, []],
       cityName: [this.defaults.cityName || null, []],
-      postalZone: [this.defaults.postalZone || null, []]
+      postalZone: [this.defaults.postalZone || null, []],
+      grupoCliente: [this.defaults.grupoCliente || null, []],
+      customerGroupId: [this.defaults.customerGroupId || null, []],
+      metodoPagamento: [this.defaults.metodoPagamento || null, []],
+      paymentMethodId: [this.defaults.paymentMethodId || null, []],
+      condicaoPagamento: [this.defaults.condicaoPagamento || null, []],
+      paymentTermId: [this.defaults.paymentTermId || null, []],
     });
 
     this.requisicao = true;
     this.loadCountries();
     this.loadCurrencies();
     this.loadCultures();
-   
+    this.loadCustomerGroup();
+    this.loadPaymentMethod();
+    this.loadDadosJasmin(environment.paymentTerms, this.listOfPaymentTerms, this.defaults.condicaoPagamento, "paymentTermId", this.defaults.paymentTermId, this.isRetornoPaymentTerms);
+    
   }
 
 
@@ -144,7 +163,7 @@ export class ClienteCreateUpdateComponent implements OnInit {
           this.form.controls['pais'].setValue(this.defaults.pais);
       }
       this.isRetornoCountries = true;
-      if(this.isRetornoCountries && this.isRetornoCurrency && this.isRetornoCultures){
+      if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
       }
       
@@ -161,7 +180,7 @@ export class ClienteCreateUpdateComponent implements OnInit {
       }
 
       this.isRetornoCurrency = true;
-      if(this.isRetornoCountries && this.isRetornoCurrency && this.isRetornoCultures){
+      if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
       }
       
@@ -178,13 +197,70 @@ export class ClienteCreateUpdateComponent implements OnInit {
       }
 
       this.isRetornoCultures = true;
-      if(this.isRetornoCountries && this.isRetornoCurrency && this.isRetornoCultures){
+      if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
       }
       
     });
   }
 
+
+  loadCustomerGroup() {
+    this.commomService.get(environment.customerGroup).subscribe(response => {
+      this.listOfCustomerGroup = response.body;
+
+      if(this.defaults.grupoCliente != null) {
+        this.defaults.grupoCliente = this.listOfCustomerGroup.find(p => p.id === this.defaults.customerGroupId);
+        this.form.controls['grupoCliente'].setValue(this.defaults.grupoCliente);
+      }
+
+      this.isRetornoCustomerGroup = true;
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
+  loadPaymentMethod() {
+    this.commomService.get(environment.paymentMethods).subscribe(response => {
+      this.listOfPaymentMethods = response.body;
+
+      if(this.defaults.metodoPagamento != null) {
+        this.defaults.metodoPagamento = this.listOfPaymentMethods.find(p => p.id === this.defaults.paymentMethodId);
+        this.form.controls['metodoPagamento'].setValue(this.defaults.metodoPagamento);
+      }
+
+      this.isRetornoPaymentMethods = true;
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
+  loadDadosJasmin(url, lista, objetoAtualizacao, nomePropriedade, idPropriedade, flagRetorno) {
+    this.commomService.get(url).subscribe(response => {
+      lista = response.body;
+
+      if(objetoAtualizacao != null) {
+        objetoAtualizacao = lista.find(p => p.id === idPropriedade);
+        this.form.controls[nomePropriedade].setValue(objetoAtualizacao);
+      }
+
+      flagRetorno = true;
+      console.log("teste metodo generico");
+      console.log(this.listOfPaymentTerms);
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
+  verificaRetornoRequisicoes(){
+    return this.isRetornoCountries && this.isRetornoCurrency && this.isRetornoCultures && this.isRetornoCustomerGroup && this.isRetornoPaymentMethods;
+  }
 
 
   save() {
@@ -233,11 +309,28 @@ export class ClienteCreateUpdateComponent implements OnInit {
     }
   }
 
+  setGrupoClienteToProperty(cliente: Cliente){
+    if(cliente.grupoCliente != null){
+      cliente.customerGroup = cliente.grupoCliente.customerGroupKey;
+      cliente.customerGroupDescription = cliente.grupoCliente.description;
+      cliente.customerGroupId = cliente.grupoCliente.id;
+    }
+  }
+
+  geraObjeto(cliente : Cliente){
+    this.setPaisToProperty(cliente);
+    this.setMoedaToProperty(cliente);
+    this.setCulturaToProperty(cliente);
+    this.setGrupoClienteToProperty(cliente);
+  }
+
+
   createCliente() {
     const cliente = this.form.value;
     this.setPaisToProperty(cliente);
     this.setMoedaToProperty(cliente);
     this.setCulturaToProperty(cliente);
+    this.setGrupoClienteToProperty(cliente);
 
     this.commomService.post(environment.clientes, cliente)
       .subscribe(response => {
@@ -258,13 +351,7 @@ export class ClienteCreateUpdateComponent implements OnInit {
    
   
     this.montaCliente();
-    console.log("update");
-    this.setPaisToProperty(this.defaults);
-    console.log("setPaisToProperty");
-    this.setMoedaToProperty(this.defaults);
-    console.log("setMoedaToProperty");
-    this.setCulturaToProperty(this.defaults);
-    console.log("setCulturaToProperty");
+    this.geraObjeto(this.defaults)
 
     this.commomService.put(environment.clientes, this.defaults)
       .subscribe(response => {
@@ -317,6 +404,7 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.defaults.cultura= this.form.controls['cultura'].value;   
     this.defaults.postalZone= this.form.controls['postalZone'].value;   
     this.defaults.cityName= this.form.controls['cityName'].value;   
+    this.defaults.customerGroupId = this.form.controls['customerGroupId'].value;
   }
 }
 

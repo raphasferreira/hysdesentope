@@ -34,7 +34,12 @@ namespace GestaoHYS.Infrastructure.Extensions
             services.AddClientAccessTokenClient("Countries", "auth");
             services.AddClientAccessTokenClient("Currencies", "auth");
             services.AddClientAccessTokenClient("Cultures", "auth");
-            
+            services.AddClientAccessTokenClient("CustomerGroup", "auth");
+            services.AddClientAccessTokenClient("PaymentMethods", "auth");
+            services.AddClientAccessTokenClient("PaymentTerms", "auth");
+
+
+
         }
 
     }
