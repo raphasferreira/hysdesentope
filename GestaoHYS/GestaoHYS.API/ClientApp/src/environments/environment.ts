@@ -20,6 +20,7 @@ export const environment = {
   customerGroup: 'CustomerGroup',
   paymentMethods: 'PaymentMethods',
   paymentTerms: 'PaymentTerms',
+  deliveryTerms: 'DeliveryTerms',
   ambiente: "dsv"
 
 };

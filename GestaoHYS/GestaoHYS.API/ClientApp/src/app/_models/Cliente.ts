@@ -2,6 +2,9 @@ import { Countries } from "./Countries";
 import { Cultures } from "./Cultures";
 import { Currencies } from "./Currencies";
 import { CustomerGroups } from "./CustomerGroup";
+import { DeliveryTerms } from "./DeliveryTerms";
+import { PaymentMethods } from "./PaymentMethods";
+import { PaymentTerms } from "./PaymentTerms";
 
 export class Cliente {
     versionByte: string;
@@ -43,10 +46,11 @@ export class Cliente {
     paymentMethod: string;
     paymentMethodId: string;
     paymentMethodDescription: string;
-    metodoPagamento: string;
+    metodoPagamento: PaymentMethods;
     paymentTerm: string;
     paymentTermId: string;
     paymentTermDescription: string;
+    condicaoPagamento: PaymentTerms;
     salesperson?: string;
     salespersonId?: string;
     salespersonBaseEntityId?: string;
@@ -60,6 +64,7 @@ export class Cliente {
     deliveryTerm: string;
     deliveryTermId: string;
     deliveryTermDescription: string;
+    condicaoEnvio: DeliveryTerms;
     accountingSchema: number;
     accountingSchemaDescription: string;
     accountingParty: string;
@@ -189,7 +194,12 @@ export class Cliente {
         this.pais = new Countries(this.countryId, this.countryDescription, this.country);
         this.moeda = new Currencies(this.currencyId, this.currencyDescription, this.currency);
         this.cultura = new Cultures(this.cultureId, this.cultureDescription, this.culture);
+
         this.grupoCliente = new CustomerGroups(this.customerGroupId, this.countryDescription, this.customerGroup);
+  
+        this.metodoPagamento = new PaymentMethods(this.paymentMethodId, this.paymentMethodDescription, this.paymentMethod);
+        this.condicaoPagamento = new PaymentTerms(this.paymentTermId, this.paymentTermDescription, this.paymentTerm);
+        this.condicaoEnvio = new DeliveryTerms(this.deliveryTermId, this.deliveryTermDescription, this.deliveryTerm);
 
     }
  

@@ -140,6 +140,8 @@ namespace GestaoHIS.API
             services.AddScoped<ICustomerGroupService, CustomerGroupService>();
             services.AddScoped<IPaymentMethodsService, PaymentMethodsService>();
             services.AddScoped<IPaymentTermsService, PaymentTermsService>();
+            services.AddScoped<IDeliveryTermsService, DeliveryTermsService>();
+
 
             //WebServices
             services.AddScoped<ICustomerWebService, CustomerWebService>();
@@ -149,6 +151,7 @@ namespace GestaoHIS.API
             services.AddScoped<ICustomerGroupWebService, CustomerGroupWebService>();
             services.AddScoped<IPaymentMethodsWebService, PaymentMethodsWebService>();
             services.AddScoped<IPaymentTermsWebService, PaymentTermsWebService>();
+            services.AddScoped<IDeliveryTermsWebService, DeliveryTermsWebService>();
 
 
             //Repositories

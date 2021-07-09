@@ -107,6 +107,30 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
                 })
             });
 
+            services.Register<IDeliveryTermsClient>("DeliveryTerms", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
+            services.Register<IPartyTaxSchemasClient>("PartyTaxSchemas", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
         }
 
         private static IHttpClientBuilder Register<T>(this IServiceCollection services,string name, string baseAddress, RefitSettings refitSettings)

@@ -1,11 +1,11 @@
-export class PaymentTerms{
+export class DeliveryTerms{
     id: string;
     description: string;
-    paymentTermKey: string;
+    deliveryTermKey: string;
   
     constructor(id : string, name: string, key: string){
         this.id = id;
         this.description = name;
-        this.paymentTermKey = key;
+        this.deliveryTermKey = key;
     }
 }

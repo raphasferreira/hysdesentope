@@ -174,7 +174,7 @@
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Condição de Pagamento</mat-label>
             <mat-select formControlName="condicaoPagamento" required>
-              <mat-option *ngFor="let item of listOfPaymentTerms" [value]="item">{{item.paymentTermsKey}} - {{item.description}}
+              <mat-option *ngFor="let item of listOfPaymentTerms" [value]="item">{{item.paymentTermKey}} - {{item.description}}
 
               </mat-option>
             </mat-select>
@@ -182,7 +182,10 @@
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Condição de Envio</mat-label>
-            <input formControlName="partyKey" matInput required>
+            <mat-select formControlName="condicaoEnvio" required>
+              <mat-option *ngFor="let item of listOfDeliveryTerms" [value]="item">{{item.deliveryTermKey}} - {{item.description}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="flex flex-col sm:flex-row">
@@ -190,7 +193,7 @@
 
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Desconto</mat-label>
-            <input formControlName="name" matInput required>
+            <input formControlName="settlementDiscountPercent" matInput required>
           </mat-form-field>
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">

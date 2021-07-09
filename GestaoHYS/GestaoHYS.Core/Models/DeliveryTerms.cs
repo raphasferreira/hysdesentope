@@ -6,15 +6,15 @@ using System.Text;
 
 namespace GestaoHYS.Core.Models
 {
-    public class PaymentTerms
+    public class DeliveryTerms
     {
         [Column("id")]
         [JsonProperty("id")]
         public string id { get; set; }
 
-        [Column("paymentTermKey")]
-        [JsonProperty("paymentTermKey")]
-        public string paymentTermKey { get; set; }
+        [Column("deliveryTermKey")]
+        [JsonProperty("deliveryTermKey")]
+        public string deliveryTermKey { get; set; }
 
         [Column("description")]
         [JsonProperty("description")]
