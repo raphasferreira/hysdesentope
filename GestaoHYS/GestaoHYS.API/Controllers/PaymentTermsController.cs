@@ -24,7 +24,7 @@ namespace GestaoHYS.API.Controllers
 
         [HttpGet]
         [Produces(typeof(IList<PaymentTerms>))]
-        public async Task<ActionResult> GetAllCustomerAsync()
+        public async Task<ActionResult> GetAllAsync()
         {
             try
             {

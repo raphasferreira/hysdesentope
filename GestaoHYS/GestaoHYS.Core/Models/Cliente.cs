@@ -30,22 +30,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("versionByte")]
         public string VersionByte { get; set; }
 
-        [Column("settlementDiscountPercent")]
-        [JsonProperty("settlementDiscountPercent")]
-        public double SettlementDiscountPercent { get; set; }
-
-        [Column("locked")]
-        [JsonProperty("locked")]
-        public Boolean Locked { get; set; }
-
-        [Column("oneTimeCustomer")]
-        [JsonProperty("oneTimeCustomer")]
-        public Boolean OneTimeCustomer { get; set; }
-
-        [Column("endCustomer")]
-        [JsonProperty("endCustomer")]
-        public Boolean EndCustomer { get; set; }
-
         [Column("partyKey")]
         [JsonProperty("partyKey")]
         public string PartyKey { get; set; }
@@ -58,9 +42,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("partyKeySequenceId")]
         public string PartyKeySequenceId { get; set; }
 
-
-       
-
         [Column("notes")]
         [JsonProperty("notes")]
         public string Notes { get; set; }
@@ -69,12 +50,9 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("picture")]
         public string Picture { get; set; }
 
-
         [Column("pictureThumbnail")]
         [JsonProperty("pictureThumbnail")]
         public string PictureThumbnail { get; set; }
-
-   
 
         [Column("username")]
         [JsonProperty("username")]
@@ -91,12 +69,6 @@ namespace GestaoHYS.Core.Models
         [Column("isExternallyManaged")]
         [JsonProperty("isExternallyManaged")]
         public Boolean IsExternallyManaged { get; set; }
-
-
-
-        [Column("customerGroup")]
-        [JsonProperty("customerGroup")]
-        public string CustomerGroup { get; set; }
 
         [Column("customerGroupId")]
         [JsonProperty("customerGroupId")]
@@ -118,10 +90,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("priceListDescription")]
         public string PriceListDescription { get; set; }
 
-        [Column("paymentMethod")]
-        [JsonProperty("paymentMethod")]
-        public string PaymentMethod { get; set; }
-
         [Column("paymentMethodId")]
         [JsonProperty("paymentMethodId")]
         public string PaymentMethodId { get; set; }
@@ -129,10 +97,6 @@ namespace GestaoHYS.Core.Models
         [Column("paymentMethodDescription")]
         [JsonProperty("paymentMethodDescription")]
         public string PaymentMethodDescription { get; set; }
-
-        [Column("paymentTerm")]
-        [JsonProperty("paymentTerm")]
-        public string PaymentTerm { get; set; }
 
         [Column("paymentTermId")]
         [JsonProperty("paymentTermId")]
@@ -158,10 +122,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("salespersonDescription")]
         public string SalespersonDescription { get; set; }
 
-        [Column("partyTaxSchema")]
-        [JsonProperty("partyTaxSchema")]
-        public string PartyTaxSchema { get; set; }
-
         [Column("partyTaxSchemaId")]
         [JsonProperty("partyTaxSchemaId")]
         public string PartyTaxSchemaId { get; set; }
@@ -170,10 +130,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("partyTaxSchemaDescription")]
         public string PartyTaxSchemaDescription { get; set; }
 
-        [Column("partyWithholdingTaxSchema")]
-        [JsonProperty("partyWithholdingTaxSchema")]
-        public string PartyWithholdingTaxSchema { get; set; }
-
         [Column("partyWithholdingTaxSchemaId")]
         [JsonProperty("partyWithholdingTaxSchemaId")]
         public string PartyWithholdingTaxSchemaId { get; set; }
@@ -181,10 +137,6 @@ namespace GestaoHYS.Core.Models
         [Column("partyWithholdingTaxSchemaDescription")]
         [JsonProperty("partyWithholdingTaxSchemaDescription")]
         public string PartyWithholdingTaxSchemaDescription { get; set; }
-
-        [Column("deliveryTerm")]
-        [JsonProperty("deliveryTerm")]
-        public string DeliveryTerm { get; set; }
 
         [Column("deliveryTermId")]
         [JsonProperty("deliveryTermId")]
@@ -214,7 +166,6 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("accountingPartyDescription")]
         public string AccountingPartyDescription { get; set; }
 
-
         [Column("currencyId")]
         [JsonProperty("currencyId")]
         public string CurrencyId { get; set; }
@@ -222,8 +173,6 @@ namespace GestaoHYS.Core.Models
         [Column("currencyDescription")]
         [JsonProperty("currencyDescription")]
         public string CurrencyDescription { get; set; }
-
-   
 
         [Column("countryId")]
         [JsonProperty("countryId")]
@@ -309,11 +258,13 @@ namespace GestaoHYS.Core.Models
         [JsonProperty("isIntegration")]
         public Boolean isIntegration { get; set; }
 
-
         [Column("isIntegrated")]
         [JsonProperty("isIntegrated")]
         public Boolean isIntegrated { get; set; }
 
-  
+        [Column("ErrosIntegracao")]
+        [JsonProperty("ErrosIntegracao")]
+        public string ErrosIntegracao { get; set; }
+
     }
 }

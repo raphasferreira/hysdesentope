@@ -13,22 +13,22 @@ namespace GestaoHYS.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class PartyTaxSchemasController : ControllerBase
+    public class PriceListsController : ControllerBase
     {
-        private IPartyTaxSchemasService _service;
+        private IPriceListsService _service;
 
-        public PartyTaxSchemasController(IPartyTaxSchemasService service)
+        public PriceListsController(IPriceListsService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Produces(typeof(IList<PartyTaxSchemas>))]
+        [Produces(typeof(IList<PriceLists>))]
         public async Task<ActionResult> GetAllAsync()
         {
             try
             {
-                var list = await _service.GetAllPartyTaxSchemas();
+                var list = await _service.GetAllPriceLists();
                 if (list.Count() == 0)
                     return NoContent();
 

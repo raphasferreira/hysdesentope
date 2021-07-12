@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Platform
 {
-    public interface IPartyTaxSchemasClient
+    public interface IPartyWithholdingTaxSchemasClient
     {
-        [Get("/taxesCore/partyTaxSchemas")]
-        Task<List<PartyTaxSchemas>> GetAll();
+        [Get("/taxesCore/partyWithholdingTaxSchemas")]
+        Task<List<PartyWithholdingTaxSchemas>> GetAll();
     }
 }

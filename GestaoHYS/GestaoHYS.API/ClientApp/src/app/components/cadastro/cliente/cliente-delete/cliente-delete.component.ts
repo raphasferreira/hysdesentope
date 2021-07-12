@@ -41,7 +41,7 @@ export class ClienteDeleteComponent implements OnInit {
 
   deletarCliente(){
     this.requisicao = true
-    this.commomService.delete(`${environment.clientes}/${this.clienteSelecionado.id}`)
+    this.commomService.delete(`${environment.clientes}/${this.clienteSelecionado.idBaseLocal}`)
     .subscribe(response => {
       this.snackBar.open(MessagesSnackBar.DELETAR_USUARIO_SUCESSO, 'Close', { duration: 4000 });
       EventEmitterService.get('buscarClientes').emit();

@@ -33,6 +33,27 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
             <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.electronicMail || "-"}} </mat-cell>
         </ng-container> 
+
+        <ng-container matColumnDef="Integrar">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Integrar no Jasmin </mat-header-cell>
+            
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row">
+                <div 
+                [ngClass]="[ 'text-green', 'bg-green-light']"
+                class="rounded px-2 py-1 font-medium text-xs"
+                fxFlex="none">
+                        {{ row.isIntegration ? "SIM" : "NÃO" }}
+                </div>
+                <div *ngIf="row.ErrosIntegracao != null"
+                [ngClass]="[ 'text-red', 'bg-red-light']"
+                class="rounded px-2 py-1 font-medium text-xs"
+                fxFlex="none">
+                        ERRO
+                </div>
+            </mat-cell>            
+        </ng-container> 
+
+      
         
         <ng-container matColumnDef="Acoes">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>

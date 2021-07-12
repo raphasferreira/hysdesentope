@@ -27,7 +27,7 @@ namespace GestaoHYS.API.Helpers
                         ClaimTypes.Name, 
                         usuario.Email.ToString ())
                 }),
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddHours(8),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

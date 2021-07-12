@@ -10,7 +10,7 @@ using GestaoHYS.Core.Repositories;
 
 namespace GestaoHYS.Core.Services
 {
-    public class CustomerService :  BaseService<Cliente>, ICustomerService
+    public class CustomerService : BaseService<Cliente>, ICustomerService
     {
         private ICustomerWebService _webService;
         private IClienteRepository _repository;
@@ -82,7 +82,9 @@ namespace GestaoHYS.Core.Services
         {
             try
             {
-               await _webService.Update(cliente);
+                cliente = await _webService.Update(cliente);
+                _repository.UpdateAttached(cliente);
+
             }
             catch (Exception ex)
             {
@@ -106,9 +108,9 @@ namespace GestaoHYS.Core.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao integrar cliente com Jasmin. Ex.: "+ ex.Message);
+                throw new Exception("Erro ao integrar cliente com Jasmin. Ex.: " + ex.Message);
             }
-           
+
         }
 
         private async Task<Boolean> VerificaPartyKeyIsUnica(string partyKey)
@@ -118,7 +120,7 @@ namespace GestaoHYS.Core.Services
 
         private async Task AtualizarClienteIntegrado(Cliente cliente)
         {
-            cliente.isIntegrated = true;
+            cliente.isIntegrated = cliente.ErrosIntegracao == null;
             cliente.isIntegration = true;
             await _repository.UpdateAttached(cliente);
         }
@@ -130,11 +132,11 @@ namespace GestaoHYS.Core.Services
                 cliente.isIntegrated = false;
                 await _repository.Add(cliente);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Erro ao inserir cliente na base local. Ex.: " + ex.Message);
             }
-           
+
         }
 
         public async Task<IList<Cliente>> GetAllCustomer()
@@ -149,11 +151,19 @@ namespace GestaoHYS.Core.Services
         }
 
         override
-        public  async Task Delete(object id)
+        public async Task Delete(object id)
         {
             var entidade = await _repository.FindAsync(id);
             if (entidade != null)
             {
+                if (entidade.isIntegration)
+                {
+                    if (entidade.isIntegrated)
+                    {
+                        await _webService.Delete(entidade.IdReferencia);
+                    }
+                }
+
                 entidade.IsDeleted = true;
                 await _repository.Update(entidade);
             }

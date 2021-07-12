@@ -32,6 +32,9 @@ import { CustomerGroups } from 'src/app/_models/CustomerGroup';
 import { PaymentMethods } from 'src/app/_models/PaymentMethods';
 import { PaymentTerms } from 'src/app/_models/PaymentTerms';
 import { DeliveryTerms } from 'src/app/_models/DeliveryTerms';
+import { PartyTaxSchemas } from 'src/app/_models/PartyTaxSchemas';
+import { PartyWithholdingTaxSchemas } from 'src/app/_models/PartyWithholdingTaxSchemas';
+import { PriceLists } from 'src/app/_models/PriceLists';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -87,6 +90,9 @@ export class ClienteCreateUpdateComponent implements OnInit {
   listOfPaymentMethods = new Array<PaymentMethods>();
   listOfPaymentTerms = new Array<PaymentTerms>();
   listOfDeliveryTerms = new Array<DeliveryTerms>();
+  listOfPartyTaxSchemas = new Array<PartyTaxSchemas>();
+  listOfPartyWithholdingTaxSchemas = new Array<PartyWithholdingTaxSchemas>();
+  listOfPriceLists = new Array<PriceLists>();
 
   requisicao: boolean = false;
   isRetornoCountries: boolean = false;
@@ -96,6 +102,9 @@ export class ClienteCreateUpdateComponent implements OnInit {
   isRetornoPaymentMethods: boolean = false;
   isRetornoPaymentTerms: boolean = false;
   isRetornoDeliveryTerms: boolean = false;
+  isRetornoPartyTaxSchemas: boolean = false;
+  isRetornoPartyWithholdingTaxSchemas: boolean = false;
+  isRetornoPriceLists: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public defaults: any,
     private dialogRef: MatDialogRef<ClienteCreateUpdateComponent>,
@@ -149,8 +158,17 @@ export class ClienteCreateUpdateComponent implements OnInit {
       paymentTermId: [this.defaults.paymentTermId || null, []],
       deliveryTermId: [this.defaults.deliveryTermId || null, []],
       condicaoEnvio: [this.defaults.condicaoEnvio || null, []],
-      settlementDiscountPercent: [this.defaults.settlementDiscountPercent || 0, [Validators.max(100), Validators.min(0)]]
-      
+      settlementDiscountPercent: [this.defaults.settlementDiscountPercent || 0, [Validators.max(100), Validators.min(0)]],
+      regimeImposto: [this.defaults.regimeImposto || null, []],
+      partyTaxSchemaId: [this.defaults.partyTaxSchemaId || null, []],
+      tipoRetencao: [this.defaults.tipoRetencao || null, []],
+      partyWithholdingTaxSchemaId: [this.defaults.partyWithholdingTaxSchemaId || null, []],
+      listaPreco: [this.defaults.listaPreco || null, []],
+      priceListId: [this.defaults.priceListId || null, []],
+      ErrosIntegracao: [this.defaults.ErrosIntegracao || null, []],
+      oneTimeCustomer: [this.defaults.oneTimeCustomer || false, []],
+      endCustomer: [this.defaults.endCustomer || false, []],
+      locked: [this.defaults.locked || false, []]
     });
 
     this.requisicao = true;
@@ -161,7 +179,13 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.loadPaymentMethod();
     this.loadPaymentTerms();
     this.loadDeliveryTerms();
-    
+    this.loadPartyTaxSchemas();
+    this.loadPartyWithholdingTaxSchemas();
+    this.loadPriceLists();
+
+    if(this.mode === 'update'){
+      this.form.get('partyKey').disable({ onlySelf: true });
+    }
   }
 
 
@@ -286,10 +310,63 @@ export class ClienteCreateUpdateComponent implements OnInit {
     });
   }
 
+  loadPartyTaxSchemas() {
+    this.commomService.get(environment.partyTaxSchemas).subscribe(response => {
+      this.listOfPartyTaxSchemas = response.body;
+
+      if(this.defaults.partyTaxSchemaId != null) {
+        this.defaults.regimeImposto = this.listOfPartyTaxSchemas.find(p => p.id === this.defaults.partyTaxSchemaId);
+        this.form.controls['regimeImposto'].setValue(this.defaults.regimeImposto);
+      }
+
+      this.isRetornoPartyTaxSchemas = true; 
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
+  loadPartyWithholdingTaxSchemas(){
+    this.commomService.get(environment.partyWithholdingTaxSchemas).subscribe(response => {
+      this.listOfPartyWithholdingTaxSchemas = response.body;
+
+      if(this.defaults.partyWithholdingTaxSchemaId != null) {
+        this.defaults.tipoRetencao = this.listOfPartyWithholdingTaxSchemas.find(p => p.id === this.defaults.partyWithholdingTaxSchemaId);
+        this.form.controls['tipoRetencao'].setValue(this.defaults.tipoRetencao);
+      }
+
+      this.isRetornoPartyWithholdingTaxSchemas = true; 
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
+  loadPriceLists(){
+    this.commomService.get(environment.priceLists).subscribe(response => {
+      this.listOfPriceLists = response.body;
+
+      console.log(this.defaults.priceListId);
+      if(this.defaults.priceListId != null) {
+        this.defaults.listaPreco = this.listOfPriceLists.find(p => p.id === this.defaults.priceListId);
+        this.form.controls['listaPreco'].setValue(this.defaults.listaPreco);
+      }
+
+      this.isRetornoPriceLists = true; 
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
 
   verificaRetornoRequisicoes(){
     return     this.isRetornoCountries && this.isRetornoCurrency && this.isRetornoCultures && this.isRetornoCustomerGroup 
-            && this.isRetornoPaymentMethods && this.isRetornoPaymentTerms && this.isRetornoDeliveryTerms;
+            && this.isRetornoPaymentMethods && this.isRetornoPaymentTerms && this.isRetornoDeliveryTerms && this.isRetornoPartyTaxSchemas
+            && this.isRetornoPartyWithholdingTaxSchemas && this.isRetornoPriceLists;
   }
 
 
@@ -371,6 +448,32 @@ export class ClienteCreateUpdateComponent implements OnInit {
     }
   }
 
+  setRegimeImpostoToProperty(cliente: Cliente){
+    console.log("cliente.regimeImposto");
+    console.log(cliente.regimeImposto);
+    if(cliente.regimeImposto != null) {
+      cliente.partyTaxSchema = cliente.regimeImposto.taxCodeGroupKey;
+      cliente.partyTaxSchemaDescription = cliente.regimeImposto.description;
+      cliente.partyTaxSchemaId = cliente.regimeImposto.id;
+    }
+  }
+
+  setTipoRetencaoToProperty(cliente: Cliente){
+    if(cliente.tipoRetencao != null) {
+      cliente.partyWithholdingTaxSchema = cliente.tipoRetencao.partyWithholdingTaxSchemaKey;
+      cliente.partyWithholdingTaxSchemaDescription = cliente.tipoRetencao.description;
+      cliente.partyWithholdingTaxSchemaId = cliente.tipoRetencao.id;
+    }
+  }
+  
+  setListaPrecoToProperty(cliente: Cliente){
+    if(cliente.listaPreço != null) {
+      cliente.priceList = cliente.listaPreço.priceListKey;
+      cliente.priceListDescription = cliente.listaPreço.description;
+      cliente.priceListId = cliente.listaPreço.id;
+    }
+  }
+
 
   geraObjeto(cliente : Cliente){
     this.setPaisToProperty(cliente);
@@ -380,6 +483,9 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.setMetodoPagamentoToProperty(cliente);
     this.setCondicaoPagamentoToProperty(cliente);
     this.setCondicaoEnvioToProperty(cliente);
+    this.setRegimeImpostoToProperty(cliente);
+    this.setTipoRetencaoToProperty(cliente);
+    this.setListaPrecoToProperty(cliente);
   }
 
 
@@ -392,16 +498,23 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.setMetodoPagamentoToProperty(cliente);
     this.setCondicaoPagamentoToProperty(cliente);
     this.setCondicaoEnvioToProperty(cliente);
-
+    this.setRegimeImpostoToProperty(cliente);
+    this.setTipoRetencaoToProperty(cliente);
+    this.setListaPrecoToProperty(cliente);
+    
+    this.requisicao = true;
     this.commomService.post(environment.clientes, cliente)
       .subscribe(response => {
+        this.requisicao = false;
         this.dialogRef.close(cliente);
         this.snackBar.open(MessagesSnackBar.CRIAR_USUARIO_SUCESSO, 'Close', { duration: 6000 })
         EventEmitterService.get('buscarClientes').emit();
       },
         (error) => {
-       
+          this.requisicao = false;
+          this.dialogRef.close(cliente);
           this.snackBar.open(error.error, 'Close', { duration: 10000 });
+          EventEmitterService.get('buscarClientes').emit();
           
         });
 
@@ -414,13 +527,19 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.montaCliente();
     this.geraObjeto(this.defaults)
 
+    console.log("cliente");
+    console.log(this.defaults);
+
+    this.requisicao = true;
     this.commomService.put(environment.clientes, this.defaults)
       .subscribe(response => {
+        this.requisicao = false;
         this.dialogRef.close(this.defaults);
         this.snackBar.open(MessagesSnackBar.EDITAR_USUARIO_SUCESSO, 'Close', { duration: 6000 })
         EventEmitterService.get('buscarClientes').emit();
       },
         (error) => {
+          this.requisicao = false;
           this.snackBar.open(MessagesSnackBar.EDITAR_USUARIO_ERRO, 'Close', { duration: 4000 });
           this.dialogRef.close(this.defaults);
         });
@@ -461,6 +580,18 @@ export class ClienteCreateUpdateComponent implements OnInit {
     this.defaults.postalZone= this.form.controls['postalZone'].value;   
     this.defaults.cityName= this.form.controls['cityName'].value; 
     this.defaults.settlementDiscountPercent = this.form.controls['settlementDiscountPercent'].value;
+    this.defaults.locked = this.form.controls['locked'].value;
+    this.defaults.oneTimeCustomer = this.form.controls['oneTimeCustomer'].value;
+    this.defaults.endCustomer = this.form.controls['endCustomer'].value;
+    this.defaults.grupoCliente = this.form.controls['grupoCliente'].value;
+    this.defaults.metodoPagamento = this.form.controls['metodoPagamento'].value;
+    this.defaults.condicaoPagamento = this.form.controls['condicaoPagamento'].value;
+    this.defaults.condicaoEnvio = this.form.controls['condicaoEnvio'].value;
+    this.defaults.tipoRetencao = this.form.controls['tipoRetencao'].value;
+    this.defaults.regimeImposto = this.form.controls['regimeImposto'].value;
+    this.defaults.listaPreco = this.form.controls['listaPreco'].value;
+    
+
 
   }
 }

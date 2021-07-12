@@ -4,6 +4,7 @@ using GestaoHYS.Core.WebServices;
 using GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Sales;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -36,6 +37,25 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
             }
         }
 
+
+        public async Task Delete(string clienteId)
+        {
+            try
+            {
+                var resultrefit = _client.Delete(clienteId).Result;
+
+                if (!resultrefit.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Erro ao deletar cliente no Jasmin. {  resultrefit.Error.Content } ");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao inserir cliente no Jasmin. { ex.Message } ");
+            }
+        }
+
         public async Task<Cliente> Insert(Cliente cliente)
         {
             try
@@ -47,12 +67,13 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
                     var idClient = resultrefit.Content.Replace("\"", "").Trim();
                     var clienteResult = _client.FindById(idClient).Result;
                     clienteResult.Id = cliente.Id;
+                    clienteResult.ErrosIntegracao = null;
                     return clienteResult;
                 }
                 else
                 {
-                    
-                    throw new Exception($"Erro ao inserir cliente no Jasmin. { resultrefit.Error.Content }");
+                    cliente.ErrosIntegracao = resultrefit.Error.Content;
+                    return cliente;
                 }
    
             }
@@ -62,26 +83,35 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
             }
         }
 
-        public async Task Update(Cliente cliente)
+        public async Task<Cliente> Update(Cliente cliente)
         {
             try
             {
-                
+                cliente.ErrosIntegracao = null;
+
                 foreach (var prop in cliente.GetType().BaseType.GetProperties())
                 {
                     var valorItem = prop.GetValue(cliente, null);
-     
-                    
-                    var resultrefit = _client.Update(cliente.PartyKey, prop.Name, valorItem?.ToString()).Result;
+
+                    ApiResponse<ActionResult> resultrefit;
+
+                    if (prop.DeclaringType.Name.Equals("ClientePropriedadesAtualizacao"))
+                    {
+                        resultrefit = _client.Update(cliente.PartyKey, prop.Name, valorItem?.ToString()).Result;
+                    }
+                    else
+                    {
+                        resultrefit = _client.UpdateSalesCore(cliente.PartyKey, prop.Name, valorItem?.ToString()).Result;
+                    }
 
                     if (!resultrefit.IsSuccessStatusCode)
                     {
-                        throw new Exception($"Erro ao atualizar cliente no Jasmin. { resultrefit.Error.Content }");
+                        cliente.ErrosIntegracao += resultrefit.Error.Content + "\n ";
+                
                     }
-             
-
+                    
                 }
-
+                return cliente;
             }
             catch (Exception ex)
             {

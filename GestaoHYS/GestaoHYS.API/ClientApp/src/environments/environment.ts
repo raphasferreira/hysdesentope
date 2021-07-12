@@ -21,6 +21,9 @@ export const environment = {
   paymentMethods: 'PaymentMethods',
   paymentTerms: 'PaymentTerms',
   deliveryTerms: 'DeliveryTerms',
+  partyTaxSchemas: 'PartyTaxSchemas',
+  partyWithholdingTaxSchemas: 'PartyWithholdingTaxSchemas',
+  priceLists: 'PriceLists',
   ambiente: "dsv"
 
 };

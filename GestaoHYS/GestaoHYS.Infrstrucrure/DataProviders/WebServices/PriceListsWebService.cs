@@ -1,4 +1,4 @@
-﻿    using AutoMapper;
+﻿using AutoMapper;
 using GestaoHYS.Core.Models;
 using GestaoHYS.Core.WebServices;
 using GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Platform;
@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace GestaoHYS.Infrastructure.DataProviders.WebServices
 {
-    public class PartyTaxSchemasWebService : IPartyTaxSchemasWebService
+    public class PriceListsWebService : IPriceListsWebService
     {
-        private IPartyTaxSchemasClient _client;
+        private IPriceListsClient _client;
 
-        public PartyTaxSchemasWebService(IPartyTaxSchemasClient client)
+        public PriceListsWebService(IPriceListsClient client)
         {
             _client = client;
       
         }
 
 
-        public async Task<IList<PartyTaxSchemas>> GetAll()
+        public async Task<IList<PriceLists>> GetAll()
         {
             try
             {
@@ -31,7 +31,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
             }
             catch(Exception ex)
             {
-                throw new Exception($"Erro ao buscar todos as regime de imposto. { ex.Message } ");
+                throw new Exception($"Erro ao buscar lista de preços. { ex.Message } ");
             }
         }
     }

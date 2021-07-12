@@ -23,5 +23,13 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Sales
         [Put("/businesscore/parties/{id}/{propriedade}")]
         Task<ApiResponse<ActionResult>> Update(string id, string propriedade, [Body(BodySerializationMethod.Json)] string valor);
 
+        [Put("/salescore/customerparties/{id}/{propriedade}")]
+        Task<ApiResponse<ActionResult>> UpdateSalesCore(string id, string propriedade, [Body(BodySerializationMethod.Json)] string valor);
+
+        [Delete("/salesCore/customerParties/{id}")]
+        Task<ApiResponse<ActionResult>> Delete(string id);
+
+
+
     }
 }

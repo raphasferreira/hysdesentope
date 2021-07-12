@@ -3,8 +3,11 @@ import { Cultures } from "./Cultures";
 import { Currencies } from "./Currencies";
 import { CustomerGroups } from "./CustomerGroup";
 import { DeliveryTerms } from "./DeliveryTerms";
+import { PartyTaxSchemas } from "./PartyTaxSchemas";
+import { PartyWithholdingTaxSchemas } from "./PartyWithholdingTaxSchemas";
 import { PaymentMethods } from "./PaymentMethods";
 import { PaymentTerms } from "./PaymentTerms";
+import { PriceLists } from "./PriceLists";
 
 export class Cliente {
     versionByte: string;
@@ -43,6 +46,7 @@ export class Cliente {
     priceList: string;
     priceListId: string;
     priceListDescription: string;
+    listaPreço: PriceLists;
     paymentMethod: string;
     paymentMethodId: string;
     paymentMethodDescription: string;
@@ -58,9 +62,11 @@ export class Cliente {
     partyTaxSchema: string;
     partyTaxSchemaId: string;
     partyTaxSchemaDescription: string;
+    regimeImposto: PartyTaxSchemas;
     partyWithholdingTaxSchema?: string;
     partyWithholdingTaxSchemaId?: string;
     partyWithholdingTaxSchemaDescription?: string;
+    tipoRetencao: PartyWithholdingTaxSchemas;
     deliveryTerm: string;
     deliveryTermId: string;
     deliveryTermDescription: string;
@@ -102,6 +108,7 @@ export class Cliente {
     _state: number;
     isIntegration: boolean;
     isIntegrated: boolean;
+
 
     constructor(cliente){
         this.versionByte= cliente.versionByte;
@@ -194,13 +201,13 @@ export class Cliente {
         this.pais = new Countries(this.countryId, this.countryDescription, this.country);
         this.moeda = new Currencies(this.currencyId, this.currencyDescription, this.currency);
         this.cultura = new Cultures(this.cultureId, this.cultureDescription, this.culture);
-
         this.grupoCliente = new CustomerGroups(this.customerGroupId, this.countryDescription, this.customerGroup);
-  
         this.metodoPagamento = new PaymentMethods(this.paymentMethodId, this.paymentMethodDescription, this.paymentMethod);
         this.condicaoPagamento = new PaymentTerms(this.paymentTermId, this.paymentTermDescription, this.paymentTerm);
         this.condicaoEnvio = new DeliveryTerms(this.deliveryTermId, this.deliveryTermDescription, this.deliveryTerm);
-
+        this.regimeImposto = new PartyTaxSchemas(this.partyTaxSchemaId, this.partyTaxSchemaDescription, this.partyTaxSchema);
+        this.tipoRetencao = new PartyWithholdingTaxSchemas(this.partyWithholdingTaxSchemaId, this.partyWithholdingTaxSchemaDescription, this.partyWithholdingTaxSchema);
+        this.listaPreço = new PriceLists(this.priceListId, this.priceListDescription, this.priceList);
     }
  
 }

@@ -11,6 +11,7 @@ namespace GestaoHYS.Core.WebServices
         Task<IList<Cliente>> GetAll();
 
         Task<Cliente> Insert(Cliente cliente);
-        Task Update(Cliente cliente);
+        Task<Cliente> Update(Cliente cliente);
+        Task Delete(string clienteId);
     }
 }

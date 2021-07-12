@@ -141,6 +141,10 @@ namespace GestaoHIS.API
             services.AddScoped<IPaymentMethodsService, PaymentMethodsService>();
             services.AddScoped<IPaymentTermsService, PaymentTermsService>();
             services.AddScoped<IDeliveryTermsService, DeliveryTermsService>();
+            services.AddScoped<IPartyWithholdingTaxSchemasService, PartyWithholdingTaxSchemasService>();
+            services.AddScoped<IPriceListsService, PriceListsService>();
+            services.AddScoped<IPartyTaxSchemasService, PartyTaxSchemasService>();
+            services.AddScoped<IPartyWithholdingTaxSchemasService, PartyWithholdingTaxSchemasService>();
 
 
             //WebServices
@@ -152,6 +156,10 @@ namespace GestaoHIS.API
             services.AddScoped<IPaymentMethodsWebService, PaymentMethodsWebService>();
             services.AddScoped<IPaymentTermsWebService, PaymentTermsWebService>();
             services.AddScoped<IDeliveryTermsWebService, DeliveryTermsWebService>();
+            services.AddScoped<IPartyWithholdingTaxSchemasWebService, PartyWithholdingTaxSchemasWebService>();
+            services.AddScoped<IPriceListsWebService, PriceListsWebService>();
+            services.AddScoped<IPartyTaxSchemasWebService, PartyTaxSchemasWebService>();
+            services.AddScoped<IPartyWithholdingTaxSchemasWebService, PartyWithholdingTaxSchemasWebService>();
 
 
             //Repositories

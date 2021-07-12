@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GestaoHYS.Core.Models
 {
-    public abstract class ClientePropriedadesAtualizacao
+    public abstract class ClientePropriedadesAtualizacao : ClientePropriedadesAtualizacaoSalesCore
     {
         [Column("name")]
         [JsonProperty("name")]
@@ -75,5 +75,8 @@ namespace GestaoHYS.Core.Models
         [Column("culture")]
         [JsonProperty("culture")]
         public string Culture { get; set; }
+
+  
+
     }
 }

@@ -71,6 +71,7 @@ export class ClienteTelaDataTableComponent<T> implements OnInit, OnChanges, Afte
     "Pais",
     "Telefone",
     "Email",
+    "Integrar",
     "Acoes"
   ];
 

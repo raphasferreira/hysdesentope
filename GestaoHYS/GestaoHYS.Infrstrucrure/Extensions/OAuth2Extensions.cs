@@ -39,6 +39,8 @@ namespace GestaoHYS.Infrastructure.Extensions
             services.AddClientAccessTokenClient("PaymentTerms", "auth");
             services.AddClientAccessTokenClient("DeliveryTerms", "auth");
             services.AddClientAccessTokenClient("PartyTaxSchemas", "auth");
+            services.AddClientAccessTokenClient("PartyWithholdingTaxSchemas", "auth");
+            services.AddClientAccessTokenClient("PriceLists", "auth");
             
 
         }

@@ -1,5 +1,14 @@
 <form (ngSubmit)="save()" [formGroup]="form">
   <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <div *ngIf="form.get('ErrosIntegracao').value"
+      [ngClass]="[ 'text-red', 'bg-red-light']"
+      class="rounded px-2 py-1 font-medium text-xs"
+      fxFlex="none">
+      <p mat-line> Erro de Integração no Jasmin</p> 
+        {{ form.get('ErrosIntegracao').value}}
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
 
 
     <h2 *ngIf="form.get('name').value " class="headline m-0" fxFlex="auto">{{ form.get('name').value}}</h2>
@@ -8,16 +17,20 @@
     <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
       <mat-icon [icIcon]="icClose"></mat-icon>
     </button>
+
+    
   </div>
 
   <div *ngIf="requisicao">
-    <mat-hint>Buscando dados cadastrais complementares no Jasmin ...</mat-hint>
+
     <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary">
     </mat-progress-bar>
     <br>
 
   </div>
 
+
+  
 
   <mat-divider class="-mx-6 text-border"></mat-divider>
 
@@ -154,7 +167,7 @@
         <div class="flex flex-col sm:flex-row">
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Grupo de Clientes</mat-label>
-            <mat-select formControlName="grupoCliente" required>
+            <mat-select formControlName="grupoCliente" >
               <mat-option *ngFor="let item of listOfCustomerGroup" [value]="item">{{item.customerGroupKey}} - {{item.description}}
 
               </mat-option>
@@ -164,7 +177,7 @@
         <div class="flex flex-col sm:flex-row">
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Método de Pagamento</mat-label>
-            <mat-select formControlName="metodoPagamento" required>
+            <mat-select formControlName="metodoPagamento" >
               <mat-option *ngFor="let item of listOfPaymentMethods" [value]="item">{{item.paymentMethodsKey}} - {{item.description}}
 
               </mat-option>
@@ -173,7 +186,7 @@
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Condição de Pagamento</mat-label>
-            <mat-select formControlName="condicaoPagamento" required>
+            <mat-select formControlName="condicaoPagamento" >
               <mat-option *ngFor="let item of listOfPaymentTerms" [value]="item">{{item.paymentTermKey}} - {{item.description}}
 
               </mat-option>
@@ -182,7 +195,7 @@
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Condição de Envio</mat-label>
-            <mat-select formControlName="condicaoEnvio" required>
+            <mat-select formControlName="condicaoEnvio" >
               <mat-option *ngFor="let item of listOfDeliveryTerms" [value]="item">{{item.deliveryTermKey}} - {{item.description}}
               </mat-option>
             </mat-select>
@@ -193,55 +206,55 @@
 
           <mat-form-field class="mt-6 flex-auto">
             <mat-label>Desconto</mat-label>
-            <input formControlName="settlementDiscountPercent" matInput required>
-          </mat-form-field>
-
-          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-            <mat-label>Regime de Imposto</mat-label>
-            <input formControlName="partyKey" matInput required>
+            <input formControlName="settlementDiscountPercent" matInput >
           </mat-form-field>
 
           <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
             <mat-label>Tipo de Retenção</mat-label>
-            <input formControlName="name" matInput required>
-          </mat-form-field>
-        </div>
-   
-        <div class="flex flex-col sm:flex-row">
-          <mat-form-field class="mt-6 flex-auto">
-            <mat-label>Lista de Preços</mat-label>
-            <input formControlName="partyKey" matInput required>
-          </mat-form-field>
-
-          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
-            <mat-label>Vendedor</mat-label>
-            <input formControlName="name" matInput required>
-          </mat-form-field>
-        </div>
-        <div class="flex flex-col sm:flex-row">
-          <mat-form-field class="mt-6 flex-auto">
-            <mat-label>Entidade de Faturação</mat-label>
-            <mat-select formControlName="pais" required>
-              <mat-option *ngFor="let item of listOfCountries" [value]="item">{{item.countryKey}} - {{item.name}}
-
+            <mat-select formControlName="tipoRetencao" >
+              <mat-option *ngFor="let item of listOfPartyWithholdingTaxSchemas" [value]="item">{{item.partyWithholdingTaxSchemaKey}} - {{item.description}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
         <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Regime de Imposto</mat-label>
+
+            <mat-select formControlName="regimeImposto" >
+              <mat-option *ngFor="let item of listOfPartyTaxSchemas" [value]="item">{{item.taxCodeGroupKey}} 
+                <p mat-line>{{item.description}}</p> 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+   
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Lista de Preços</mat-label>
+            <mat-select formControlName="listaPreco" >
+              <mat-option *ngFor="let item of listOfPriceLists" [value]="item">{{item.priceListKey}} - {{item.description}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+  
+
+        <div class="flex flex-col sm:flex-row">
           <div class="mt-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
-            <mat-checkbox formControlName="isPerson">Cliente Indiferenciado</mat-checkbox>
+            <mat-checkbox formControlName="oneTimeCustomer">Cliente Indiferenciado</mat-checkbox>
           </div>
         </div>
         <div class="flex flex-col sm:flex-row">
           <div class="mt-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
-            <mat-checkbox formControlName="isPerson">Cliente Final </mat-checkbox>
+            <mat-checkbox formControlName="endCustomer">Cliente Final </mat-checkbox>
           </div>
         </div>
         <div class="flex flex-col sm:flex-row">
           <div class="mt-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
-            <mat-checkbox formControlName="isPerson">Bloqueado </mat-checkbox>
+            <mat-checkbox formControlName="locked">Bloqueado </mat-checkbox>
           </div>
         </div>
       </mat-tab>
