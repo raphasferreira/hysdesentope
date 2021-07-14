@@ -8,6 +8,17 @@ export const environment = {
     clientes: 'Cliente',
     empresas: 'Empresa',
     parceiros: 'Parceiro',
-
+    usuarios: 'Usuario',
+    perfilUsuario: 'PerfilUsuario',
+    countries: 'Countries',
+    currencies: 'Currencies',
+    cultures: 'Cultures',
+    customerGroup: 'CustomerGroup',
+    paymentMethods: 'PaymentMethods',
+    paymentTerms: 'PaymentTerms',
+    deliveryTerms: 'DeliveryTerms',
+    partyTaxSchemas: 'PartyTaxSchemas',
+    partyWithholdingTaxSchemas: 'PartyWithholdingTaxSchemas',
+    priceLists: 'PriceLists',
     ambiente: "dsv"
 };

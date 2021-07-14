@@ -27,8 +27,12 @@ namespace GestaoHYS.Core.Models
         [Column("locked")]
         public bool Locked { get; set; }
 
-        //[Column("itemKey")]
-        //public object ItemKey { get; set; }
+        [Column("itemKey")]
+        public string ItemKey { get; set; }
+
+        [Column("ErrosIntegracao")]
+        public string ErrosIntegracao { get; set; }
+        
 
         [Column("unit")]
         public string Unit { get; set; }
@@ -109,6 +113,14 @@ namespace GestaoHYS.Core.Models
 
         [Column("_state")]
         public int State { get; set; }
+
+        [Column("isIntegration")]
+        [JsonProperty("isIntegration")]
+        public Boolean isIntegration { get; set; }
+
+        [Column("isIntegrated")]
+        [JsonProperty("isIntegrated")]
+        public Boolean isIntegrated { get; set; }
     }
 
 }
