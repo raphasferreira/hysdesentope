@@ -9,7 +9,7 @@ export class ArtigoVenda {
     idReferencia: string;
     VersionByte: string;
     locked: boolean;
-    itemKey :string ;
+    ItemKey :string ;
     errosIntegracao: string;
     unit : string;
     unitId:string;
@@ -51,7 +51,6 @@ export class ArtigoVenda {
     baseunitId:string;
     baseunitDescription: string ;
     description: string;
-    ErrosIntegracao: string;
     complementaryDescription:string;
 
     itemWithholdingTaxSchema :string;

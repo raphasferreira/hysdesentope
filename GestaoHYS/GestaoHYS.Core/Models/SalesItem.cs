@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace GestaoHYS.Core.Models
 {
     [Table("SalesItem")]
-    public class SalesItem
+    public class SalesItem : SalesItemAtualizacao
     {
         [Column("Id")]
         [Key]
@@ -37,14 +37,46 @@ namespace GestaoHYS.Core.Models
         public bool Locked { get; set; }
 
         [Column("itemKey")]
+        [JsonProperty("ItemKey")]
         public string ItemKey { get; set; }
 
         [Column("ErrosIntegracao")]
         public string ErrosIntegracao { get; set; }
-        
 
-        [Column("unit")]
-        public string Unit { get; set; }
+
+    
+
+        [Column("brandId")]
+        public string BrandId { get; set; }
+
+        [Column("brandDescription")]
+        public string BrandDescription { get; set; }
+
+
+        [Column("brandModelId")]
+        public string BrandModelId { get; set; }
+
+        [Column("brandModelDescription")]
+        public string BrandModelDescription { get; set; }
+
+
+
+
+        [Column("assortmentId")]
+        public string AssortmentId { get; set; }
+
+        [Column("assortmentDescription")]
+        public string AssortmentDescription { get; set; }
+
+   
+
+        [Column("baseUnitId")]
+        public string BaseUnitId { get; set; }
+
+        [Column("baseUnitDescription")]
+        public string BaseUnitDescription { get; set; }
+
+
 
         [Column("unitId")]
         public string UnitId { get; set; }
@@ -60,15 +92,6 @@ namespace GestaoHYS.Core.Models
 
         [Column("itemTaxSchemaDescription")]
         public string ItemTaxSchemaDescription { get; set; }
-
-        //[Column("itemWithholdingTaxSchema")]
-        //public object ItemWithholdingTaxSchema { get; set; }
-
-        //[Column("itemWithholdingTaxSchemaId")]
-        //public object ItemWithholdingTaxSchemaId { get; set; }
-
-        //[Column("itemWithholdingTaxSchemaDescription")]
-        //public object ItemWithholdingTaxSchemaDescription { get; set; }
 
         [Column("priceListLines")]
         public List<PriceListLine> PriceListLines { get; set; }
@@ -91,14 +114,6 @@ namespace GestaoHYS.Core.Models
         [Column("isDraft")]
         public bool IsDraft { get; set; }
 
-        [Column("complementaryDescription")]
-        public string complementaryDescription { get; set; }
-
-        [Column("isActive")]
-        public bool IsActive { get; set; }
-
-        [Column("isDeleted")]
-        public bool IsDeleted { get; set; }
 
         [Column("isSystem")]
         public bool IsSystem { get; set; }
@@ -132,6 +147,10 @@ namespace GestaoHYS.Core.Models
         [Column("isIntegrated")]
         [JsonProperty("isIntegrated")]
         public Boolean isIntegrated { get; set; }
+
+        [Column("isDeleted")]
+        public bool IsDeleted { get; set; }
+
     }
 
 }

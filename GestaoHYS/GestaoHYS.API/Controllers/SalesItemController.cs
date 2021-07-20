@@ -39,5 +39,63 @@ namespace GestaoHYS.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro na busca dos dados.{ex.Message}");
             }
         }
+
+        // GET: api/Cliente/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Cliente>> GetArtigoVenda(long id)
+        {
+            try
+            {
+                var artigo = await _service.FindById(id);
+
+                if (artigo == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(artigo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao buscar artigo de venda. Exception: { ex.Message }");
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<SalesItem>> PostSalesItem(SalesItem artigo)
+        {
+            try
+            {
+                artigo = await _service.Insert(artigo);
+                return CreatedAtAction("GetArtigoVenda", new { id = artigo.Id }, artigo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutSalesItem(SalesItem artigo)
+        {
+            if (artigo.Id == 0)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _service.Update(artigo);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
+        }
     }
 }

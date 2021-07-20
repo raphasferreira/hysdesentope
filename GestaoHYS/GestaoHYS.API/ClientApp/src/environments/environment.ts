@@ -27,6 +27,8 @@ export const environment = {
   artigoVendas: 'SalesItem',
   unit: 'Unit',
   assortments: 'Assortments',
+  brands: 'Brands',
+  brandModels: 'BrandModels',
   ambiente: "dsv"
 
 };

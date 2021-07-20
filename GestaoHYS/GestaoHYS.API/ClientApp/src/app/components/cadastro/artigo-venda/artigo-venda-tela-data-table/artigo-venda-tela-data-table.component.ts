@@ -21,6 +21,7 @@ import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { Contact } from 'src/static-data/contact';
 import { EventEmitterService } from 'src/app/services/event.service';
 import { ReplaySubject } from 'rxjs';
+import { ArtigoVendaCreateUpdateComponent } from '../artigo-venda-create-update/artigo-venda-create-update.component';
 
 
 @Component({
@@ -127,12 +128,12 @@ export class ArtigoVendaTelaDataTableComponent<T> implements OnInit, OnChanges, 
     this.toggleStar.emit(id);
   }
 
-  // updateArtigoVenda(cliente) {
-  //   console.log(cliente);
-  //   this.dialog.open(ArtigoVendaCreateUpdateComponent, {
-  //     data: cliente
-  //   });
-  // }
+  updateArtigoVenda(cliente) {
+    console.log(cliente);
+    this.dialog.open(ArtigoVendaCreateUpdateComponent, {
+      data: cliente
+    });
+  }
 
   // deleteArtigoVenda(cliente) {
 

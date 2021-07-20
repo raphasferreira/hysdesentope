@@ -6,7 +6,7 @@
     
         <ng-container matColumnDef="Artigo">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Artigo </mat-header-cell>
-            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.itemKey || "-"}} </mat-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.ItemKey || "-"}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Descricao">
@@ -44,7 +44,7 @@
                 fxFlex="none">
                         {{ row.isIntegration ? "SIM" : "NÃO" }}
                 </div>
-                <div *ngIf="row.ErrosIntegracao != null"
+                <div *ngIf="row.errosIntegracao != null"
                 [ngClass]="[ 'text-red', 'bg-red-light']"
                 class="rounded px-2 py-1 font-medium text-xs"
                 fxFlex="none">
@@ -58,8 +58,8 @@
         <ng-container matColumnDef="Acoes">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
             <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
-            <!-- <img (click)="updateCliente(row)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
-            <img (click)="deleteCliente(row)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png"> -->
+            <img (click)="updateArtigoVenda(row)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+            <!-- <img (click)="deleteCliente(row)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png"> -->
             </mat-cell>
         </ng-container>  
     

@@ -13,18 +13,19 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Sales
         [Get("/salescore/salesitems")]
         Task<List<SalesItem>> GetAll();
 
-        [Post("/salescore/salesItemParties")]
+        [Post("/salesCore/salesItems")]
         Task<ApiResponse<string>> Insert([Body]SalesItem salesItemPartyResource);
 
-        [Get("/salesCore/salesItemParties/{id}")]
+        [Get("/salesCore/salesItems/{id}")]
         Task<SalesItem> FindById(string id);
 
 
-        [Put("/businesscore/parties/{id}/{propriedade}")]
+        [Put("/salesCore/salesItems/{id}/{propriedade}")]
         Task<ApiResponse<ActionResult>> Update(string id, string propriedade, [Body(BodySerializationMethod.Json)] string valor);
 
-        [Put("/salescore/salesItemparties/{id}/{propriedade}")]
-        Task<ApiResponse<ActionResult>> UpdateSalesCore(string id, string propriedade, [Body(BodySerializationMethod.Json)] string valor);
+
+        [Put("/businesscore/items/{id}/{propriedade}")]
+        Task<ApiResponse<ActionResult>> UpdateBusinessCore(string id, string propriedade, [Body(BodySerializationMethod.Json)] string valor);
 
         [Delete("/salesCore/salesItemParties/{id}")]
         Task<ApiResponse<ActionResult>> Delete(string id);

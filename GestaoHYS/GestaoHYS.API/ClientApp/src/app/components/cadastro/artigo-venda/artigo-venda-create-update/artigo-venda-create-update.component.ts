@@ -63,6 +63,9 @@ export class ArtigoVendaCreateUpdateComponent implements OnInit {
 
   isRetornoUnit: boolean = false;
   isRetornoAssortments:  boolean = false;
+  isRetornoBrands:  boolean = false;
+  isRetornoBrandModels:  boolean = false;
+
   constructor(@Inject(MAT_DIALOG_DATA) public defaults: any,
     private dialogRef: MatDialogRef<ArtigoVendaCreateUpdateComponent>,
     private snackBar: MatSnackBar,
@@ -74,14 +77,11 @@ export class ArtigoVendaCreateUpdateComponent implements OnInit {
 
     if (this.defaults) {
       this.mode = 'update';
+      this.artigoVendaModel = this.defaults;
     } else {
       this.defaults = new ArtigoVenda();
+      this.artigoVendaModel = new ArtigoVenda();
     }
-
-    this.artigoVendaModel = new ArtigoVenda();
-
-
-
     this.requisicao = true;
 
 
@@ -91,11 +91,8 @@ export class ArtigoVendaCreateUpdateComponent implements OnInit {
     this.loadBaseUnit();
     this.loadItemTypes();
     this.loadAssortments();
-    //this.loadBrand();
-    //this.loadBrandModel();
-    //this.loadIncomeAccount();
-    //this.loadItemTaxSchemas();
-    //this.loadItemWithholdingTaxSchemas();
+    this.loadBrand();
+    this.loadBrandModel();
   }
 
   loadBaseUnit() {
@@ -146,70 +143,59 @@ export class ArtigoVendaCreateUpdateComponent implements OnInit {
     });
   }
 
+  loadBrand() {
+    this.commomService.get(environment.brands).subscribe(response => {
+      this.listOfBrands = response.body;
+      
+
+      if(this.artigoVendaModel.brandId != null){
+        const brand = this.listOfBrands.find(p => p.id === this.artigoVendaModel.brandId);
+        this.artigoVendaModel.brand = brand.brandKey;
+        this.artigoVendaModel.brandDescription = brand.description;
+        this.artigoVendaModel.brandId = brand.id;
+      }
+
+
+      this.isRetornoBrands = true;
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
+  loadBrandModel() {
+    this.commomService.get(environment.brandModels).subscribe(response => {
+      this.listOfBrandModels = response.body;
+      
+
+      if(this.artigoVendaModel.brandModelId != null){
+        const brandModels = this.listOfBrandModels.find(p => p.id === this.artigoVendaModel.brandModelId);
+        this.artigoVendaModel.brandModel = brandModels.modelKey;
+        this.artigoVendaModel.brandModelDescription = brandModels.description;
+        this.artigoVendaModel.brandModelId = brandModels.id;
+      }
+
+
+      this.isRetornoBrandModels = true;
+      if(this.verificaRetornoRequisicoes()){
+        this.requisicao = false;
+      }
+      
+    });
+  }
+
   loadItemTypes() {
-    const artigo = new ItemType(2, "Artigo");
+    const artigo = new ItemType(1, "Artigo");
     const servico = new ItemType(2, "Serviço");
     this.listOfItemTypes = new Array<ItemType>();
     this.listOfItemTypes.push(artigo);
     this.listOfItemTypes.push(servico);
 
   }
-
-  eventSelectionItemType(event) {
-    this.artigoVendaModel.itemType = event.id;
-    this.artigoVendaModel.itemTypeDescription = event.description;
-  }
-  eventSelectionBaseUnidades(event) {
-    this.artigoVendaModel.baseUnit = event.unitKey;
-    this.artigoVendaModel.baseunitDescription = event.description;
-    this.artigoVendaModel.baseunitId = event.id;
-  }
-  eventSelectionUnidades(event) {
-    this.artigoVendaModel.unit = event.unitKey;
-    this.artigoVendaModel.unitDescription = event.description;
-    this.artigoVendaModel.unitId = event.id;
-  }
-
-  eventSelectionAssortments(event) {
-    this.artigoVendaModel.assortment = event.assortmentKey;
-    this.artigoVendaModel.assortmentDescription = event.description;
-    this.artigoVendaModel.assortmentId = event.id;
-  }
-
-  eventSelectionBrand(event) {
-    this.artigoVendaModel.brand = event.brandKey;
-    this.artigoVendaModel.brandDescription = event.description;
-    this.artigoVendaModel.brandId = event.id;
-  }
-
-  eventSelectionBrandModel(event) {
-    this.artigoVendaModel.brandModel = event.brandModelKey;
-    this.artigoVendaModel.brandModelDescription = event.description;
-    this.artigoVendaModel.brandModelId = event.id;
-  }
-
-  eventSelectionIncomeAccount(event) {
-    this.artigoVendaModel.incomeAccount = event.incomeAccountKey;
-    this.artigoVendaModel.incomeAccountDescription = event.description;
-    this.artigoVendaModel.incomeAccountId = event.id;
-  }
-
-  eventSelectionItemTaxSchemas(event) {
-    this.artigoVendaModel.itemTaxSchema = event.taxCodeGroupKey;
-    this.artigoVendaModel.itemTaxSchemaDescription = event.description;
-    this.artigoVendaModel.itemTaxSchemaId = event.id;
-  }
-
-
-  eventSelectionItemWithholdingTaxSchemas(event) {
-    this.artigoVendaModel.itemWithholdingTaxSchema = event.itemWithholdingTaxSchemaKey;
-    this.artigoVendaModel.itemWithholdingTaxSchemaDescription = event.description;
-    this.artigoVendaModel.itemWithholdingTaxSchemaId = event.id;
-  }
-
  
   verificaRetornoRequisicoes() {
-    return this.isRetornoUnit && this.isRetornoAssortments;
+    return this.isRetornoUnit && this.isRetornoAssortments && this.isRetornoBrandModels;
   }
 
 
@@ -224,7 +210,8 @@ export class ArtigoVendaCreateUpdateComponent implements OnInit {
   createArtigoVenda() {
 
     this.requisicao = true;
-    this.commomService.post(environment.clientes, this.artigoVendaModel)
+   
+    this.commomService.post(environment.artigoVendas, this.artigoVendaModel)
       .subscribe(response => {
         this.requisicao = false;
         this.dialogRef.close(this.artigoVendaModel);
@@ -245,7 +232,7 @@ export class ArtigoVendaCreateUpdateComponent implements OnInit {
   updateArtigoVenda() {
 
     this.requisicao = true;
-    this.commomService.put(environment.clientes, this.defaults)
+    this.commomService.put(environment.artigoVendas, this.defaults)
       .subscribe(response => {
         this.requisicao = false;
         this.dialogRef.close(this.defaults);

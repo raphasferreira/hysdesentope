@@ -101,7 +101,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
                     }
                     else
                     {
-                        resultrefit = _client.UpdateSalesCore(salesItem.ItemKey, prop.Name, valorItem?.ToString()).Result;
+                        resultrefit = _client.UpdateBusinessCore(salesItem.ItemKey, prop.Name, valorItem?.ToString()).Result;
                     }
 
                     if (!resultrefit.IsSuccessStatusCode)

@@ -9,7 +9,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Platform
 {
     public interface IBrandModelsClient
     {
-        [Get("/salesCore/BrandModels")]
+        [Get("/businessCore/brandModels")]
         Task<List<BrandModels>> GetAll();
     }
 }
