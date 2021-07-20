@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +39,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { Router } from '@angular/router';
 import { CommomService } from './services/commom.service';
 
-
+export let InjectorInstance: Injector;
 
 @NgModule({
   declarations: [
@@ -96,4 +96,7 @@ import { CommomService } from './services/commom.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {  constructor(private injector: Injector) 
+  {
+    InjectorInstance = this.injector;
+  }}

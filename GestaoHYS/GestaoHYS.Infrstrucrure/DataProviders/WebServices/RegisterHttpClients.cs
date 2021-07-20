@@ -156,7 +156,66 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
                 })
             });
 
-            
+            services.Register<ISalesItemClient>("SalesItem", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
+            services.Register<IUnitClient>("Unit", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
+            services.Register<IAssortmentsClient>("Assortments", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
+            services.Register<IBrandsClient>("Brands", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
+            services.Register<IBrandModelsClient>("BrandModels", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
+
         }
 
         private static IHttpClientBuilder Register<T>(this IServiceCollection services,string name, string baseAddress, RefitSettings refitSettings)

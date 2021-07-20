@@ -141,7 +141,7 @@ export class AppComponent implements OnInit{
           {
             type: 'link',
             label: 'Artigos de Vendas',
-            route: '/gestaohis/cadastro/tipo-servico',
+            route: '/gestaohis/cadastro/artigo-venda',
             icon: icAssigment,
             gruop:'GestaoHis',
           },

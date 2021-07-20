@@ -10,7 +10,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Sales
 {
     public interface ISalesItemClient
     {
-        [Get("/salesCore/salesItemParties")]
+        [Get("/salescore/salesitems")]
         Task<List<SalesItem>> GetAll();
 
         [Post("/salescore/salesItemParties")]

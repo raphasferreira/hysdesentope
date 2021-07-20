@@ -13,22 +13,22 @@ namespace GestaoHYS.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class SalesItemController : ControllerBase
+    public class UnitController : ControllerBase
     {
-        private ISalesItemService _service;
+        private IUnitService _service;
 
-        public SalesItemController(ISalesItemService service)
+        public UnitController(IUnitService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Produces(typeof(IList<SalesItem>))]
+        [Produces(typeof(IList<Unit>))]
         public async Task<ActionResult> GetAllAsync()
         {
             try
             {
-                var list = await _service.FindAll();
+                var list = await _service.GetAllUnit();
                 if (list.Count() == 0)
                     return NoContent();
 

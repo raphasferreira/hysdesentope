@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,13 +11,21 @@ namespace GestaoHYS.Core.Models
     [Table("SalesItem")]
     public class SalesItem
     {
-
         [Column("Id")]
         [Key]
         [DatabaseGenerated
         (DatabaseGeneratedOption.Identity)]
         [Required]
-        public string Id { get; set; }
+        [JsonProperty("idBaseLocal")]
+
+        public long Id { get; set; }
+
+
+        [Column("IdReferencia")]
+        [JsonProperty("id")]
+        public string IdReferencia { get; set; }
+
+
 
         //[Column("version")]
         //public List<int> Version { get; set; }
@@ -82,7 +91,8 @@ namespace GestaoHYS.Core.Models
         [Column("isDraft")]
         public bool IsDraft { get; set; }
 
-        
+        [Column("complementaryDescription")]
+        public string complementaryDescription { get; set; }
 
         [Column("isActive")]
         public bool IsActive { get; set; }
@@ -111,7 +121,8 @@ namespace GestaoHYS.Core.Models
         //[Column("subscriptionId")]
         //public object SubscriptionId { get; set; }
 
-        [Column("_state")]
+        [Column("state")]
+        [JsonProperty("_state")]
         public int State { get; set; }
 
         [Column("isIntegration")]

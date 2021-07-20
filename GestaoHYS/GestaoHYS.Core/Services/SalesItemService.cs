@@ -27,7 +27,7 @@ namespace GestaoHYS.Core.Services
         {
             try
             {
-                var isPartKeyUnica = await VerificaPartyKeyIsUnica(salesItem.PartyKey);
+                var isPartKeyUnica = await VerificaPartyKeyIsUnica(salesItem.ItemKey);
 
 
                 if (!isPartKeyUnica)
@@ -141,7 +141,7 @@ namespace GestaoHYS.Core.Services
 
         public async Task<IList<SalesItem>> GetAllSalesItem()
         {
-            IList<SalesItem> salesItemResult = await _webService.GetAll();
+            IList<SalesItem> salesItemResult = await _repository.FindAll();
             return salesItemResult;
         }
 

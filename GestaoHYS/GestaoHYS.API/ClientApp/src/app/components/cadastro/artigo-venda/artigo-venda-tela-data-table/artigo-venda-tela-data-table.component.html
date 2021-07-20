@@ -1,0 +1,76 @@
+
+<vex-scrollbar class="h-full relative">
+
+    <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary"></mat-progress-bar> 
+      <mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="Artigo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Artigo </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.itemKey || "-"}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Descricao">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.description || "-"}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Marca">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Marca </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.brand || "-"}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Modelo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Modelo </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.brandModel || "-"}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Familia">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Família </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.assortment || "-"}} </mat-cell>
+        </ng-container> 
+
+        <ng-container matColumnDef="Unidade">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Unidade </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.baseUnit || "-"}} </mat-cell>
+        </ng-container> 
+
+        <ng-container matColumnDef="Integrar">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Integrar no Jasmin </mat-header-cell>
+            
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row">
+                <div 
+                [ngClass]="[ 'text-green', 'bg-green-light']"
+                class="rounded px-2 py-1 font-medium text-xs"
+                fxFlex="none">
+                        {{ row.isIntegration ? "SIM" : "NÃO" }}
+                </div>
+                <div *ngIf="row.ErrosIntegracao != null"
+                [ngClass]="[ 'text-red', 'bg-red-light']"
+                class="rounded px-2 py-1 font-medium text-xs"
+                fxFlex="none">
+                        ERRO
+                </div>
+            </mat-cell>            
+        </ng-container> 
+
+      
+        
+        <ng-container matColumnDef="Acoes">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+            <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <!-- <img (click)="updateCliente(row)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+            <img (click)="deleteCliente(row)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png"> -->
+            </mat-cell>
+        </ng-container>  
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    
+    
+</vex-scrollbar>
+      
+      
+      

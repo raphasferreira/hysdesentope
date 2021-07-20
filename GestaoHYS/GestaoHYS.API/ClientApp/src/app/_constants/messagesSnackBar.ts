@@ -8,7 +8,15 @@ export enum MessagesSnackBar {
     DELETAR_CLIENTE_SUCESSO = 'Cliente deletado com sucesso',
     DELETAR_CLIENTE_ERRO = 'Erro ao deletar cliente',
 
-  //MENSAGENS PARCEIRO
+    //MENSAGENS ARTIGOVENDA
+    CRIAR_ARTIGOVENDA_SUCESSO = 'ARTIGO VENDA criado com sucesso',
+    CRIAR_ARTIGOVENDA_ERRO = 'Erro ao criar ARTIGO VENDA',
+    EDITAR_ARTIGOVENDA_SUCESSO = 'ARTIGO VENDA alterado com sucesso',
+    EDITAR_ARTIGOVENDA_ERRO = 'Erro ao alterar ARTIGO VENDA',
+    DELETAR_ARTIGOVENDA_SUCESSO = 'ARTIGO VENDA deletado com sucesso',
+    DELETAR_ARTIGOVENDA_ERRO = 'Erro ao deletar ARTIGO VENDA',
+    BUSCAR_ARTIGOVENDA_ERRO = 'Erro ao buscar ARTIGO VENDA',
+    //MENSAGENS PARCEIRO
     CRIAR_PARCEIRO_SUCESSO = 'Parceiro criado com sucesso',
     CRIAR_PARCEIRO_ERRO = 'Erro ao criar parceiro',
     EDITAR_PARCEIRO_SUCESSO = 'Parceiro alterado com sucesso',

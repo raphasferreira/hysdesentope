@@ -1,0 +1,179 @@
+<div class="form-group">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <div *ngIf="artigoVendaModel.ErrosIntegracao" [ngClass]="[ 'text-red', 'bg-red-light']"
+      class="rounded px-2 py-1 font-medium text-xs" fxFlex="none">
+      <p mat-line> Erro de Integração no Jasmin</p>
+      {{ artigoVendaModel.ErrosIntegracao }}
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+
+
+    <h2 *ngIf="artigoVendaModel.itemKey " class="headline m-0" fxFlex="auto">{{ artigoVendaModel.itemKey}}</h2>
+    <h2 *ngIf="!artigoVendaModel.itemKey" class="headline m-0" fxFlex="auto">Novo Artigo Venda</h2>
+
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+
+
+  </div>
+
+  <div *ngIf="requisicao">
+
+    <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary">
+    </mat-progress-bar>
+    <br>
+
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+
+  <mat-dialog-content fxLayout="column">
+
+    <mat-tab-group dynamicHeight>
+
+      <mat-tab label="Geral">
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Artigo</mat-label>
+            <input cdkFocusInitial [(ngModel)]="artigoVendaModel.itemKey" matInput>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Descrição</mat-label>
+            <input [(ngModel)]="artigoVendaModel.description" matInput required>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Unidade Base</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.baseUnit" (change)="eventSelectionUnidades($event.value)" required>
+              <mat-option *ngFor="let item of listOfUnidades" [value]="item">{{item.unitKey}} - {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Tipo de Artigo</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.itemType" (change)="eventSelectionItemType($event.value)"
+              required>
+              <mat-option *ngFor="let item of listOfItemTypes" [value]="item"> {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="flex-auto">
+            <mat-label>Descrição Completa</mat-label>
+            <textarea [(ngModel)]="artigoVendaModel.complementaryDescription" matInput>
+            </textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="mt-6 mb-4 text-secondary" fxFlex="none">
+            Geral
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Família</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.assortment" (change)="eventSelectionAssortments($event.value)"
+              required>
+              <mat-option *ngFor="let item of listOfAssortments" [value]="item"> {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Marca</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.brand" (change)="eventSelectionBrand($event.value)" required>
+              <mat-option *ngFor="let item of listOfBrands" [value]="item"> {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Modelo Marca</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.brandModel" (change)="eventSelectionBrandModel($event.value)"
+              required>
+              <mat-option *ngFor="let item of listOfBrandModels" [value]="item"> {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+      <mat-tab label="Artigo Venda">
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Unidade de Venda</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.unit" (change)="eventSelectionUnidades($event.value)" required>
+              <mat-option *ngFor="let item of listOfUnidades" [value]="item">{{item.unitKey}} - {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Contas de Receitas</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.incomeAccount" (change)="eventSelectionIncomeAccount($event.value)"
+              required>
+              <mat-option *ngFor="let item of listOfIncomeAccount" [value]="item"> {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <mat-form-field class="mt-6 flex-auto">
+            <mat-label>Tipo de Imposto</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.itemTaxSchema" (change)="eventSelectionItemTaxSchemas($event.value)" required>
+              <mat-option *ngFor="let item of listOfItemTaxSchemas" [value]="item">{{item.taxCodeGroupKey}} - {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+            <mat-label>Tipo de Retenção</mat-label>
+            <mat-select [(ngModel)]="artigoVendaModel.itemWithholdingTaxSchema" (change)="eventSelectionItemWithholdingTaxSchemas($event.value)"
+              required>
+              <mat-option *ngFor="let item of listOfItemWithholdingTaxSchemas" [value]="item">{{item.itemWithholdingTaxSchemaKey}} - {{item.description}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="sm:mt-6 sm:ml-6 flex-auto" fxLayout="column" fxLayoutGap="8px">
+          <mat-checkbox formControlName="isActive">Bloqueado</mat-checkbox>
+        </div>
+
+    
+      </mat-tab>
+    </mat-tab-group>
+
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCEL</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-button type="submit">CRIAR
+      ARTIGO VENDA</button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-button type="submit">ATUALIZAR
+      ARTIGO VENDA</button>
+  </mat-dialog-actions>
+</div>
