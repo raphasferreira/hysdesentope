@@ -31,9 +31,11 @@ namespace GestaoHYS.Core.Models
         //public List<int> Version { get; set; }
 
         [Column("versionByte")]
+        [JsonProperty("versionByte")]
         public string VersionByte { get; set; }
 
         [Column("locked")]
+        [JsonProperty("locked")]
         public bool Locked { get; set; }
 
         [Column("itemKey")]
@@ -44,93 +46,121 @@ namespace GestaoHYS.Core.Models
         public string ErrosIntegracao { get; set; }
 
 
-    
+        [Column("unit")]
+        [JsonProperty("unit")]
+        public string Unit { get; set; }
 
         [Column("brandId")]
+        [JsonProperty("brandId")]
         public string BrandId { get; set; }
 
         [Column("brandDescription")]
+        [JsonProperty("brandDescription")]
         public string BrandDescription { get; set; }
 
 
         [Column("brandModelId")]
+        [JsonProperty("brandModelId")]
         public string BrandModelId { get; set; }
 
         [Column("brandModelDescription")]
+        [JsonProperty("brandModelDescription")]
         public string BrandModelDescription { get; set; }
 
 
 
 
         [Column("assortmentId")]
+        [JsonProperty("assortmentId")]
         public string AssortmentId { get; set; }
 
         [Column("assortmentDescription")]
+        [JsonProperty("assortmentDescription")]
         public string AssortmentDescription { get; set; }
 
    
 
         [Column("baseUnitId")]
+        [JsonProperty("baseUnitId")]
         public string BaseUnitId { get; set; }
 
         [Column("baseUnitDescription")]
+        [JsonProperty("baseUnitDescription")]
         public string BaseUnitDescription { get; set; }
 
 
 
         [Column("unitId")]
+        [JsonProperty("unitId")]
         public string UnitId { get; set; }
 
         [Column("unitDescription")]
+        [JsonProperty("unitDescription")]
         public string UnitDescription { get; set; }
 
         [Column("itemTaxSchema")]
+        [JsonProperty("itemTaxSchema")]
         public string ItemTaxSchema { get; set; }
 
         [Column("itemTaxSchemaId")]
+        [JsonProperty("itemTaxSchemaId")]
         public string ItemTaxSchemaId { get; set; }
 
         [Column("itemTaxSchemaDescription")]
+        [JsonProperty("itemTaxSchemaDescription")]
         public string ItemTaxSchemaDescription { get; set; }
 
         [Column("priceListLines")]
+        [JsonProperty("priceListLines")]
         public List<PriceListLine> PriceListLines { get; set; }
 
         [Column("incomeAccount")]
+        [JsonProperty("incomeAccount")]
         public string IncomeAccount { get; set; }
 
         [Column("incomeAccountId")]
+        [JsonProperty("incomeAccountId")]
         public string IncomeAccountId { get; set; }
 
         [Column("incomeAccountDescription")]
+        [JsonProperty("incomeAccountDescription")]
         public string IncomeAccountDescription { get; set; }
 
         [Column("salesChannelLines")]
+        [JsonProperty("salesChannelLines")]
         public List<SalesChannelLine> SalesChannelLines { get; set; }
 
         [Column("baseEntityId")]
+        [JsonProperty("baseEntityId")]
         public string BaseEntityId { get; set; }
 
         [Column("isDraft")]
+        [JsonProperty("isDraft")]
         public bool IsDraft { get; set; }
 
 
         [Column("isSystem")]
+        [JsonProperty("isSystem")]
         public bool IsSystem { get; set; }
 
         [Column("createdBy")]
+        [JsonProperty("createdBy")]
         public string CreatedBy { get; set; }
 
         [Column("createdOn")]
+        [JsonProperty("createdOn")]
         public DateTime CreatedOn { get; set; }
 
         [Column("modifiedBy")]
+        [JsonProperty("modifiedBy")]
         public string ModifiedBy { get; set; }
 
         [Column("modifiedOn")]
+        [JsonProperty("modifiedOn")]
         public DateTime ModifiedOn { get; set; }
 
         [Column("draftId")]
+        [JsonProperty("draftId")]
         public string DraftId { get; set; }
 
         //[Column("subscriptionId")]
@@ -149,6 +179,7 @@ namespace GestaoHYS.Core.Models
         public Boolean isIntegrated { get; set; }
 
         [Column("isDeleted")]
+        [JsonProperty("isDeleted")]
         public bool IsDeleted { get; set; }
 
     }

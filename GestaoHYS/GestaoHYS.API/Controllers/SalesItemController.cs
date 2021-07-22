@@ -28,7 +28,7 @@ namespace GestaoHYS.API.Controllers
         {
             try
             {
-                var list = await _service.FindAll();
+                var list = await _service.FindAllAtivo();
                 if (list.Count() == 0)
                     return NoContent();
 
@@ -96,6 +96,21 @@ namespace GestaoHYS.API.Controllers
             }
 
 
+        }
+
+        // DELETE: api/Cliente/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteArtigoVenda(long id)
+        {
+            try
+            {
+                await _service.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

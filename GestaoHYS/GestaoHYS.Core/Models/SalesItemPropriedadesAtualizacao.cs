@@ -10,8 +10,7 @@ namespace GestaoHYS.Core.Models
 {
     public abstract class SalesItemPropriedadesAtualizacao
     {
-        [Column("unit")]
-        public string Unit { get; set; }
+       
 
 
    

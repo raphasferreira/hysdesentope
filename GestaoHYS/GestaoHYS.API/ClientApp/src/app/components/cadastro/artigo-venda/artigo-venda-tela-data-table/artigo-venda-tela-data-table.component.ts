@@ -22,6 +22,7 @@ import { Contact } from 'src/static-data/contact';
 import { EventEmitterService } from 'src/app/services/event.service';
 import { ReplaySubject } from 'rxjs';
 import { ArtigoVendaCreateUpdateComponent } from '../artigo-venda-create-update/artigo-venda-create-update.component';
+import { ArtigoVendaDeleteComponent } from '../artigo-venda-delete/artigo-venda-delete.component';
 
 
 @Component({
@@ -128,17 +129,17 @@ export class ArtigoVendaTelaDataTableComponent<T> implements OnInit, OnChanges, 
     this.toggleStar.emit(id);
   }
 
-  updateArtigoVenda(cliente) {
-    console.log(cliente);
+  updateArtigoVenda(artigoVenda) {
+    console.log(artigoVenda);
     this.dialog.open(ArtigoVendaCreateUpdateComponent, {
-      data: cliente
+      data: artigoVenda
     });
   }
 
-  // deleteArtigoVenda(cliente) {
+  deleteArtigoVenda(artigoVenda) {
 
-  //   this.dialog.open(ArtigoVendaDeleteComponent, {
-  //     data: cliente
-  //   });
-  // }
+    this.dialog.open(ArtigoVendaDeleteComponent, {
+      data: artigoVenda
+    });
+  }
 }

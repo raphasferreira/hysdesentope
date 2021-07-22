@@ -149,7 +149,9 @@ namespace GestaoHIS.API
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IAssortmentsService, AssortmentsService>();
             services.AddScoped< IBrandModelsService, BrandModelsService> ();
-            services.AddScoped< IBrandsService, BrandsService> ();
+            services.AddScoped< IBrandsService, BrandsService>();
+            services.AddScoped< ISeriesService, SeriesService>();
+            services.AddScoped<IInvoiceTypesService, InvoiceTypesService>();
 
 
             //WebServices
@@ -170,6 +172,8 @@ namespace GestaoHIS.API
             services.AddScoped<IAssortmentsWebService, AssortmentsWebService>();
             services.AddScoped<IBrandModelsWebService, BrandModelsWebService>();
             services.AddScoped<IBrandsWebService, BrandsWebService>();
+            services.AddScoped<ISeriesWebService, SeriesWebService>();
+            services.AddScoped<InvoiceTypesWebService, InvoiceTypesWebService>();
 
 
             //Repositories

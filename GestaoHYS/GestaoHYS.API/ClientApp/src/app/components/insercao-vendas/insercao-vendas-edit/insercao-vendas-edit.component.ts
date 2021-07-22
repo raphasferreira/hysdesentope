@@ -22,6 +22,7 @@ import icEdit from '@iconify/icons-ic/twotone-edit';
 import icClose from '@iconify/icons-ic/twotone-close';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Contact } from 'src/static-data/contact';
+import { InvoiceTypes } from 'src/app/_models/InvoiceTypes';
 
 export interface CountryState {
   name: string;
@@ -64,172 +65,17 @@ export class InsercaoVendasEditComponent implements OnInit {
   format_list_bulleted =format_list_bulleted;
   icEdit = icEdit;
 
-
+  listOfInvoiceTypes = new Array<InvoiceTypes>();
   stateCtrl = new FormControl();
-  states: CountryState[] = [
-    {
-      name: 'Arkansas',
-      population: '2.978M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
-    },
-    {
-      name: 'California',
-      population: '39.14M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
-    },
-    {
-      name: 'Florida',
-      population: '20.27M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Florida.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
-    },
-    {
-      name: 'Texas',
-      population: '27.47M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
-    }
-  ];
-  filteredStates$ = this.stateCtrl.valueChanges.pipe(
-    startWith(''),
-    map(state => state ? this.filterStates(state) : this.states.slice())
-  );
+ 
 
-
-  accountFormGroup: FormGroup;
-  passwordFormGroup: FormGroup;
-  confirmFormGroup: FormGroup;
-
-  verticalAccountFormGroup: FormGroup;
-  verticalPasswordFormGroup: FormGroup;
-  verticalConfirmFormGroup: FormGroup;
-
-  phonePrefixOptions = ['+1', '+27', '+44', '+49', '+61', '+91'];
-
-  passwordInputType = 'password';
-
-
-  tableColumns: TableColumn<any>[] = [
-    {
-      label: 'Entidade',
-      property: 'entidade',
-      type: 'text',
-      cssClasses: ['font-medium']
-    },
-    {
-      label: 'Nome',
-      property: 'name',
-      type: 'text',
-      cssClasses: ['font-medium']
-    },
-    {
-      label: 'NIF',
-      property: 'companyTaxID',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    },
-    {
-      label: 'Termo de Pesquisa',
-      property: 'termoPesquisa',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    },
-    {
-      label: 'País',
-      property: 'pais',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    },
-    {
-      label: 'Telefone',
-      property: 'phone',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    },
-    {
-      label: 'EMAIL',
-      property: 'electronicMail',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    },
-    {
-      label: 'Grupo',
-      property: 'grupo',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    },
-    {
-      label: '',
-      property: 'menu',
-      type: 'button',
-      cssClasses: ['text-secondary', 'w-10']
-    },
-  ];
-
+  
 
   constructor(private cd: ChangeDetectorRef,private fb: FormBuilder,
     private snackbar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit() {
-    /**
-     * Horizontal Stepper
-     * @type {FormGroup}
-     */
-    this.accountFormGroup = this.fb.group({
-      username: [null, Validators.required],
-      name: [null, Validators.required],
-      email: [null, Validators.required],
-      phonePrefix: [this.phonePrefixOptions[3]],
-      phone: [],
-    });
-
-    this.passwordFormGroup = this.fb.group({
-      password: [
-        null,
-        Validators.compose(
-          [
-            Validators.required,
-            Validators.minLength(6)
-          ]
-        )
-      ],
-      passwordConfirm: [null, Validators.required]
-    });
-
-    this.confirmFormGroup = this.fb.group({
-      terms: [null, Validators.requiredTrue]
-    });
-
-    /**
-     * Vertical Stepper
-     * @type {FormGroup}
-     */
-    this.verticalAccountFormGroup = this.fb.group({
-      username: [null, Validators.required],
-      name: [null, Validators.required],
-      email: [null, Validators.required],
-      phonePrefix: [this.phonePrefixOptions[3]],
-      phone: [],
-    });
-
-    this.verticalPasswordFormGroup = this.fb.group({
-      password: [
-        null,
-        Validators.compose(
-          [
-            Validators.required,
-            Validators.minLength(6)
-          ]
-        )
-      ],
-      passwordConfirm: [null, Validators.required]
-    });
-
-    this.verticalConfirmFormGroup = this.fb.group({
-      terms: [null, Validators.requiredTrue]
-    });
+   
   }
 
   togglePassword() {
@@ -244,21 +90,7 @@ export class InsercaoVendasEditComponent implements OnInit {
     }
   }
 
-  filterStates(name: string) {
-    return this.states.filter(state => state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
-  }
-
   
-  showPassword() {
-    this.passwordInputType = 'text';
-    this.cd.markForCheck();
-  }
-
-  hidePassword() {
-    this.passwordInputType = 'password';
-    this.cd.markForCheck();
-  }
-
   submit() {
     this.snackbar.open('Hooray! You successfully created your account.', null, {
       duration: 5000
