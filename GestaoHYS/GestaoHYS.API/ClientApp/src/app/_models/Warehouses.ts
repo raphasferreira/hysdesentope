@@ -1,11 +1,12 @@
-export class ItemWithholdingTaxSchemas{
+export class Warehouses{
     id: string;
+    warehouseKey: string;
     description: string;
-    itemWithholdingTaxGroupKey: string;
-  
+
     constructor(id : string, name: string, key: string){
         this.id = id;
         this.description = name;
-        this.itemWithholdingTaxGroupKey = key;
+        this.warehouseKey = key;
     }
+  
 }

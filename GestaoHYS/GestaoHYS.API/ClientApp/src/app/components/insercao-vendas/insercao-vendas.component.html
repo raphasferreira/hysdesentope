@@ -1,73 +1,41 @@
 <div class="h-full" fxLayout="column">
-    <div class="p-6 pb-0 bg-card shadow-b" fxFlex="none">
-      <div vexContainer>
-        <h1 class="display-1 mt-0 mb-4" fxLayout="row" fxLayoutAlign="start center">
-          <span @scaleIn
-            class="w-12 h-12 rounded-full text-primary ltr:mr-4 rtl:ml-4 flex items-center justify-center bg-primary-light">
-            <ic-icon [icon]="icContacts" size="24px"></ic-icon>
-          </span>
-          <span @fadeInRight class="block">Faturas</span>
-        </h1>
-  
-        <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 1%;">
-          <nav  class="vex-tabs border-0" fxFlex="auto" mat-tab-nav-bar>
-            <div *ngIf="labelBotao=='Criar Fatura'">
-            <a *ngFor="let link of links"
-              >
-              {{ link.label }}
-            </a>
-          </div>
-          </nav>
-  
-          
-  
-          <button *ngIf="labelBotao=='Criar Fatura'" color="primary" fxFlex="none" fxHide.xs mat-icon-button matTooltip="Search Contacts" type="button">
-            <mat-icon [icIcon]="icSearch"></mat-icon>
-          </button>
-  
-          <button *ngIf="labelBotao=='Criar Fatura'" class="ltr:ml-1 rtl:mr-1" color="primary" fxFlex="none" fxHide.xs mat-icon-button
-            matTooltip="Export Contacts" type="button">
-            <mat-icon [icIcon]="icCloudDownload"></mat-icon>
-          </button>
-  
-          <button *ngIf="labelBotao=='Criar Fatura'" class="ltr:ml-1 rtl:mr-1" color="primary" fxFlex="none" mat-icon-button matTooltip="Filter Contacts"
-            type="button">
-            <mat-icon [icIcon]="icFilterList"></mat-icon>
-          </button>
-  
-          <button (click)="openContact()" class="ltr:ml-1 rtl:mr-1" color="primary" fxFlex="none" fxHide.gt-xs
-            mat-mini-fab matTooltip="Add Contact" type="button">
-            <mat-icon [icIcon]="icPersonAdd"></mat-icon>
-          </button>
-  
-          <button (click)="openContact()" class="ltr:ml-4 rtl:mr-4" color="primary" fxFlex="none" fxHide.xs
-            mat-raised-button type="button">
-            <ic-icon [icon]="icPersonAdd" class="ltr:mr-2 rtl:ml-2 ltr:-ml-1 rtl:-mr-1" inline="true" size="20px">
-            </ic-icon>
-            <span>{{labelBotao}}</span>
-          </button>
-        </div>
+  <div class="p-6 pb-0 bg-card shadow-b" fxFlex="none">
+    <div vexContainer>
+      <h1 class="display-1 mt-0 mb-4" fxLayout="row" fxLayoutAlign="start center">
+        <span @scaleIn
+          class="w-12 h-12 rounded-full text-primary ltr:mr-4 rtl:ml-4 flex items-center justify-center bg-primary-light">
+          <ic-icon [icon]="icContacts" size="24px"></ic-icon>
+        </span>
+        <span @fadeInRight class="block">Faturas</span>
+      </h1>
+
+      <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 1%;">
+        <nav class="vex-tabs border-0" fxFlex="auto" mat-tab-nav-bar>
+
+        </nav>
+
+        <button *ngIf="labelBotao=='Criar Fatura'" class="ltr:ml-1 rtl:mr-1" color="primary" fxFlex="none" fxHide.xs
+          mat-icon-button matTooltip="Export Contacts" type="button">
+          <mat-icon [icIcon]="icCloudDownload"></mat-icon>
+        </button>
+
+        <button (click)="createFatura()" class="ml-4" color="primary" fxFlex="none" mat-mini-fab
+          matTooltip="Inserir Artigo Venda" type="button">
+          <mat-icon [icIcon]="icAdd"></mat-icon>
+        </button>
+
       </div>
     </div>
-  
-  
-    <div *ngIf="labelBotao=='Criar Fatura'" @stagger class="overflow-y-auto" fxFlex="auto">
-      <div class="p-gutter" vexContainer gdColumns="1fr " gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr" gdGap="24px">
-        <vex-insercao-vendas-data-table (openContact)=" openContact($event)" (toggleStar)="toggleStar($event)"
-          [columns]="tableColumns" [data]="tableData" [searchStr]="searchStr$ | async">
-        </vex-insercao-vendas-data-table>
-      </div>
-    </div>
-  
-    <div *ngIf="labelBotao=='Voltar Lista'" @stagger class="overflow-y-auto" fxFlex="auto">
-      <div class="p-gutter" vexContainer gdColumns="1fr " gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr" gdGap="24px">
-        <vex-insercao-vendas-edit [boolGeralCliente]="boolGeralCliente"></vex-insercao-vendas-edit>
-      </div>
-    </div>
-  
-    <!-- <div *ngIf="labelBotao=='Voltar Lista'" @scaleFadeIn fxFlex="auto" fxLayout="column"
-      fxLayoutAlign="center center">
-      <img class="m-12 h-64" src="assets/img/illustrations/idea.svg">
-      <h2 class="headline m-0 text-center">No contacts matching your filters</h2>
-    </div>  -->
   </div>
+    
+  
+    <div  @stagger class="overflow-y-auto" fxFlex="auto">
+      <div class="p-gutter" vexContainer gdColumns="1fr " gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr" gdGap="24px">
+        
+        <vex-insercao-vendas-data-table (openContact)=" openContact($event)" (toggleStar)="toggleStar($event)"
+        [searchStr]="searchStr$ | async">
+      </vex-insercao-vendas-data-table>
+      </div>
+    </div>
+
+</div>

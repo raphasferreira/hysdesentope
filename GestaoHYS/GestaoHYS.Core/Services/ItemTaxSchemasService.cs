@@ -7,25 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using GestaoHYS.Core.Repositories;
-using MoreLinq;
 
 namespace GestaoHYS.Core.Services
 {
-    public class InvoiceTypesService : IInvoiceTypesService
+    public class ItemTaxSchemasService : IItemTaxSchemasService
     {
-        private IInvoiceTypesWebService _webService;
+        private IItemTaxSchemasWebService _webService;
 
-        public InvoiceTypesService(IInvoiceTypesWebService webService) 
+        public ItemTaxSchemasService(IItemTaxSchemasWebService webService) 
            
         {
             _webService = webService;
         }
 
-        public async Task<IList<InvoiceTypes>> GetAllInvoiceTypes()
+        public async Task<IList<ItemTaxSchemas>> GetAllItemTaxSchemas()
         {
-            IList<InvoiceTypes> result = await _webService.GetAll();
-
-            return result.DistinctBy(r => r.typeKey).ToList();
+            IList<ItemTaxSchemas> result = await _webService.GetAll();
+            return result;
         }
 
        

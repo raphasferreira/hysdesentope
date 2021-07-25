@@ -29,6 +29,12 @@ export const environment = {
   assortments: 'Assortments',
   brands: 'Brands',
   brandModels: 'BrandModels',
+  invoiceTypes: 'InvoiceTypes',
+  invoice: 'Invoice',
+  series: 'Series',
+  warehouses:'Warehouses',
+  itemTaxSchemas: 'ItemTaxSchemas',
+  itemWithholdingTaxSchemas: 'ItemWithholdingTaxSchemas',
   ambiente: "dsv"
 
 };

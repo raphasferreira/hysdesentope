@@ -1,0 +1,234 @@
+<div class="form-group">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <div *ngIf="faturaModel.errosIntegracao" [ngClass]="[ 'text-red', 'bg-red-light']"
+      class="rounded px-2 py-1 font-medium text-xs" fxFlex="none">
+      <p mat-line> Erro de Integração no Jasmin</p>
+      {{ faturaModel.errosIntegracao }}
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+
+
+    <h2 *ngIf="faturaModel.naturalKey " class="headline m-0" fxFlex="auto">{{ faturaModel.naturalKey}}</h2>
+    <h2 *ngIf="!faturaModel.naturalKey" class="headline m-0" fxFlex="auto">Nova Fatura</h2>
+
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+
+
+  </div>
+
+  <div *ngIf="requisicao">
+
+    <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary">
+    </mat-progress-bar>
+    <br>
+
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+
+  <mat-dialog-content fxLayout="column">
+
+    <mat-tab-group dynamicHeight>
+
+      <mat-tab label="Geral">
+        <div class="px-6 py-4" fxLayout="column">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Tipo de Documento</mat-label>
+
+              <mat-select [(ngModel)]="faturaModel.documentType" required>
+                <mat-option *ngFor="let item of listOfInvoiceTypes" [value]="item.typeKey">{{item.typeKey}} -
+                  {{item.description}}
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="auto">
+              <mat-label>Série</mat-label>
+              <mat-select [(ngModel)]="faturaModel.serie" required>
+                <mat-option *ngFor="let item of listOfSeries" [value]="item.serieKey">{{item.serieKey}} -
+                  {{item.description}}
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="auto">
+              <mat-label>Número</mat-label>
+              <input type="number" [(ngModel)]="faturaModel.seriesNumber" matInput disabled>
+            </mat-form-field>
+
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+
+            <mat-form-field appearance="fill">
+              <mat-label>Data</mat-label>
+              <input matInput [matDatepicker]="pickerdocumentDate" [(ngModel)]="faturaModel.documentDate">
+              <mat-datepicker-toggle matSuffix [for]="pickerdocumentDate"></mat-datepicker-toggle>
+              <mat-datepicker #pickerdocumentDate></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="auto">
+              <mat-label>Referência</mat-label>
+              <input matInput [(ngModel)]="faturaModel.note">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Cliente</mat-label>
+              <mat-select [(ngModel)]="faturaModel.buyerCustomerParty" required>
+                <mat-option *ngFor="let item of listOfClientes" [value]="item.partyKey">{{item.partyKey}} -
+                  {{item.name}}
+
+                </mat-option>
+              </mat-select>
+
+            </mat-form-field>
+            <mat-form-field fxFlex="auto">
+              <mat-label>Condição de Pagamento</mat-label>
+              <mat-select [(ngModel)]="faturaModel.paymentTerm" required>
+                <mat-option *ngFor="let item of listOfPaymentTerms" [value]="item.paymentTermKey">
+                  {{item.paymentTermKey}} -
+                  {{item.description}}
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Desconto</mat-label>
+              <input [(ngModel)]="faturaModel.discount" type="number" matInput>
+            </mat-form-field>
+
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <mat-form-field appearance="fill">
+              <mat-label>Data de Vencimento</mat-label>
+              <input matInput [matDatepicker]="pickerdueDate" [(ngModel)]="faturaModel.dueDate">
+              <mat-datepicker-toggle matSuffix [for]="pickerdueDate"></mat-datepicker-toggle>
+              <mat-datepicker #pickerdueDate></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="auto">
+              <mat-label>Método de Pagamento</mat-label>
+              <mat-select [(ngModel)]="faturaModel.paymentMethod" required>
+                <mat-option *ngFor="let item of listOfPaymentMethod" [value]="item.paymentMethodsKey">
+                  {{item.paymentMethodsKey}} -
+                  {{item.description}}
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="px-6 py-4" fxLayout="column">
+          <div class="card overflow-auto -mt-16">
+            <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+              <h3 class="title my-0 ltr:pr-4 rtl:pl-4 ltr:mr-4 rtl:ml-4 ltr:border-r rtl:border-l" fxFlex="none" fxHide.xs>Produtos e Serviços</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <span class="table-add float-right mb-3 mr-2">
+                  <button (click)="add()" class="ml-4" color="primary" fxFlex="none" mat-mini-fab
+                    matTooltip="Inserir Artigo Venda" type="button">
+                    <mat-icon [icIcon]="icAdd"></mat-icon>
+                  </button>
+                </span>
+              </div>
+              <div id="table" class="table-editable">
+                
+                
+                  <table class="table table-bordered table-hover"  mat-table matSort>
+                    <tr>
+                      <th mat-header-cell style="width: 1200px">Artigo - Descrição </th>
+                   
+                      <th mat-header-cell style="width: 300px">Armazém</th>
+                      <th mat-header-cell style="width: 150px">Quantidade</th>
+                      <th mat-header-cell style="width: 150px">Unidade</th>
+                      <th mat-header-cell style="width: 200px">Preço Unitário</th>
+                      <th mat-header-cell style="width: 150px">Desconto</th>
+                      <th mat-header-cell style="width: 200px">Tipo Imposto</th>
+                      <th mat-header-cell style="width: 150px">Retenção</th>
+                      <th mat-header-cell style="width: 150px">Excluir</th>
+ 
+                    </tr>
+                    <tr *ngFor="let itemArtigo of faturaModel.documentLines; let id = index">
+                      <td [ngClass]="cssClasses" style="width: 300px" mat-cell>
+                        <mat-select [(ngModel)]="itemArtigo.salesItem" required>
+                          <mat-option *ngFor="let item of listOfArtigoVenda" [value]="item.ItemKey">
+                            {{item.ItemKey}} - {{item.description}} 
+                          </mat-option>
+                        </mat-select>
+                      </td>
+                      <td>
+                        <mat-select [(ngModel)]="itemArtigo.warehouse" required>
+                          <mat-option *ngFor="let item of listOfWarehouses" [value]="item.warehouseKey">
+                            {{item.warehouseKey}} - {{item.description}} 
+                          </mat-option>
+                        </mat-select>
+                      </td>
+                      <td>
+                        <input [(ngModel)]="itemArtigo.quantity" type="number" matInput>
+                      </td>
+                      <td>
+                        <mat-select [(ngModel)]="itemArtigo.unit" required>
+                          <mat-option *ngFor="let item of listOfUnidades" [value]="item.unitKey">{{item.unitKey}} - {{item.description}}
+            
+                          </mat-option>
+                        </mat-select>
+                      </td>
+                      <td>
+                        <input [(ngModel)]="itemArtigo.unitPrice.amount" type="number" matInput>
+                      </td>
+                      <td>
+                        <input [(ngModel)]="itemArtigo.unitPrice.discount" type="number" matInput>
+                      </td>
+                      <td>
+                        <mat-select [(ngModel)]="itemArtigo.itemTaxSchema" required>
+                          <mat-option *ngFor="let item of listOfItemTaxSchemas" [value]="item.taxCodeItemGroupKey">{{item.taxCodeItemGroupKey}} - {{item.description}}
+            
+                          </mat-option>
+                        </mat-select>
+                      </td>
+                      <td>
+                        <mat-select [(ngModel)]="itemArtigo.itemWithholdingTaxSchema" required>
+                          <mat-option *ngFor="let item of listOfItemWithholdingTaxSchemas" [value]="item.itemWithholdingTaxGroupKey">{{item.itemWithholdingTaxGroupKey}} - {{item.description}}
+            
+                          </mat-option>
+                        </mat-select>
+                      </td>
+                      <td>
+                        <span class="table-remove">
+                          <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                            (click)="remove(id)">Remove</button>
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+
+
+    </mat-tab-group>
+
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCEL</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-button (click)="save()">CRIAR
+      ARTIGO VENDA</button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-button (click)="save()">ATUALIZAR
+      ARTIGO VENDA</button>
+  </mat-dialog-actions>
+</div>

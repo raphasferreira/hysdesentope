@@ -46,9 +46,11 @@ namespace GestaoHYS.Infrastructure.Extensions
             services.AddClientAccessTokenClient("Assortments", "auth");
             services.AddClientAccessTokenClient("Brands", "auth");
             services.AddClientAccessTokenClient("BrandModels", "auth");
-
-
-
+            services.AddClientAccessTokenClient("InvoiceTypes", "auth");
+            services.AddClientAccessTokenClient("Series", "auth");
+            services.AddClientAccessTokenClient("Warehouses", "auth");
+            services.AddClientAccessTokenClient("ItemTaxSchemas", "auth");
+            services.AddClientAccessTokenClient("ItemWithholdingTaxSchemas", "auth");
         }
 
     }

@@ -1,11 +1,11 @@
-export class ItemWithholdingTaxSchemas{
+export class Series{
     id: string;
     description: string;
-    itemWithholdingTaxGroupKey: string;
+    serieKey: string;
   
     constructor(id : string, name: string, key: string){
         this.id = id;
         this.description = name;
-        this.itemWithholdingTaxGroupKey = key;
+        this.serieKey = key;
     }
 }

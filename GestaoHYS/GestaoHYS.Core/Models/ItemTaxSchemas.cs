@@ -6,15 +6,15 @@ using System.Text;
 
 namespace GestaoHYS.Core.Models
 {
-    public class InvoiceTypes
+    public class ItemTaxSchemas 
     {
         [Column("id")]
         [JsonProperty("id")]
         public string id { get; set; }
 
-        [Column("typeKey")]
-        [JsonProperty("typeKey")]
-        public string typeKey { get; set; }
+        [Column("taxCodeItemGroupKey")]
+        [JsonProperty("taxCodeItemGroupKey")]
+        public string taxCodeItemGroupKey { get; set; }
 
         [Column("description")]
         [JsonProperty("description")]

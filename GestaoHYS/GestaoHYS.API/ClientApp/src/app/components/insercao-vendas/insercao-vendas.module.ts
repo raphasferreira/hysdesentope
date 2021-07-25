@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { InsercaoVendasComponent } from './insercao-vendas.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
@@ -32,12 +33,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { InsercaoVendasDataTableComponent } from './insercao-vendas-data-table/insercao-vendas-data-table.component';
-import { DialogWithTableComponent, InsercaoVendasEditComponent } from './insercao-vendas-edit/insercao-vendas-edit.component';
 import { HighlightModule } from 'src/@vex/components/highlight/highlight.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [InsercaoVendasComponent, InsercaoVendasDataTableComponent, InsercaoVendasEditComponent, DialogWithTableComponent],
+  declarations: [InsercaoVendasComponent, InsercaoVendasDataTableComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -54,6 +54,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     ScrollbarModule,
     ReactiveFormsModule,
+    FormsModule,
     ContainerModule,
     MatSidenavModule,
     MatTabsModule,
