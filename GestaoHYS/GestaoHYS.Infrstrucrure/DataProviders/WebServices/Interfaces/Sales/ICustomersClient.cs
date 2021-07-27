@@ -29,7 +29,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices.Interfaces.Sales
         [Delete("/salesCore/customerParties/{id}")]
         Task<ApiResponse<ActionResult>> Delete(string id);
 
-
-
+        [Get("/salesCore/customerParties/{partyKey}")]
+        Task<ApiResponse<Cliente>> GetByKey(string partyKey);
     }
 }

@@ -30,7 +30,7 @@ export const environment = {
   brands: 'Brands',
   brandModels: 'BrandModels',
   invoiceTypes: 'InvoiceTypes',
-  invoice: 'Invoice',
+  invoice: 'SalesInvoice',
   series: 'Series',
   warehouses:'Warehouses',
   itemTaxSchemas: 'ItemTaxSchemas',

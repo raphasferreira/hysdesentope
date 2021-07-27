@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -959,20 +960,35 @@ namespace GestaoHYS.Core.Models
 
     public class UnitPrice
     {
+        [Column("Id")]
+        [Key]
+        [DatabaseGenerated
+        (DatabaseGeneratedOption.Identity)]
+        [Required]
+        [JsonProperty("idBaseLocal")]
+
+        public long Id { get; set; }
+
         [Column("amount")]
-        public double Amount { get; set; }
+        [JsonProperty("amount")]
+        public double? Amount { get; set; }
 
         [Column("baseAmount")]
-        public double BaseAmount { get; set; }
+        [JsonProperty("baseAmount")]
+        public double? BaseAmount { get; set; }
 
         [Column("reportingAmount")]
-        public double ReportingAmount { get; set; }
+        [JsonProperty("reportingAmount")]
+        public double? ReportingAmount { get; set; }
 
         [Column("fractionDigits")]
-        public int FractionDigits { get; set; }
+        [JsonProperty("fractionDigits")]
+        public int? FractionDigits { get; set; }
 
         [Column("symbol")]
+        [JsonProperty("symbol")]
         public string Symbol { get; set; }
+
     }
 
     public class DiscountInValueAmount

@@ -35,6 +35,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { InsercaoVendasDataTableComponent } from './insercao-vendas-data-table/insercao-vendas-data-table.component';
 import { HighlightModule } from 'src/@vex/components/highlight/highlight.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [InsercaoVendasComponent, InsercaoVendasDataTableComponent],
@@ -72,7 +74,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSnackBarModule,
     MatStepperModule,
     MatExpansionModule,
-    HighlightModule
+    HighlightModule,
+    MatProgressBarModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule
   ]
 })
 export class InsercaoVendasModule { }

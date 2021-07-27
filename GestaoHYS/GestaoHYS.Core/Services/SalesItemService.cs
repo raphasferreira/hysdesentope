@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using GestaoHYS.Core.Repositories;
+using MoreLinq;
 
 namespace GestaoHYS.Core.Services
 {
@@ -147,7 +148,10 @@ namespace GestaoHYS.Core.Services
 
         public async Task<List<SalesItem>> FindAllAtivo()
         {
-            return await _repository.FindAllAtivo();
+            List<SalesItem> listJasmin = (await _webService.GetAll()).ToList();
+            listJasmin.AddRange(await _repository.FindAllAtivo());
+
+            return listJasmin.ToList();
         }
 
         override

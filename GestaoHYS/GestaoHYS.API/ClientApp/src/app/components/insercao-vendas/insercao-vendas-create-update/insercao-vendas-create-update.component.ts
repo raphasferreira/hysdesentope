@@ -25,7 +25,7 @@ import { Warehouses } from 'src/app/_models/Warehouses';
 import { BaseUnit } from 'src/app/_models/BaseUnit';
 import { ItemTaxSchemas } from 'src/app/_models/ItemTaxSchemas';
 import { ItemWithholdingTaxSchemas } from 'src/app/_models/ItemWithholdingTaxSchemas';
-
+import icDelete from '@iconify/icons-ic/twotone-delete';
 
 
 @Component({
@@ -53,6 +53,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
   icClose = icClose;
   requisicao: boolean = false;
   icAdd = icAdd;
+  icDelete = icDelete;
 
   faturaModel: Invoice;
   listOfInvoiceTypes: Array<InvoiceTypes>;
@@ -129,6 +130,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoInvoiceTypes = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -149,6 +151,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoSeries = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -169,6 +172,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoCliente = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -189,6 +193,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoPaymentTerms = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -209,6 +214,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoPaymentTerms = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -221,6 +227,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoArtigoVenda = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -233,6 +240,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoWarehouses = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -245,6 +253,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoUnit = true;
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -257,6 +266,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoItemTaxSchemas = true; 
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -269,6 +279,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       this.isRetornoItemWithholdingTaxSchemas = true; 
       if(this.verificaRetornoRequisicoes()){
         this.requisicao = false;
+        document.getElementById("documentFocus").focus();
       }
       
     });
@@ -280,14 +291,8 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
     && this.isRetornoUnit && this.isRetornoItemTaxSchemas && this.isRetornoItemWithholdingTaxSchemas;
   }
 
-  updateList(id: number, property: string, event: any) {
-    // const editField = event.target.textContent;
-    // this.personList[id][property] = editField;
-  }
-
   remove(id: any) {
-    // this.awaitingPersonList.push(this.personList[id]);
-    // this.personList.splice(id, 1);
+    this.faturaModel.documentLines.splice(id, 1);
   }
 
   add() {
@@ -318,20 +323,95 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
 
   createInsercaoVendas() {
 
+    if(this.faturaModel.documentType == null){
+      this.snackBar.open("Tipo de Documento é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.serie == null){
+      this.snackBar.open("Serie é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.documentDate == null){
+      this.snackBar.open("Data do Documento é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.buyerCustomerParty == null){
+      this.snackBar.open("Cliente é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.paymentTerm == null){
+      this.snackBar.open("Condição de Pagamento é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.dueDate == null){
+      this.snackBar.open("Data de vencimento é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.paymentMethod == null){
+      this.snackBar.open("Método de Pagamento é obrigátorio.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    if(this.faturaModel.documentLines == null || this.faturaModel.documentLines.length < 1){
+      this.snackBar.open("O documento deve ter pelo menos uma linha de ´Produto e Serviços.", 'Close', { duration: 10000 });
+      return;
+    }
+
+    this.faturaModel.documentLines.forEach(element => {
+      if(element.salesItem == null){
+          this.snackBar.open("Artigo é obrigátorio.", 'Close', { duration: 10000 });
+          return;
+      }
+
+      if(element.warehouse == null){
+        this.snackBar.open("Armazém do artigo - "+ element.salesItem + " é obrigátorio.", 'Close', { duration: 10000 });
+        return;
+      }
+
+      if(element.quantity == null){
+        this.snackBar.open("Quantidade do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        return;
+      }
+
+      if(element.unit == null){
+        this.snackBar.open("Unidade do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        return;
+      }
+
+      if(element.unitPrice == null){
+        this.snackBar.open("Preço Unitário do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        return;
+      }
+
+      if(element.itemTaxSchema == null){
+        this.snackBar.open("Tipo de imposto do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        return;
+      }
+    }); 
+
+    
+
     this.requisicao = true;
    
     this.commomService.post(environment.invoice, this.faturaModel)
       .subscribe(response => {
         this.requisicao = false;
         this.dialogRef.close(this.faturaModel);
-        this.snackBar.open(MessagesSnackBar.CRIAR_USUARIO_SUCESSO, 'Close', { duration: 6000 })
-        EventEmitterService.get('buscarInsercaoVendass').emit();
+        this.snackBar.open(MessagesSnackBar.CRIAR_INVOICE_SUCESSO, 'Close', { duration: 6000 })
+        EventEmitterService.get('buscarInsercaoVendas').emit();
       },
         (error) => {
           this.requisicao = false;
           this.dialogRef.close(this.faturaModel);
+          console.log(error);
           this.snackBar.open(error.error, 'Close', { duration: 10000 });
-          EventEmitterService.get('buscarInsercaoVendass').emit();
+          EventEmitterService.get('buscarInsercaoVendas').emit();
 
         });
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,556 +17,532 @@ namespace GestaoHYS.Core.Models
         [DatabaseGenerated
         (DatabaseGeneratedOption.Identity)]
         [Required]
-        public string Id { get; set; }
+        [JsonProperty("idBaseLocal")]
+
+        public long Id { get; set; }
+
+
+        [Column("IdReferencia")]
+        [JsonProperty("id")]
+        public string IdReferencia { get; set; }
 
         //[Column("version")]
-        //public List<int> Version { get; set; }
+        //public List<int?> Version { get; set; }
 
         [Column("versionByte")]
+        [JsonProperty("versionByte")]
         public string VersionByte { get; set; }
 
         [Column("seriesNumber")]
-        public int SeriesNumber { get; set; }
+        [JsonProperty("seriesNumber")]
+        public int? SeriesNumber { get; set; }
 
-        //[Column("documentDate")]
-        //public DateTime DocumentDate { get; set; }
+        [Column("documentDate")]
+        [JsonProperty("documentDate")]
+        public DateTime? DocumentDate { get; set; }
 
         //[Column("postingDate")]
-        //public DateTime PostingDate { get; set; }
+        //public DateTime? PostingDate { get; set; }
 
         [Column("taxIncluded")]
-        public bool TaxIncluded { get; set; }
+        [JsonProperty("taxIncluded")]
+        public bool? TaxIncluded { get; set; }
 
         [Column("buyerCustomerPartyName")]
+        [JsonProperty("buyerCustomerPartyName")]
         public string BuyerCustomerPartyName { get; set; }
 
         [Column("buyerCustomerPartyTaxId")]
+        [JsonProperty("buyerCustomerPartyTaxId")]
         public string BuyerCustomerPartyTaxId { get; set; }
 
         [Column("buyerCustomerPartyAddress")]
+        [JsonProperty("buyerCustomerPartyAddress")]
         public string BuyerCustomerPartyAddress { get; set; }
 
         [Column("accountingPartyName")]
+        [JsonProperty("accountingPartyName")]
         public string AccountingPartyName { get; set; }
 
         [Column("accountingPartyTaxId")]
+        [JsonProperty("accountingPartyTaxId")]
         public string AccountingPartyTaxId { get; set; }
 
         [Column("accountingPartyAddress")]
+        [JsonProperty("accountingPartyAddress")]
         public string AccountingPartyAddress { get; set; }
 
-        [Column("exchangeRate")]
-        public double ExchangeRate { get; set; }
 
         [Column("exchangeRateDecimalPlaces")]
-        public int ExchangeRateDecimalPlaces { get; set; }
+        [JsonProperty("exchangeRateDecimalPlaces")]
+        public int? ExchangeRateDecimalPlaces { get; set; }
 
         //[Column("exchangeRateDate")]
-        //public DateTime ExchangeRateDate { get; set; }
+        //public DateTime? ExchangeRateDate { get; set; }
 
         [Column("discount")]
-        public double Discount { get; set; }
+        [JsonProperty("discount")]
+        public double? Discount { get; set; }
 
         [Column("cashInvoice")]
-        public bool CashInvoice { get; set; }
+        [JsonProperty("cashInvoice")]
+        public bool? CashInvoice { get; set; }
 
-        //[Column("checkDate")]
-        //public object CheckDate { get; set; }
-
-        //[Column("checkBank")]
-        //public object CheckBank { get; set; }
-
-        //[Column("checkBranch")]
-        //public object CheckBranch { get; set; }
-
-        //[Column("checkAccount")]
-        //public object CheckAccount { get; set; }
-
-        //[Column("checkEndorsed")]
-        //public object CheckEndorsed { get; set; }
-
-        //[Column("checkNumber")]
-        //public object CheckNumber { get; set; }
-
-        //[Column("issuePlace")]
-        //public object IssuePlace { get; set; }
+        
 
         [Column("checkPayment")]
-        public bool CheckPayment { get; set; }
+        [JsonProperty("checkPayment")]
+        public bool? CheckPayment { get; set; }
 
-        //[Column("grossValue")]
-        //public GrossValue GrossValue { get; set; }
-
+ 
         [Column("grossValueAmount")]
-        public double GrossValueAmount { get; set; }
+        [JsonProperty("grossValueAmount")]
+        public double? GrossValueAmount { get; set; }
 
-        //[Column("allowanceChargeAmount")]
-        //public AllowanceChargeAmount AllowanceChargeAmount { get; set; }
-
+       
         [Column("allowanceChargeAmountAmount")]
-        public double AllowanceChargeAmountAmount { get; set; }
+        [JsonProperty("allowanceChargeAmountAmount")]
+        public double? AllowanceChargeAmountAmount { get; set; }
 
-        //[Column("taxExclusiveAmount")]
-        //public TaxExclusiveAmount TaxExclusiveAmount { get; set; }
+
 
         [Column("taxExclusiveAmountAmount")]
-        public double TaxExclusiveAmountAmount { get; set; }
+        [JsonProperty("taxExclusiveAmountAmount")]
+        public double? TaxExclusiveAmountAmount { get; set; }
 
-        //[Column("taxTotal")]
-        //public TaxTotal TaxTotal { get; set; }
-
+ 
         [Column("taxTotalAmount")]
-        public double TaxTotalAmount { get; set; }
+        [JsonProperty("taxTotalAmount")]
+        public double? TaxTotalAmount { get; set; }
 
-        //[Column("payableAmount")]
-        //public PayableAmount PayableAmount { get; set; }
+  
 
         [Column("payableAmountAmount")]
-        public double PayableAmountAmount { get; set; }
+        [JsonProperty("payableAmountAmount")]
+        public double? PayableAmountAmount { get; set; }
 
-        //[Column("wTaxTotal")]
-        //public WTaxTotal WTaxTotal { get; set; }
 
         [Column("wTaxTotalAmount")]
-        public double WTaxTotalAmount { get; set; }
+        [JsonProperty("wTaxTotalAmount")]
+        public double? WTaxTotalAmount { get; set; }
 
-        //[Column("totalLiability")]
-        //public TotalLiability TotalLiability { get; set; }
 
         [Column("totalLiabilityAmount")]
-        public double TotalLiabilityAmount { get; set; }
+        [JsonProperty("totalLiabilityAmount")]
+        public double? TotalLiabilityAmount { get; set; }
 
         [Column("remarks")]
+        [JsonProperty("remarks")]
         public string Remarks { get; set; }
 
         [Column("note")]
+        [JsonProperty("note")]
         public string Note { get; set; }
 
         [Column("noteToRecipient")]
+        [JsonProperty("noteToRecipient")]
         public string NoteToRecipient { get; set; }
 
         [Column("isPrinted")]
-        public bool IsPrinted { get; set; }
+        [JsonProperty("isPrinted")]
+        public bool? IsPrinted { get; set; }
 
         [Column("settlementDiscountPercent")]
-        public double SettlementDiscountPercent { get; set; }
+        [JsonProperty("settlementDiscountPercent")]
+        public double? SettlementDiscountPercent { get; set; }
 
         [Column("loadingPoint")]
+        [JsonProperty("loadingPoint")]
         public string LoadingPoint { get; set; }
 
         [Column("loadingStreetName")]
+        [JsonProperty("loadingStreetName")]
         public string LoadingStreetName { get; set; }
 
-        //[Column("loadingBuildingNumber")]
-        //public object LoadingBuildingNumber { get; set; }
+
 
         [Column("loadingPostalZone")]
+        [JsonProperty("loadingPostalZone")]
         public string LoadingPostalZone { get; set; }
 
         [Column("loadingCityName")]
+        [JsonProperty("loadingCityName")]
         public string LoadingCityName { get; set; }
 
-        //[Column("loadingDateTime")]
-        //public DateTime LoadingDateTime { get; set; }
 
         [Column("loadingPointAddress")]
+        [JsonProperty("loadingPointAddress")]
         public string LoadingPointAddress { get; set; }
 
         [Column("unloadingPoint")]
+        [JsonProperty("unloadingPoint")]
         public string UnloadingPoint { get; set; }
 
         [Column("unloadingStreetName")]
+        [JsonProperty("unloadingStreetName")]
         public string UnloadingStreetName { get; set; }
 
         [Column("unloadingBuildingNumber")]
+        [JsonProperty("unloadingBuildingNumber")]
         public string UnloadingBuildingNumber { get; set; }
 
         [Column("unloadingPostalZone")]
+        [JsonProperty("unloadingPostalZone")]
         public string UnloadingPostalZone { get; set; }
 
         [Column("unloadingCityName")]
+        [JsonProperty("unloadingCityName")]
         public string UnloadingCityName { get; set; }
 
         [Column("unloadingPointAddress")]
+        [JsonProperty("unloadingPointAddress")]
         public string UnloadingPointAddress { get; set; }
 
-        [Column("unloadingDateTime")]
-        public DateTime UnloadingDateTime { get; set; }
-
-        //[Column("vehiclePlateNumber")]
-        //public object VehiclePlateNumber { get; set; }
-
         [Column("hash")]
+        [JsonProperty("hash")]
         public string Hash { get; set; }
 
         [Column("hashControl")]
+        [JsonProperty("hashControl")]
         public string HashControl { get; set; }
 
         [Column("legalStamp")]
+        [JsonProperty("legalStamp")]
         public string LegalStamp { get; set; }
 
-        //[Column("manualNumber")]
-        //public object ManualNumber { get; set; }
-
-        //[Column("manualDate")]
-        //public object ManualDate { get; set; }
-
-        //[Column("manualSerie")]
-        //public object ManualSerie { get; set; }
-
         [Column("isTransformed")]
-        public bool IsTransformed { get; set; }
+        [JsonProperty("isTransformed")]
+        public bool? IsTransformed { get; set; }
 
         [Column("dueDate")]
-        public DateTime DueDate { get; set; }
+        [JsonProperty("dueDate")]
+        public DateTime? DueDate { get; set; }
 
         [Column("isManualSerie")]
-        public bool IsManualSerie { get; set; }
+        [JsonProperty("isManualSerie")]
+        public bool? IsManualSerie { get; set; }
 
         [Column("isExternal")]
-        public bool IsExternal { get; set; }
+        [JsonProperty("isExternal")]
+        public bool? IsExternal { get; set; }
 
         [Column("isManual")]
-        public bool IsManual { get; set; }
-
-        //[Column("isOneTimeCustomer")]
-        //public object IsOneTimeCustomer { get; set; }
+        [JsonProperty("isManual")]
+        public bool? IsManual { get; set; }
 
         [Column("isSimpleInvoice")]
-        public bool IsSimpleInvoice { get; set; }
+        [JsonProperty("isSimpleInvoice")]
+        public bool? IsSimpleInvoice { get; set; }
 
         [Column("isWsCommunicable")]
-        public bool IsWsCommunicable { get; set; }
+        [JsonProperty("isWsCommunicable")]
+        public bool? IsWsCommunicable { get; set; }
 
         [Column("emailTo")]
+        [JsonProperty("emailTo")]
         public string EmailTo { get; set; }
 
-        //[Column("isCheckPayment")]
-        //public object IsCheckPayment { get; set; }
-
-        //[Column("defaultItemWithholding")]
-        //public object DefaultItemWithholding { get; set; }
-
-        //[Column("partyWithholdingMessage")]
-        //public object PartyWithholdingMessage { get; set; }
-
-        //[Column("partyHasWithholding")]
-        //public object PartyHasWithholding { get; set; }
-
-        //[Column("defaultItemWithholdingId")]
-        //public object DefaultItemWithholdingId { get; set; }
-
         [Column("isCommunicated")]
-        public bool IsCommunicated { get; set; }
-
-        //[Column("discountInValueAmount")]
-        //public DiscountInValueAmount DiscountInValueAmount { get; set; }
+        [JsonProperty("isCommunicated")]
+        public bool? IsCommunicated { get; set; }
 
         [Column("discountInValueAmountAmount")]
-        public double DiscountInValueAmountAmount { get; set; }
+        [JsonProperty("discountInValueAmountAmount")]
+        public double? DiscountInValueAmountAmount { get; set; }
 
         [Column("printAllDiscounts")]
+        [JsonProperty("printAllDiscounts")]
         public string PrintAllDiscounts { get; set; }
 
         [Column("isLocked")]
-        public bool IsLocked { get; set; }
+        [JsonProperty("isLocked")]
+        public bool? IsLocked { get; set; }
 
-        //[Column("aTCUD")]
-        //public object ATCUD { get; set; }
 
         [Column("aTQRCode")]
+        [JsonProperty("aTQRCode")]
         public string ATQRCode { get; set; }
 
         [Column("documentType")]
+        [JsonProperty("documentType")]
         public string DocumentType { get; set; }
 
         [Column("documentTypeId")]
+        [JsonProperty("documentTypeId")]
         public string DocumentTypeId { get; set; }
 
         [Column("documentTypeDescription")]
+        [JsonProperty("documentTypeDescription")]
         public string DocumentTypeDescription { get; set; }
 
         [Column("serie")]
+        [JsonProperty("serie")]
         public string Serie { get; set; }
 
         [Column("serieId")]
+        [JsonProperty("serieId")]
         public string SerieId { get; set; }
 
         [Column("serieDescription")]
+        [JsonProperty("serieDescription")]
         public string SerieDescription { get; set; }
 
         [Column("company")]
+        [JsonProperty("company")]
         public string Company { get; set; }
 
         [Column("companyId")]
+        [JsonProperty("companyId")]
         public string CompanyId { get; set; }
 
         [Column("companyDescription")]
+        [JsonProperty("companyDescription")]
         public string CompanyDescription { get; set; }
 
-        //[Column("economicActivityClassification")]
-        //public object EconomicActivityClassification { get; set; }
-
-        //[Column("economicActivityClassificationId")]
-        //public object EconomicActivityClassificationId { get; set; }
-
-        //[Column("economicActivityClassificationDescription")]
-        //public object EconomicActivityClassificationDescription { get; set; }
-
         [Column("cashFlowItem")]
+        [JsonProperty("cashFlowItem")]
         public string CashFlowItem { get; set; }
 
         [Column("cashFlowItemId")]
+        [JsonProperty("cashFlowItemId")]
         public string CashFlowItemId { get; set; }
 
         [Column("cashFlowItemDescription")]
+        [JsonProperty("cashFlowItemDescription")]
         public string CashFlowItemDescription { get; set; }
 
         [Column("financialAccount")]
+        [JsonProperty("financialAccount")]
         public string FinancialAccount { get; set; }
 
         [Column("financialAccountId")]
+        [JsonProperty("financialAccountId")]
         public string FinancialAccountId { get; set; }
 
         [Column("financialAccountDescription")]
+        [JsonProperty("financialAccountDescription")]
         public string FinancialAccountDescription { get; set; }
 
         [Column("deliveryTerm")]
+        [JsonProperty("deliveryTerm")]
         public string DeliveryTerm { get; set; }
 
         [Column("deliveryTermId")]
+        [JsonProperty("deliveryTermId")]
         public string DeliveryTermId { get; set; }
 
         [Column("deliveryTermDescription")]
+        [JsonProperty("deliveryTermDescription")]
         public string DeliveryTermDescription { get; set; }
 
         [Column("paymentTerm")]
+        [JsonProperty("paymentTerm")]
         public string PaymentTerm { get; set; }
 
         [Column("paymentTermId")]
+        [JsonProperty("paymentTermId")]
         public string PaymentTermId { get; set; }
 
         [Column("paymentTermDescription")]
+        [JsonProperty("paymentTermDescription")]
         public string PaymentTermDescription { get; set; }
 
         [Column("paymentMethod")]
+        [JsonProperty("paymentMethod")]
         public string PaymentMethod { get; set; }
 
         [Column("paymentMethodId")]
+        [JsonProperty("paymentMethodId")]
         public string PaymentMethodId { get; set; }
 
         [Column("paymentMethodDescription")]
+        [JsonProperty("paymentMethodDescription")]
         public string PaymentMethodDescription { get; set; }
 
         [Column("currency")]
+        [JsonProperty("currency")]
         public string Currency { get; set; }
 
         [Column("currencyId")]
+        [JsonProperty("currencyId")]
         public string CurrencyId { get; set; }
 
         [Column("currencyDescription")]
+        [JsonProperty("currencyDescription")]
         public string CurrencyDescription { get; set; }
 
         [Column("buyerCustomerParty")]
+        [JsonProperty("buyerCustomerParty")]
         public string BuyerCustomerParty { get; set; }
 
         [Column("buyerCustomerPartyId")]
+        [JsonProperty("buyerCustomerPartyId")]
         public string BuyerCustomerPartyId { get; set; }
 
         [Column("buyerCustomerPartyBaseEntityId")]
+        [JsonProperty("buyerCustomerPartyBaseEntityId")]
         public string BuyerCustomerPartyBaseEntityId { get; set; }
 
         [Column("buyerCustomerPartyDescription")]
+        [JsonProperty("buyerCustomerPartyDescription")]
         public string BuyerCustomerPartyDescription { get; set; }
 
         [Column("accountingParty")]
+        [JsonProperty("accountingParty")]
         public string AccountingParty { get; set; }
 
         [Column("accountingPartyId")]
+        [JsonProperty("accountingPartyId")]
         public string AccountingPartyId { get; set; }
 
         [Column("accountingPartyDescription")]
+        [JsonProperty("accountingPartyDescription")]
         public string AccountingPartyDescription { get; set; }
 
         [Column("priceList")]
+        [JsonProperty("priceList")]
         public string PriceList { get; set; }
 
         [Column("priceListId")]
+        [JsonProperty("priceListId")]
         public string PriceListId { get; set; }
 
         [Column("priceListDescription")]
+        [JsonProperty("priceListDescription")]
         public string PriceListDescription { get; set; }
 
-        //[Column("salesperson")]
-        //public object Salesperson { get; set; }
-
-        //[Column("salespersonId")]
-        //public object SalespersonId { get; set; }
-
-        //[Column("salespersonBaseEntityId")]
-        //public object SalespersonBaseEntityId { get; set; }
-
-        //[Column("salespersonDescription")]
-        //public object SalespersonDescription { get; set; }
-
-        //[Column("altAddress")]
-        //public object AltAddress { get; set; }
-
-        //[Column("altAddressId")]
-        //public object AltAddressId { get; set; }
-
         [Column("documentStatus")]
-        public int DocumentStatus { get; set; }
+        [JsonProperty("documentStatus")]
+        public int? DocumentStatus { get; set; }
 
         [Column("documentStatusDescription")]
+        [JsonProperty("documentStatusDescription")]
         public string DocumentStatusDescription { get; set; }
 
         [Column("loadingCountry")]
+        [JsonProperty("loadingCountry")]
         public string LoadingCountry { get; set; }
 
         [Column("loadingCountryId")]
+        [JsonProperty("loadingCountryId")]
         public string LoadingCountryId { get; set; }
 
         [Column("loadingCountryDescription")]
+        [JsonProperty("loadingCountryDescription")]
         public string LoadingCountryDescription { get; set; }
 
-        //[Column("loadingWarehouse")]
-        //public object LoadingWarehouse { get; set; }
-
-        //[Column("loadingWarehouseId")]
-        //public object LoadingWarehouseId { get; set; }
-
-        //[Column("loadingWarehouseDescription")]
-        //public object LoadingWarehouseDescription { get; set; }
-
         [Column("unloadingCountry")]
+        [JsonProperty("unloadingCountry")]
         public string UnloadingCountry { get; set; }
 
         [Column("unloadingCountryId")]
+        [JsonProperty("unloadingCountryId")]
         public string UnloadingCountryId { get; set; }
 
         [Column("unloadingCountryDescription")]
+        [JsonProperty("unloadingCountryDescription")]
         public string UnloadingCountryDescription { get; set; }
 
-        //TODO
-        //[Column("documentLines")]
-        //public List<DocumentLine> DocumentLines { get; set; }
-
-        //[Column("documentTaxes")]
-        //public List<DocumentTax> DocumentTaxes { get; set; }
-
-        //[Column("documentWTaxes")]
-        //public List<object> DocumentWTaxes { get; set; }
-
-        //[Column("salesChannel")]
-        //public object SalesChannel { get; set; }
-
-        //[Column("salesChannelId")]
-        //public object SalesChannelId { get; set; }
-
-        //[Column("salesChannelDescription")]
-        //public object SalesChannelDescription { get; set; }
+        [JsonProperty("documentLines")]
+        public List<DocumentLineInvoice> DocumentLines { get; set; }
 
         [Column("fiscalDocumentType")]
+        [JsonProperty("fiscalDocumentType")]
         public string FiscalDocumentType { get; set; }
 
         [Column("fiscalDocumentTypeId")]
+        [JsonProperty("fiscalDocumentTypeId")]
         public string FiscalDocumentTypeId { get; set; }
 
         [Column("fiscalDocumentTypeDescription")]
+        [JsonProperty("fiscalDocumentTypeDescription")]
         public string FiscalDocumentTypeDescription { get; set; }
 
-        //[Column("accountingAltAddress")]
-        //public object AccountingAltAddress { get; set; }
-
-        //[Column("accountingAltAddressId")]
-        //public object AccountingAltAddressId { get; set; }
-
         [Column("accountingSchema")]
-        public int AccountingSchema { get; set; }
+        [JsonProperty("accountingSchema")]
+        public int? AccountingSchema { get; set; }
 
         [Column("accountingSchemaDescription")]
+        [JsonProperty("accountingSchemaDescription")]
         public string AccountingSchemaDescription { get; set; }
 
         [Column("partyAccountingSchema")]
-        public int PartyAccountingSchema { get; set; }
+        [JsonProperty("partyAccountingSchema")]
+        public int? PartyAccountingSchema { get; set; }
 
         [Column("partyAccountingSchemaDescription")]
+        [JsonProperty("partyAccountingSchemaDescription")]
         public string PartyAccountingSchemaDescription { get; set; }
 
         [Column("notification")]
+        [JsonProperty("notification")]
         public string Notification { get; set; }
 
         [Column("notificationId")]
+        [JsonProperty("notificationId")]
         public string NotificationId { get; set; }
 
         [Column("notificationDescription")]
+        [JsonProperty("notificationDescription")]
         public string NotificationDescription { get; set; }
 
-        //[Column("lockReason")]
-        //public object LockReason { get; set; }
-
-        //[Column("lockReasonId")]
-        //public object LockReasonId { get; set; }
-
-        //[Column("lockReasonDescription")]
-        //public object LockReasonDescription { get; set; }
 
         [Column("baseCurrencyId")]
+        [JsonProperty("baseCurrencyId")]
         public string BaseCurrencyId { get; set; }
 
-        //[Column("baseCurrency")]
-        //public object BaseCurrency { get; set; }
-
-        //[Column("baseCurrencyDescription")]
-        //public object BaseCurrencyDescription { get; set; }
 
         [Column("reportingCurrencyId")]
+        [JsonProperty("reportingCurrencyId")]
         public string ReportingCurrencyId { get; set; }
 
-        //[Column("reportingCurrency")]
-        //public object ReportingCurrency { get; set; }
-
-        //[Column("reportingCurrencyDescription")]
-        //public object ReportingCurrencyDescription { get; set; }
-
-        //[Column("customAttributes")]
-        //public CustomAttributes CustomAttributes { get; set; }
 
         [Column("naturalKey")]
+        [JsonProperty("naturalKey")]
         public string NaturalKey { get; set; }
 
         [Column("isDraft")]
-        public bool IsDraft { get; set; }
+        [JsonProperty("isDraft")]
+        public bool? IsDraft { get; set; }
 
         [Column("isActive")]
-        public bool IsActive { get; set; }
+        [JsonProperty("isActive")]
+        public bool? IsActive { get; set; }
 
         [Column("isDeleted")]
+        [JsonProperty("isDeleted")]
         public bool IsDeleted { get; set; }
 
         [Column("isSystem")]
-        public bool IsSystem { get; set; }
+        [JsonProperty("isSystem")]
+        public bool? IsSystem { get; set; }
 
         [Column("createdBy")]
+        [JsonProperty("createdBy")]
         public string CreatedBy { get; set; }
 
         [Column("createdOn")]
-        public DateTime CreatedOn { get; set; }
+        [JsonProperty("createdOn")]
+        public DateTime? CreatedOn { get; set; }
 
         [Column("modifiedBy")]
+        [JsonProperty("modifiedBy")]
         public string ModifiedBy { get; set; }
 
         [Column("modifiedOn")]
-        public DateTime ModifiedOn { get; set; }
+        [JsonProperty("modifiedOn")]
+        public DateTime? ModifiedOn { get; set; }
 
         [Column("draftId")]
+        [JsonProperty("draftId")]
         public string DraftId { get; set; }
 
-        //[Column("subscriptionId")]
-        //public object SubscriptionId { get; set; }
-
         [Column("_state")]
-        public int State { get; set; }
+        [JsonProperty("_state")]
+        public int? State { get; set; }
+
+        public bool isIntegrated { get; set; }
+        public bool isIntegration { get; set; }
+        public string ErrosIntegracao { get; set; }
     }
 }

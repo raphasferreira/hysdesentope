@@ -155,6 +155,7 @@ namespace GestaoHIS.API
             services.AddScoped<IWarehousesService, WarehousesService>();
             services.AddScoped<IItemTaxSchemasService, ItemTaxSchemasService>();
             services.AddScoped<IItemWithholdingTaxSchemasService, ItemWithholdingTaxSchemasService>();
+            services.AddScoped<ISalesInvoiceService, SalesInvoiceService>();
 
             //WebServices
             services.AddScoped<ICustomerWebService, CustomerWebService>();
@@ -179,6 +180,7 @@ namespace GestaoHIS.API
             services.AddScoped<IWarehousesWebService, WarehousesWebService>();
             services.AddScoped<IItemTaxSchemasWebService, ItemTaxSchemasWebService>();
             services.AddScoped<IItemWithholdingTaxSchemasWebService, ItemWithholdingTaxSchemasWebService>();
+            services.AddScoped<ISalesInvoiceWebService, SalesInvoiceWebService>();
 
             //Repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -189,6 +191,7 @@ namespace GestaoHIS.API
             services.AddScoped<IParceiroRepository, ParceiroRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<ISalesItemRepository, SalesItemRepository>();
+            services.AddScoped<ISalesInvoiceRepository, SalesInvoiceRepository>();
 
         }
 

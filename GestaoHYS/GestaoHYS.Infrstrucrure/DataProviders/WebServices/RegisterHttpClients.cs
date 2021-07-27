@@ -276,6 +276,18 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
 
                 })
             });
+
+            services.Register<ISalesInvoiceClient>("SalesInvoice", urlBase, new RefitSettings
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
+
+                })
+            });
         }
 
         private static IHttpClientBuilder Register<T>(this IServiceCollection services,string name, string baseAddress, RefitSettings refitSettings)

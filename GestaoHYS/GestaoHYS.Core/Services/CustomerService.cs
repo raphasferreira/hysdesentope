@@ -115,7 +115,8 @@ namespace GestaoHYS.Core.Services
 
         private async Task<Boolean> VerificaPartyKeyIsUnica(string partyKey)
         {
-            return await _repository.FindPartyKey(partyKey) == null;
+
+            return await _repository.FindPartyKey(partyKey) == null && await _webService.GetByKey(partyKey) == null;
         }
 
         private async Task AtualizarClienteIntegrado(Cliente cliente)
@@ -147,7 +148,9 @@ namespace GestaoHYS.Core.Services
 
         public async Task<List<Cliente>> FindAllAtivo()
         {
-            return await _repository.FindAllAtivo();
+            List<Cliente> listJasmin = (await _webService.GetAll()).ToList();
+            listJasmin.AddRange(await _repository.FindAllAtivo());
+            return listJasmin;
         }
 
         override

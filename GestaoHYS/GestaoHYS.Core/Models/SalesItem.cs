@@ -26,10 +26,6 @@ namespace GestaoHYS.Core.Models
         public string IdReferencia { get; set; }
 
 
-
-        //[Column("version")]
-        //public List<int> Version { get; set; }
-
         [Column("versionByte")]
         [JsonProperty("versionByte")]
         public string VersionByte { get; set; }

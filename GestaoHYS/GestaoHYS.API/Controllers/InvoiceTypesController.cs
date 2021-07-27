@@ -39,5 +39,7 @@ namespace GestaoHYS.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro na busca dos dados.{ex.Message}");
             }
         }
+
+
     }
 }

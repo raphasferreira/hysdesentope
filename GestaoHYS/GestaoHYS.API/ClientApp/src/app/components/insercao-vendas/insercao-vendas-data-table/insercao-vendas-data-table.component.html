@@ -1,97 +1,70 @@
 <vex-scrollbar class="h-full relative">
-    <div fxLayout="column" fxLayoutAlign="space-between">
-      <table [@stagger]="dataSource.filteredData"
-             [dataSource]="dataSource"
-             class="w-full"
-             fxFlex="auto"
-             mat-table
-             matSort>
+  <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary"></mat-progress-bar> 
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="Data">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.documentDate | date : 'dd-MM-yyyy' || "-"}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Fatura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fatura </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.naturalKey || "-"}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Entidade">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Entidade </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.buyerCustomerParty || "-"}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="NIF">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> NIF </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.buyerCustomerPartyTaxId || "-"}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Nome">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.buyerCustomerPartyDescription || "-"}} </mat-cell>
+    </ng-container> 
+
+    <ng-container matColumnDef="Referencia">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Referência </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.note || "-"}} </mat-cell>
+    </ng-container> 
+
+    <ng-container matColumnDef="Integrar">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Integrar no Jasmin </mat-header-cell>
+        
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row">
+            <div 
+            [ngClass]="[ 'text-green', 'bg-green-light']"
+            class="rounded px-2 py-1 font-medium text-xs"
+            fxFlex="none">
+                {{ row.isIntegration || row.id != null ? "SIM" : "NÃO" }}
+            </div>
+            <div *ngIf="row.errosIntegracao != null"
+            [ngClass]="[ 'text-red', 'bg-red-light']"
+            class="rounded px-2 py-1 font-medium text-xs"
+            fxFlex="none">
+                    ERRO
+            </div>
+        </mat-cell>            
+    </ng-container> 
+
   
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-  
-        <!-- Model Properties Column -->
-        <ng-container *ngFor="let column of columns">
-          <ng-container *ngIf="column.type === 'text'" [matColumnDef]="column.property">
-            <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
-            <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>{{ row[column.property] }}</td>
-          </ng-container>
-  
-          <ng-container *ngIf="column.type === 'checkbox'" [matColumnDef]="column.property">
-            <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
-            <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>
-              <mat-checkbox (click)="$event.stopPropagation()" [checked]="row[column.property]"></mat-checkbox>
-            </td>
-          </ng-container>
-  
-          <ng-container *ngIf="column.type === 'image'" [matColumnDef]="column.property">
-            <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
-            <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>
-              <img [src]="row[column.property]" class="avatar h-9 w-9 align-middle my-2">
-            </td>
-          </ng-container>
-  
-          <ng-container *ngIf="column.type === 'button'" [matColumnDef]="column.property">
-            <ng-container *ngIf="column.property === 'starred'">
-              <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
-              <td *matCellDef="let row" [ngClass]="column.cssClasses" class="w-10" mat-cell>
-                <button (click)="emitToggleStar($event, row.id)" mat-icon-button type="button">
-                  <mat-icon *ngIf="row[column.property]" [icIcon]="icStar" class="text-amber"></mat-icon>
-                  <mat-icon *ngIf="!row[column.property]" [icIcon]="icStarBorder"></mat-icon>
-                </button>
-              </td>
-            </ng-container>
-  
-            <ng-container *ngIf="column.property === 'menu'">
-              <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
-              <td *matCellDef="let row" [ngClass]="column.cssClasses" class="w-10" mat-cell>
-                <button (click)="$event.stopPropagation()"
-                        [matMenuTriggerFor]="contactMenu"
-                        mat-icon-button
-                        type="button">
-                  <mat-icon [icIcon]="icMoreVert"></mat-icon>
-                </button>
-              </td>
-            </ng-container>
-          </ng-container>
-        </ng-container>
-  
-  
-        <tr *matHeaderRowDef="visibleColumns; sticky: true" mat-header-row></tr>
-        <!--suppress UnnecessaryLabelJS -->
-        <tr (click)="openContact.emit(row.id)"
-            *matRowDef="let row; columns: visibleColumns;"
-            @fadeInUp
-            class="hover:bg-hover cursor-pointer"
-            mat-row></tr>
-      </table>
-  
-      <div *ngIf="dataSource.filteredData.length === 0"
-           @scaleFadeIn
-           fxFlex="auto"
-           fxLayout="column"
-           fxLayoutAlign="center center">
-        <img class="m-12 h-64" src="assets/img/illustrations/idea.svg">
-        <h2 class="headline m-0 text-center">Nenhuma fatura encontrada</h2>
-      </div>
-  
-      <mat-paginator [fxHide]="dataSource.filteredData.length === 0"
-                     [pageSize]="pageSize"
-                     [pageSizeOptions]="pageSizeOptions"
-                     class="sticky bottom-0 left-0 right-0 border-t"
-                     fxFlex="none"></mat-paginator>
-    </div>
+    
+    <ng-container matColumnDef="Acoes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+        <img (click)="updateVenda(row)" style="cursor: pointer; max-width: 25px;" src="../../../assets/view.png">
+        <img *ngIf="row.idBaseLocal != 0" (click)="deleteVenda(row)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png">
+        </mat-cell>
+    </ng-container>  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </vex-scrollbar>
-  
-  <mat-menu #contactMenu="matMenu" xPosition="before" yPosition="below">
-    <button mat-menu-item>
-      <mat-icon [icIcon]="icEdit"></mat-icon>
-      <span>Edit Contact</span>
-    </button>
-  
-    <button mat-menu-item>
-      <mat-icon [icIcon]="icDeleteForever"></mat-icon>
-      <span>Delete Contact</span>
-    </button>
-  </mat-menu>
   

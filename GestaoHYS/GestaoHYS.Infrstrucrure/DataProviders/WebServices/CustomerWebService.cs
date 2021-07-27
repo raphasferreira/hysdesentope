@@ -118,5 +118,25 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
                 throw new Exception($"Erro ao inserir cliente no Jasmin. { ex.Message } ");
             }
         }
+
+        public async Task<Cliente> GetByKey(string partyKey)
+        {
+            try
+            {
+                var resultrefit = _client.GetByKey(partyKey).Result;
+                if (resultrefit.IsSuccessStatusCode)
+                {
+                    return resultrefit.Content;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar todos os cliente. { ex.Message } ");
+            }
+        }
     }
 }

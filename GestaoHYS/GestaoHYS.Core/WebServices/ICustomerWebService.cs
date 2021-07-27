@@ -9,6 +9,7 @@ namespace GestaoHYS.Core.WebServices
     public interface ICustomerWebService
     {
         Task<IList<Cliente>> GetAll();
+        Task<Cliente> GetByKey(string partyKey);
 
         Task<Cliente> Insert(Cliente cliente);
         Task<Cliente> Update(Cliente cliente);

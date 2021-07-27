@@ -51,6 +51,8 @@ namespace GestaoHYS.Infrastructure.Extensions
             services.AddClientAccessTokenClient("Warehouses", "auth");
             services.AddClientAccessTokenClient("ItemTaxSchemas", "auth");
             services.AddClientAccessTokenClient("ItemWithholdingTaxSchemas", "auth");
+            services.AddClientAccessTokenClient("SalesInvoice", "auth");
+            
         }
 
     }

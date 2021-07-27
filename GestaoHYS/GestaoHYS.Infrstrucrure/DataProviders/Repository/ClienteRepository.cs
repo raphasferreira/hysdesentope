@@ -22,7 +22,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
         {
             try
             {
-                return await _unitOfWork.Context.Set<Cliente>().Where(w => (!w.IsDeleted)).ToListAsync();
+                return await _unitOfWork.Context.Set<Cliente>().Where(w => (!w.IsDeleted) && (!w.isIntegration || (w.isIntegration && !w.isIntegrated))).ToListAsync();
             }
             catch(Exception ex)
             {

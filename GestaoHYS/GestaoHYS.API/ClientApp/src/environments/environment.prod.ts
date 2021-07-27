@@ -20,5 +20,17 @@ export const environment = {
     partyTaxSchemas: 'PartyTaxSchemas',
     partyWithholdingTaxSchemas: 'PartyWithholdingTaxSchemas',
     priceLists: 'PriceLists',
+    artigoVendas: 'SalesItem',
+    unit: 'Unit',
+    assortments: 'Assortments',
+    brands: 'Brands',
+    brandModels: 'BrandModels',
+    invoiceTypes: 'InvoiceTypes',
+    invoice: 'SalesInvoice',
+    series: 'Series',
+    warehouses:'Warehouses',
+    itemTaxSchemas: 'ItemTaxSchemas',
+    itemWithholdingTaxSchemas: 'ItemWithholdingTaxSchemas',
     ambiente: "dsv"
+  
 };

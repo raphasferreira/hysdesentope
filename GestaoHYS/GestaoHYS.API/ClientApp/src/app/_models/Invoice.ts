@@ -38,7 +38,7 @@ export class Invoice{
     errosIntegracao: string;
     naturalKey:  string;
     note: string;
-
+    isIntegration: boolean;
     constructor(){
     }
 }

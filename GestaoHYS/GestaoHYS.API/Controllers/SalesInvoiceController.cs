@@ -1,151 +1,139 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using GestaoHIS.API.Helpers;
-//using GestaoHIS.API.Model;
-//using GestaoHIS.API.Repository;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
+﻿using GestaoHYS.Core.Models;
+using GestaoHYS.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-//namespace GestaoHYS.Core.Models
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class SalesInvoiceController : ControllerBase
-//    {
+namespace GestaoHYS.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class SalesInvoiceController : ControllerBase
+    {
+        private ISalesInvoiceService _service;
 
-//        private readonly GestaoHISContext _context;
-//        internal static AuthenticationProvider AuthenticationProvider { get; set; }
+        public SalesInvoiceController(ISalesInvoiceService service)
+        {
+            _service = service;
+        }
 
-//        public SalesInvoiceController(GestaoHISContext context)
-//        {
-//            _context = context;
+        [HttpGet("GetSalesInvoiceAllJasmin")]
+        [Produces(typeof(IList<SalesInvoice>))]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllSalesInvoiceAsync()
+        {
+            try
+            {
+                var list = await _service.GetAllSalesInvoice();
+                if (list.Count() == 0)
+                    return NoContent();
 
-//            AuthenticationProvider = new AuthenticationProvider("", "");
-//        }
+                return Ok(list);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro no busca dos dados.{ex.Message}");
+            }
+        }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SalesInvoice>>> GetSalesInvoices()
+        {
+            try
+            {
+                var list = await _service.FindAllAtivo();
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao buscar lista de usuários. Exception: { ex.Message }");
+            }
 
-//        // GET: api/SalesInvoice
-//        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<SalesInvoice>>> GetSalesInvoice()
-//        {
-//            return await _context.SalesInvoice.ToListAsync();
-//        }
+        }
 
-//        // GET: api/SalesInvoice/5
-//        [HttpGet("{id}")]
-//        public async Task<ActionResult<SalesInvoice>> GetSalesInvoice(string id)
-//        {
-//            try
-//            {
-//                var SalesInvoice = await _context.SalesInvoice.FindAsync(id);
+        // GET: api/SalesInvoice/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SalesInvoice>> GetSalesInvoice(long id)
+        {
+            try
+            {
+                var salesInvoice = await _service.FindById(id);
 
-//                if (SalesInvoice == null)
-//                {
-//                    return NotFound();
-//                }
+                if (salesInvoice == null)
+                {
+                    return NotFound();
+                }
 
-//                return SalesInvoice;
-//            }
-//            catch (Exception e)
-//            {
-//                return Conflict(e);
-//                throw e;
-//            }
+                return Ok(salesInvoice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao buscar usuário. Exception: { ex.Message }");
+            }
 
-//        }
+        }
 
-//        // GET: api/SalesInvoice/5
-//        [HttpGet("GetSalesInvoiceAll")]
-//        public async Task<ActionResult<List<SalesInvoice>>> GetSalesInvoiceAll()
-//        {
-//            try
-//            {
-//                var SalesInvoices = await _context.SalesInvoice.ToListAsync();
+        // PUT: api/SalesInvoice/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut]
+        public async Task<IActionResult> PutSalesInvoice(SalesInvoice salesInvoice)
+        {
+            if (salesInvoice.Id == 0)
+            {
+                return BadRequest();
+            }
 
-//                if (SalesInvoices == null)
-//                {
-//                    return NotFound();
-//                }
-
-//                return SalesInvoices;
-//            }
-//            catch (Exception e)
-//            {
-
-//                return Conflict();
-//                throw e;
-//            }
-
-//        }
-
-
-//        // PUT: api/SalesInvoice/5
-//        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-//        // more details see https://aka.ms/RazorPagesCRUD.
-//        [HttpPut("{id}")]
-//        public async Task<IActionResult> PutSalesInvoice(string id, SalesInvoice SalesInvoice)
-//        {
-//            if (id != SalesInvoice.Id)
-//            {
-//                return BadRequest();
-//            }
-
-//            _context.Entry(SalesInvoice).State = EntityState.Modified;
-
-//            try
-//            {
-//                await _context.SaveChangesAsync();
-//            }
-//            catch (DbUpdateConcurrencyException)
-//            {
-//                if (!SalesInvoiceExists(id))
-//                {
-//                    return NotFound();
-//                }
-//                else
-//                {
-//                    throw;
-//                }
-//            }
-
-//            return NoContent();
-//        }
-
-//        // POST: api/SalesInvoice
-//        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-//        // more details see https://aka.ms/RazorPagesCRUD.
-//        [HttpPost]
-//        public async Task<ActionResult<SalesInvoice>> PostSalesInvoice(SalesInvoice SalesInvoice)
-//        {
-//            _context.SalesInvoice.Add(SalesInvoice);
-//            await _context.SaveChangesAsync();
-
-//            return CreatedAtAction("GetSalesInvoice", new { id = SalesInvoice.Id }, SalesInvoice);
-//        }
-
-//        // DELETE: api/SalesInvoice/5
-//        [HttpDelete("{id}")]
-//        public async Task<ActionResult<SalesInvoice>> DeleteSalesInvoice(string id)
-//        {
-//            var SalesInvoice = await _context.SalesInvoice.FindAsync(id);
-//            if (SalesInvoice == null)
-//            {
-//                return NotFound();
-//            }
-
-//            _context.SalesInvoice.Remove(SalesInvoice);
-//            await _context.SaveChangesAsync();
-
-//            return SalesInvoice;
-//        }
-
-//        private bool SalesInvoiceExists(string id)
-//        {
-//            return _context.SalesInvoice.Any(e => e.Id == id);
-//        }
+            try
+            {
+                await _service.Update(salesInvoice);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
 
-//    }
-//}
+        }
+
+        // POST: api/SalesInvoice
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult<SalesInvoice>> PostSalesInvoice(SalesInvoice salesInvoice)
+        {
+            try
+            {
+                salesInvoice = await _service.Insert(salesInvoice);
+                return CreatedAtAction("GetSalesInvoice", new { id = salesInvoice.Id }, salesInvoice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        // DELETE: api/SalesInvoice/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteSalesInvoice(long id)
+        {
+            try
+            {
+                await _service.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    }
+}

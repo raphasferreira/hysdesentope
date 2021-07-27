@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace GestaoHYS.Infrastructure.DataProviders.Repository
 {
-    public class SalesItemRepository : Repository<SalesItem>, ISalesItemRepository
+    public class SalesInvoiceRepository : Repository<SalesInvoice>, ISalesInvoiceRepository
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public SalesItemRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public SalesInvoiceRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<SalesItem>> FindAllAtivo()
+        public async Task<List<SalesInvoice>> FindAllAtivo()
         {
             try
             {
-                return await _unitOfWork.Context.Set<SalesItem>().Where(w => (!w.IsDeleted) && (!w.isIntegration || (w.isIntegration && !w.isIntegrated))).ToListAsync();
+                return await _unitOfWork.Context.Set<SalesInvoice>().Where(w => (!w.IsDeleted) && (!w.isIntegration || (w.isIntegration && !w.isIntegrated))).ToListAsync();
             }
             catch(Exception ex)
             {
@@ -31,28 +31,16 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
             
         }
 
-        public async Task<SalesItem> FindPartyKey(string partyKey)
-        {
-            try
-            {
-                return await _unitOfWork.Context.Set<SalesItem>().FirstOrDefaultAsync(w => w.ItemKey.Equals(partyKey));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public async Task UpdateAttached(SalesItem entity)
+        public async Task UpdateAttached(SalesInvoice entity)
         {
             this.DetachLocal(entity);
             await base.SetUpdate(entity);
 
         }
 
-        public void DetachLocal(SalesItem entity)
+        public void DetachLocal(SalesInvoice entity)
         {
-            var local = _unitOfWork.Context.Set<SalesItem>().Local
+            var local = _unitOfWork.Context.Set<SalesInvoice>().Local
                 .FirstOrDefault(entry => entry.Id.Equals(entry.Id));
 
             if (local != null)
