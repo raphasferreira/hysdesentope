@@ -156,6 +156,7 @@ namespace GestaoHIS.API
             services.AddScoped<IItemTaxSchemasService, ItemTaxSchemasService>();
             services.AddScoped<IItemWithholdingTaxSchemasService, ItemWithholdingTaxSchemasService>();
             services.AddScoped<ISalesInvoiceService, SalesInvoiceService>();
+            services.AddScoped<ITitulosService, TitulosService>();
 
             //WebServices
             services.AddScoped<ICustomerWebService, CustomerWebService>();
@@ -192,6 +193,9 @@ namespace GestaoHIS.API
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<ISalesItemRepository, SalesItemRepository>();
             services.AddScoped<ISalesInvoiceRepository, SalesInvoiceRepository>();
+            services.AddScoped<ITitulosRepository, TitulosRepository>();
+            services.AddScoped<IPagamentosRepository, PagamentosRepository>();
+            
 
         }
 

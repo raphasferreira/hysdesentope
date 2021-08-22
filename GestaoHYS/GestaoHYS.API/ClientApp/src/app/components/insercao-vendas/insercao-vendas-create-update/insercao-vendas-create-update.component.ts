@@ -26,6 +26,9 @@ import { BaseUnit } from 'src/app/_models/BaseUnit';
 import { ItemTaxSchemas } from 'src/app/_models/ItemTaxSchemas';
 import { ItemWithholdingTaxSchemas } from 'src/app/_models/ItemWithholdingTaxSchemas';
 import icDelete from '@iconify/icons-ic/twotone-delete';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -46,8 +49,9 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
     ativo: true
   };
   static id = 100;
-
-
+ 
+  filteredOptions: Observable<Array<Series>>;
+  myControl = new FormControl();
   mode: 'create' | 'update' = 'create';
 
   icClose = icClose;
@@ -55,7 +59,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
   icAdd = icAdd;
   icDelete = icDelete;
 
-  faturaModel: Invoice;
+  faturaModel: Invoice = new Invoice();
   listOfInvoiceTypes: Array<InvoiceTypes>;
   listOfSeries: Array<Series>;
   listOfClientes: Array<Cliente>;
@@ -113,7 +117,11 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
     this.loadBaseUnit();
     this.loadItemTaxSchemas();
     this.loadItemWithholdingTaxSchemas();
+
+    
   }
+
+ 
 
   loadInvoiceTypes() {
     this.commomService.get(environment.invoiceTypes).subscribe(response => {
@@ -154,6 +162,7 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
         document.getElementById("documentFocus").focus();
       }
       
+
     });
   }
 
@@ -295,6 +304,11 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
     this.faturaModel.documentLines.splice(id, 1);
   }
 
+  changeArtigoVenda(event, itemArtigo){
+    let artigoSelecionado = this.listOfArtigoVenda.find(a => a.ItemKey == event.value);
+    itemArtigo.unit = artigoSelecionado.unit;
+  }
+
   add() {
     if (this.faturaModel.documentLines != null && this.faturaModel.documentLines.length > 0) {
       const artigo = new DocumentLines();
@@ -363,39 +377,48 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
       return;
     }
 
+    let falhaItens = false;
     this.faturaModel.documentLines.forEach(element => {
       if(element.salesItem == null){
           this.snackBar.open("Artigo é obrigátorio.", 'Close', { duration: 10000 });
+          falhaItens = true;
           return;
       }
 
       if(element.warehouse == null){
         this.snackBar.open("Armazém do artigo - "+ element.salesItem + " é obrigátorio.", 'Close', { duration: 10000 });
+        falhaItens = true;
         return;
       }
 
       if(element.quantity == null){
         this.snackBar.open("Quantidade do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        falhaItens = true;
         return;
       }
 
       if(element.unit == null){
         this.snackBar.open("Unidade do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        falhaItens = true;
         return;
       }
 
       if(element.unitPrice == null){
         this.snackBar.open("Preço Unitário do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        falhaItens = true;
         return;
       }
 
       if(element.itemTaxSchema == null){
         this.snackBar.open("Tipo de imposto do artigo - "+ element.salesItem + "  é obrigátorio.", 'Close', { duration: 10000 });
+        falhaItens = true;
         return;
       }
     }); 
 
-    
+    if(falhaItens){
+      return;
+    }
 
     this.requisicao = true;
    

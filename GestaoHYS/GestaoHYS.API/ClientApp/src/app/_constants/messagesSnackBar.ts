@@ -60,5 +60,9 @@ export enum MessagesSnackBar {
   DELETAR_INVOICE_SUCESSO = 'Venda deletado com sucesso',
   DELETAR_INVOICE_ERRO = 'Erro ao deletar vendas',
   BUSCAR_INVOICE_ERRO = 'Erro ao buscar vendas',
-  
+
+  //TITULOS
+  BUSCAR_TITULOS_ERRO = "Erro ao buscar títulos",
+  BAIXA_TITULO_ERRO = "Erro ao realizar pagamento no título",
+  BAIXA_TITULO_SUCESSO = "Pagamento do título realizado com sucesso"
 }

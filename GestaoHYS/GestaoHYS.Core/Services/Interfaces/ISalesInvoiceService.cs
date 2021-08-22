@@ -10,5 +10,6 @@ namespace GestaoHYS.Core.Services.Interfaces
     {
         Task<IList<SalesInvoice>> GetAllSalesInvoice();
         Task<List<SalesInvoice>> FindAllAtivo();
+        Task<IList<SalesInvoice>> BuscaFaturasAbertasLocais();
     }
 }

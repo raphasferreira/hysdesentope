@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VexRoutes } from 'src/@vex/interfaces/vex-route.interface';
 import { NotasCreditoComponent } from './notas-credito/notas-credito.component';
+import { TitulosComponent } from './titulos/titulos.component';
 
 const routes: VexRoutes = [
   {
@@ -10,6 +11,10 @@ const routes: VexRoutes = [
       {
         path: 'notas-credito',
         component: NotasCreditoComponent,
+      },
+      {
+        path: 'titulos',
+        component: TitulosComponent,
       }
     ]
   }

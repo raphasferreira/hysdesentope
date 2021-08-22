@@ -35,6 +35,7 @@ export const environment = {
   warehouses:'Warehouses',
   itemTaxSchemas: 'ItemTaxSchemas',
   itemWithholdingTaxSchemas: 'ItemWithholdingTaxSchemas',
+  titulos: 'titulos',
   ambiente: "dsv"
 
 };

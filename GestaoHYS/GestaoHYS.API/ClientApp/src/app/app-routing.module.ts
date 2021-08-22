@@ -12,6 +12,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { ClienteComponent } from './components/cadastro/cliente/cliente.component';
 import { ArtigoVendaComponent } from './components/cadastro/artigo-venda/artigo-venda.component';
+import { TitulosComponent } from './components/gestao-financeira/titulos/titulos.component';
 // import { ParceiroComponent } from './components/cadastro/parceiro/parceiro.component';
 
 
@@ -29,6 +30,7 @@ const routes: VexRoutes = [
       { path: 'gestaohis/cadastro/usuario', component: UsuarioComponent },
       { path: 'gestaohis/cadastro/perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'gestaohis/cadastro/artigo-venda', component: ArtigoVendaComponent },
+      { path: 'gestaohis/gestao-financeira/titulos', component: TitulosComponent}
      
     ],
   },

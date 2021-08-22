@@ -1,0 +1,23 @@
+<div class="h-full" fxLayout="column">
+  <div class="p-6 pb-0 bg-card shadow-b" fxFlex="none">
+    <div vexContainer>
+      <h1 class="display-1 mt-0 mb-4" fxLayout="row" fxLayoutAlign="start center">
+        <span @scaleIn
+          class="w-12 h-12 rounded-full text-primary ltr:mr-4 rtl:ml-4 flex items-center justify-center bg-primary-light">
+          <ic-icon [icon]="icContacts" size="24px"></ic-icon>
+        </span>
+        <span @fadeInRight class="block">Títulos</span>
+      </h1>
+    </div>
+  </div>
+    
+  
+    <div  @stagger class="overflow-y-auto" fxFlex="auto">
+      <div class="p-gutter" vexContainer gdColumns="1fr " gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr" gdGap="24px">
+        <vex-titulos-data-table (openContact)=" openContact($event)" (toggleStar)="toggleStar($event)"
+        [searchStr]="searchStr$ | async">
+      </vex-titulos-data-table>
+      </div>
+    </div>
+
+</div>

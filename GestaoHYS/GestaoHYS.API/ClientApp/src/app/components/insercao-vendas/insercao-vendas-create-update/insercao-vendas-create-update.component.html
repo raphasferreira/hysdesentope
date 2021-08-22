@@ -56,9 +56,9 @@
               <mat-select [(ngModel)]="faturaModel.serie" required>
                 <mat-option *ngFor="let item of listOfSeries" [value]="item.serieKey">{{item.serieKey}} -
                   {{item.description}}
-
                 </mat-option>
               </mat-select>
+              
             </mat-form-field>
             <mat-form-field fxFlex="auto">
               <mat-label>Número</mat-label>
@@ -163,7 +163,7 @@
                     </tr>
                     <tr *ngFor="let itemArtigo of faturaModel.documentLines; let id = index">
                       <td [ngClass]="cssClasses" style="width: 300px" mat-cell>
-                        <mat-select [(ngModel)]="itemArtigo.salesItem" required>
+                        <mat-select [(ngModel)]="itemArtigo.salesItem" (selectionChange)="changeArtigoVenda($event, itemArtigo)" required>
                           <mat-option *ngFor="let item of listOfArtigoVenda" [value]="item.ItemKey">
                             {{item.ItemKey}} - {{item.description}} 
                           </mat-option>
@@ -190,7 +190,7 @@
                         <input [(ngModel)]="itemArtigo.unitPrice.amount" type="number" matInput>
                       </td>
                       <td>
-                        <input [(ngModel)]="itemArtigo.unitPrice.discount" type="number" matInput>
+                        <input [(ngModel)]="itemArtigo.discount1" type="number" matInput>
                       </td>
                       <td>
                         <mat-select [(ngModel)]="itemArtigo.itemTaxSchema" required>

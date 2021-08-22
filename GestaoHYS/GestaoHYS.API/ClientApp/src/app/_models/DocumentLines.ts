@@ -13,7 +13,8 @@ export class DocumentLines{
     deliveryDate: DateTime;
     warehouse:string;
     itemWithholdingTaxSchema: string;
-    
+    discount1: number;
+
     constructor(){
         this.unitPrice = new UnitPrice();
     }

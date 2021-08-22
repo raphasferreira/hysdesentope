@@ -104,6 +104,7 @@ namespace GestaoHYS.Infrastructure.DataProviders.WebServices
                         resultrefit = _client.UpdateSalesCore(cliente.PartyKey, prop.Name, valorItem?.ToString()).Result;
                     }
 
+
                     if (!resultrefit.IsSuccessStatusCode)
                     {
                         cliente.ErrosIntegracao += resultrefit.Error.Content + "\n ";

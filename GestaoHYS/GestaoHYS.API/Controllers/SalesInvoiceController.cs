@@ -56,6 +56,21 @@ namespace GestaoHYS.API.Controllers
 
         }
 
+        [HttpGet("GetSalesInvoicesAbertasLocais")]
+        public async Task<ActionResult<IEnumerable<SalesInvoice>>> GetSalesInvoicesAbertasLocais()
+        {
+            try
+            {
+                var list = await _service.BuscaFaturasAbertasLocais();
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao buscar lista de faturas abertas locais. Exception: { ex.Message }");
+            }
+
+        }
+
         // GET: api/SalesInvoice/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SalesInvoice>> GetSalesInvoice(long id)

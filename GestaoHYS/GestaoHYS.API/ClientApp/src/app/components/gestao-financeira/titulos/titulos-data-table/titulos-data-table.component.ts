@@ -13,24 +13,23 @@ import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { TableColumn } from 'src/@vex/interfaces/table-column.interface';
 import { Contact } from 'src/static-data/contact';
-import { Invoice } from 'src/app/_models/Invoice';
 import { CommomService } from 'src/app/services/commom.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EventEmitterService } from 'src/app/services/event.service';
 import { environment } from 'src/environments/environment';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
-import { InsercaoVendasCreateUpdateComponent } from '../insercao-vendas-create-update/insercao-vendas-create-update.component';
-import { InsercaoVendaDeleteComponent } from '../insercao-vendas-delete/insercao-vendas-delete.component';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import { Titulos } from 'src/app/_models/Titulos';
+import { TitulosPagamentosComponent } from '../titulos-pagamentos/titulos-pagamentos.component';
 
 @UntilDestroy()
 @Component({
-  selector: 'vex-insercao-vendas-data-table',
-  templateUrl: './insercao-vendas-data-table.component.html',
-  styleUrls: ['./insercao-vendas-data-table.component.scss'],
+  selector: 'vex-titulos-data-table',
+  templateUrl: './titulos-data-table.component.html',
+  styleUrls: ['./titulos-data-table.component.scss'],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -46,7 +45,7 @@ import icSearch from '@iconify/icons-ic/twotone-search';
   ]
   
 })
-export class InsercaoVendasDataTableComponent<T> implements OnInit, OnChanges, AfterViewInit {
+export class TitulosDataTableComponent<T> implements OnInit, OnChanges, AfterViewInit {
 
   @Input() data: T[];
   @Input() columns: TableColumn<T>[];
@@ -58,8 +57,8 @@ export class InsercaoVendasDataTableComponent<T> implements OnInit, OnChanges, A
   @Output() openContact = new EventEmitter<Contact['id']>();
 
   visibleColumns: Array<keyof T | string>;
-  dataSource: MatTableDataSource<Invoice>;
-  listTable: Invoice[] = [];
+  dataSource: MatTableDataSource<Titulos>;
+  listTable: Titulos[] = [];
   requisicao: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -74,12 +73,10 @@ export class InsercaoVendasDataTableComponent<T> implements OnInit, OnChanges, A
 
   displayedColumns: string[] = [
     "Data",
-    "Fatura",
-    "Entidade",
-    "NIF",
-    "Nome",
+    "Vencimento",
+    "Valor",
     "Referencia",
-    "Integrar",
+    "Status",
     "Acoes"
   ];
   searchCtrl = new FormControl();
@@ -89,24 +86,43 @@ export class InsercaoVendasDataTableComponent<T> implements OnInit, OnChanges, A
     private dialog: MatDialog) { }
 
   ngOnInit() {
-    EventEmitterService.get('buscarInsercaoVendas').subscribe(()=>this.mostrarInvoices());
-    this.mostrarInvoices();
+    EventEmitterService.get('buscarTitulos').subscribe(()=>this.mostrarTitulos());
+    this.mostrarTitulos();
 
     this.searchCtrl.valueChanges.pipe(
       untilDestroyed(this)
     ).subscribe(value => this.onFilterChange(value));
   }
 
-  mostrarInvoices(){
+  filterTitulos(value){
+    if(this.listTable){
+      if(value != 0){
+        let listafiltrada = this.listTable.filter(t => t.statusTitulo == value);
+        this.dataSource = new MatTableDataSource(listafiltrada)   
+        this.dataSource.paginator = this.paginator; 
+        this.dataSource.sort = this.sort;
+      }
+      else{
+        this.dataSource = new MatTableDataSource(this.listTable)   
+        this.dataSource.paginator = this.paginator; 
+        this.dataSource.sort = this.sort;
+      }
+      
+    }
+  }
+
+  mostrarTitulos(){
     this.requisicao = true
     this.listTable = [];
-    this.commomService.get(environment.invoice)
+    this.commomService.get(environment.titulos)
     .subscribe(response => {
+      console.log("TITULOS")
+      console.log(response.body)
       if(response.body){
         this.listTable = response.body;  
       }
       else{
-        this.listTable = new Array<Invoice>();
+        this.listTable = new Array<Titulos>();
       }
       this.dataSource = new MatTableDataSource(this.listTable)   
       this.dataSource.paginator = this.paginator; 
@@ -115,7 +131,7 @@ export class InsercaoVendasDataTableComponent<T> implements OnInit, OnChanges, A
     },
     (error) => {
       console.log(error.message);
-      this.snackBar.open(MessagesSnackBar.BUSCAR_INVOICE_ERRO, 'Close', { duration: 4000 });
+      this.snackBar.open(MessagesSnackBar.BUSCAR_TITULOS_ERRO, 'Close', { duration: 4000 });
     });
   }
 
@@ -133,17 +149,10 @@ export class InsercaoVendasDataTableComponent<T> implements OnInit, OnChanges, A
     this.dataSource.sort = this.sort;
   }
 
-  updateVenda(venda) {
-    console.log(venda);
-    this.dialog.open(InsercaoVendasCreateUpdateComponent, {
-      data: venda
-    });
-  }
+  realizarPagamento(titulo) {
 
-  deleteVenda(venda) {
-
-    this.dialog.open(InsercaoVendaDeleteComponent, {
-      data: venda
+    this.dialog.open(TitulosPagamentosComponent, {
+      data: titulo
     });
   }
 

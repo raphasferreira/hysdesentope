@@ -1,4 +1,27 @@
+
 <vex-scrollbar class="h-full relative">
+
+    <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+        <div class="bg-card rounded-full border px-4"
+        fxFlex="400px"
+        fxFlex.lt-md="auto"
+        fxHide.xs
+        fxLayout="row"
+        fxLayoutAlign="start center">
+        <ic-icon [icIcon]="icSearch" size="20px"></ic-icon>
+        <input [formControl]="searchCtrl"
+            class="px-4 py-3 border-0 outline-none w-full bg-transparent"
+            placeholder="Pesquisar..."
+            type="search">
+        </div>
+
+        <span fxFlex></span>
+
+        <button class="ml-4" fxFlex="none" fxHide.gt-xs mat-icon-button type="button">
+        <mat-icon [icIcon]="icSearch"></mat-icon>
+        </button>
+    </div>
+
   <mat-progress-bar *ngIf="requisicao" mode="indeterminate" color="primary"></mat-progress-bar> 
   <mat-table [dataSource]="dataSource" matSort>
 

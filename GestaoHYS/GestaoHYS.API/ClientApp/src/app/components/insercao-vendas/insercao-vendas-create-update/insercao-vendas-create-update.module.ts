@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MY_DATE_FORMATS } from 'src/app/services/date-format';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { MY_DATE_FORMATS } from 'src/app/services/date-format';
     MatCheckboxModule,
     MatProgressBarModule,
     MatTabsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatAutocompleteModule
   ],
   declarations: [InsercaoVendasCreateUpdateComponent],
   entryComponents: [InsercaoVendasCreateUpdateComponent],

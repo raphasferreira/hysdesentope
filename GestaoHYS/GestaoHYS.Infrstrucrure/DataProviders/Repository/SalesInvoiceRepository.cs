@@ -22,7 +22,9 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
         {
             try
             {
-                return await _unitOfWork.Context.Set<SalesInvoice>().Where(w => (!w.IsDeleted) && (!w.isIntegration || (w.isIntegration && !w.isIntegrated))).ToListAsync();
+                return await _unitOfWork.Context.Set<SalesInvoice>()
+                    .Include(w => w.DocumentLines).ThenInclude(d => d.UnitPrice)
+                    .Where(w => (!w.IsDeleted) && (!w.isIntegration || (w.isIntegration && !w.isIntegrated))).ToListAsync();
             }
             catch(Exception ex)
             {
@@ -48,6 +50,11 @@ namespace GestaoHYS.Infrastructure.DataProviders.Repository
                 _unitOfWork.Context.Entry(local).State = EntityState.Detached;
             }
             _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public async Task<IList<SalesInvoice>> BuscaFaturasAbertasLocais()
+        {
+            return await _unitOfWork.Context.Set<SalesInvoice>().Where(s => !s.isIntegrated && s.DocumentStatus == (int)DocumentStatus.Open).ToListAsync();
         }
     }
 }

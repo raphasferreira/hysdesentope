@@ -10,5 +10,6 @@ namespace GestaoHYS.Core.Repositories
     {
         Task<List<SalesInvoice>> FindAllAtivo();
         Task UpdateAttached(SalesInvoice entity);
+        Task<IList<SalesInvoice>> BuscaFaturasAbertasLocais();
     }
 }

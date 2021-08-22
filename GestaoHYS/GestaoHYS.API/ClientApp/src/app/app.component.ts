@@ -131,6 +131,13 @@ export class AppComponent implements OnInit{
             icon: icAssigment,
             gruop:'GestaoHis',
           },
+          {
+            type: 'link',
+            label: 'Títulos',
+            route: '/gestaohis/gestao-financeira/titulos',
+            icon: icAssigment,
+            gruop:'GestaoHis',
+          },
         ]
       },
       {

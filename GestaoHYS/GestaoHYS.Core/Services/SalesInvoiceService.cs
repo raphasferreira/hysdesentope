@@ -14,11 +14,13 @@ namespace GestaoHYS.Core.Services
     {
         private ISalesInvoiceWebService _webService;
         private ISalesInvoiceRepository _repository;
-        public SalesInvoiceService(ISalesInvoiceWebService webService, ISalesInvoiceRepository repository) :
+        private ITitulosRepository _repositoryTitulos;
+        public SalesInvoiceService(ISalesInvoiceWebService webService, ISalesInvoiceRepository repository, ITitulosRepository titulosRepository) :
             base(repository)
         {
             _webService = webService;
             _repository = repository;
+            _repositoryTitulos = titulosRepository;
         }
 
 
@@ -27,12 +29,20 @@ namespace GestaoHYS.Core.Services
         {
             try
             {
+                salesInvoice.DocumentStatus = (int)DocumentStatus.Open;
+                salesInvoice.DocumentStatusDescription = $"{DocumentStatus.Open}";
+                
                 await InsertBaseLocal(salesInvoice);
 
                 if (salesInvoice.isIntegration)
                 {
                     salesInvoice = await IntegrarSalesInvoice(salesInvoice);
-
+                }
+                else
+                {
+                    salesInvoice.NaturalKey = $"{salesInvoice.DocumentType}.{salesInvoice.Serie}.{salesInvoice.Id}";
+                    await Update(salesInvoice);
+                    await CriarTitulo(salesInvoice);
                 }
 
                 return salesInvoice;
@@ -43,6 +53,35 @@ namespace GestaoHYS.Core.Services
             }
         }
 
+        private async Task CriarTitulo(SalesInvoice salesInvoice)
+        { 
+
+            double totalizadorSalesInvoice = 0;
+
+            salesInvoice.DocumentLines.ForEach(d =>
+            {
+                totalizadorSalesInvoice += (Convert.ToDouble(d.Quantity) * (Convert.ToDouble(d.UnitPrice.Amount) - (Convert.ToDouble(d.Discount1))));
+            });
+
+            var titulo = new Titulos()
+            {
+                DataCadastro = DateTime.Now,
+                DataVencimento = salesInvoice.DueDate.Value,
+                ReferenciaSalesInvoice = salesInvoice.NaturalKey,
+                SalesInvoiceId = salesInvoice.Id,
+                StatusTitulo = salesInvoice.DocumentStatus == (int)DocumentStatus.Open ? StatusTitulo.Pendente : StatusTitulo.Liquidado,
+                ValorTotal = totalizadorSalesInvoice
+            };
+
+            try
+            {
+                await _repositoryTitulos.Add(titulo);
+            }
+            catch(Exception)
+            {
+                throw new Exception("Erro ao criar título para pagamento da fatura.");
+            }
+        }
 
         override
         public async Task Update(SalesInvoice salesInvoice)
@@ -144,5 +183,20 @@ namespace GestaoHYS.Core.Services
             }
         }
 
+
+        public async Task<IList<SalesInvoice>> BuscaFaturasAbertasLocais()
+        {
+            try
+            {
+                var listFaturaAbertas = await _repository.BuscaFaturasAbertasLocais();
+                return listFaturaAbertas;
+            }
+            catch(Exception)
+            {
+                throw new Exception("Erro ao buscar faturas abertas.");
+            }
+            
+            
+        }
     }
 }
