@@ -5,7 +5,7 @@ export const environment = {
     //API_MOCK:'http://localhost:8080/',
     API: 'http://hysdesentope.com/api/',
 
-    clientes: 'Cliente',
+  clientes: 'Cliente',
   empresas: 'Empresa',
   parceiros: 'Parceiro',
   usuarios: 'Usuario',

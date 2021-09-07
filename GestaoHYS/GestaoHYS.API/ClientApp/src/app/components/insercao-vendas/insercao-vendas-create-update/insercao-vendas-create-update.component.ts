@@ -50,8 +50,14 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
   };
   static id = 100;
  
-  filteredOptions: Observable<Array<Series>>;
-  myControl = new FormControl();
+
+  
+  listOfSeries: Array<Series> = new Array<Series>();
+  myControlSerie = new FormControl();
+  filteredOptionsSeries: Observable<Array<Series>>;
+
+
+  selectedOpt: string;
   mode: 'create' | 'update' = 'create';
 
   icClose = icClose;
@@ -60,16 +66,42 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
   icDelete = icDelete;
 
   faturaModel: Invoice = new Invoice();
-  listOfInvoiceTypes: Array<InvoiceTypes>;
-  listOfSeries: Array<Series>;
-  listOfClientes: Array<Cliente>;
-  listOfPaymentTerms: Array<PaymentTerms>;
-  listOfPaymentMethod: Array<PaymentMethods>;
-  listOfArtigoVenda: Array<ArtigoVenda>;
-  listOfWarehouses: Array<Warehouses>;
-  listOfUnidades: Array<BaseUnit>;
-  listOfItemTaxSchemas: Array<ItemTaxSchemas>;
-  listOfItemWithholdingTaxSchemas: Array<ItemWithholdingTaxSchemas>;
+  
+  listOfInvoiceTypes: Array<InvoiceTypes>  = new Array<InvoiceTypes>();
+  myControlInvoiceTypes = new FormControl();
+  filteredOptionsInvoiceTypes: Observable<Array<InvoiceTypes>>;
+
+  listOfClientes:Array<Cliente> = new Array<Cliente>();
+  myControlCliente = new FormControl();
+  filteredOptionsCliente: Observable<Array<Cliente>>;
+  
+  listOfPaymentTerms: Array<PaymentTerms> = new Array<PaymentTerms>();
+  myControlPaymentTerms = new FormControl();
+  filteredOptionsPaymentTerms: Observable<Array<PaymentTerms>>;
+
+  listOfPaymentMethod: Array<PaymentMethods>= new Array<PaymentMethods>();
+  myControlPaymentMethods = new FormControl();
+  filteredOptionsPaymentMethods: Observable<Array<PaymentMethods>>;
+
+  listOfArtigoVenda: Array<ArtigoVenda>= new Array<ArtigoVenda>();
+  myControlArtigoVenda = new FormControl();
+  filteredOptionsArtigoVenda: Observable<Array<ArtigoVenda>>;
+
+  listOfWarehouses: Array<Warehouses>= new Array<Warehouses>();
+  myControlWarehouses = new FormControl();
+  filteredOptionsWarehouses: Observable<Array<Warehouses>>;
+
+  listOfUnidades: Array<BaseUnit>= new Array<BaseUnit>();
+  myControlUnidades = new FormControl();
+  filteredOptionsUnidades: Observable<Array<BaseUnit>>;
+
+  listOfItemTaxSchemas: Array<ItemTaxSchemas>= new Array<ItemTaxSchemas>();
+  myControlItemTaxSchemas = new FormControl();
+  filteredOptionsItemTaxSchemas: Observable<Array<ItemTaxSchemas>>;
+
+  listOfItemWithholdingTaxSchemas: Array<ItemWithholdingTaxSchemas>= new Array<ItemWithholdingTaxSchemas>();
+  myControlItemWithholdingTaxSchemas = new FormControl();
+  filteredOptionsItemWithholdingTaxSchemas: Observable<Array<ItemWithholdingTaxSchemas>>;
   
   cssClasses: ['font-medium'];
 
@@ -118,10 +150,111 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
     this.loadItemTaxSchemas();
     this.loadItemWithholdingTaxSchemas();
 
+
+    this.filteredOptionsSeries = this.myControlSerie.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+    
+    this.filteredOptionsInvoiceTypes = this.myControlInvoiceTypes.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterInvoiceTypes(value))
+    );
+
+    this.filteredOptionsCliente = this.myControlCliente.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterCliente(value))
+    );
+
+    this.filteredOptionsPaymentTerms = this.myControlPaymentTerms.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterPaymentTerms(value))
+    );
+
+    this.filteredOptionsPaymentMethods = this.myControlPaymentMethods.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterPaymentMethods(value))
+    );
+
+
+    this.filteredOptionsArtigoVenda = this.myControlArtigoVenda.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterArtigoVenda(value))
+    );
+
+    this.filteredOptionsWarehouses = this.myControlWarehouses.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterWarehouses(value))
+    );
+
+    this.filteredOptionsUnidades = this.myControlUnidades.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterBaseUnit(value))
+    );
+
+    this.filteredOptionsItemTaxSchemas = this.myControlItemTaxSchemas.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterItemTaxSchemas(value))
+    );
+
+    this.filteredOptionsItemWithholdingTaxSchemas = this.myControlItemWithholdingTaxSchemas.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterItemWithholdingTaxSchemas(value))
+    );
+  }
+
+  private _filterInvoiceTypes(value: string) : InvoiceTypes[] {
+    const filterValue = value.toLowerCase();
+    return this.listOfInvoiceTypes.filter(option => option.typeKey.toLowerCase().includes(filterValue));
     
   }
 
- 
+  private _filter(value: string) : Series[] {
+    const filterValue = value.toLowerCase();
+    return this.listOfSeries.filter(option => option.serieKey.toLowerCase().includes(filterValue));
+  }
+
+  private _filterCliente(value: string) : Cliente[] {
+    const filterValue = value.toLowerCase();
+    return this.listOfClientes.filter(option => option.partyKey.toLowerCase().includes(filterValue));
+  }
+
+  private _filterPaymentTerms(value: string) : PaymentTerms[] {
+    const filterValue = value.toLowerCase();
+    return this.listOfPaymentTerms.filter(option => option.paymentTermKey.toLowerCase().includes(filterValue));
+  }
+
+  private _filterPaymentMethods(value: string) : PaymentMethods[] {
+    const filterValue = value.toLowerCase();
+    return this.listOfPaymentMethod.filter(option => option.paymentMethodsKey.toLowerCase().includes(filterValue));
+  }
+
+  private _filterArtigoVenda(value: string) : ArtigoVenda[] {
+    const filterValue = value.toLowerCase();
+    return this.listOfArtigoVenda.filter(option => option.ItemKey.toLowerCase().includes(filterValue));
+  }
+
+  
+
+  // private _filterPaymentMethods(value: string) : PaymentMethods[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.listOfPaymentMethod.filter(option => option.paymentMethodsKey.toLowerCase().includes(filterValue));
+  // }
+
+  // private _filterPaymentMethods(value: string) : PaymentMethods[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.listOfPaymentMethod.filter(option => option.paymentMethodsKey.toLowerCase().includes(filterValue));
+  // }
+
+  // private _filterPaymentMethods(value: string) : PaymentMethods[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.listOfPaymentMethod.filter(option => option.paymentMethodsKey.toLowerCase().includes(filterValue));
+  // }
+
+  // private _filterPaymentMethods(value: string) : PaymentMethods[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.listOfPaymentMethod.filter(option => option.paymentMethodsKey.toLowerCase().includes(filterValue));
+  // }
 
   loadInvoiceTypes() {
     this.commomService.get(environment.invoiceTypes).subscribe(response => {
@@ -147,7 +280,6 @@ export class InsercaoVendasCreateUpdateComponent implements OnInit {
   loadSeries() {
     this.commomService.get(environment.series).subscribe(response => {
       this.listOfSeries = response.body;
-      
 
       if(this.faturaModel.serie != null){
         const serie = this.listOfSeries.find(p => p.serieKey === this.faturaModel.serie);

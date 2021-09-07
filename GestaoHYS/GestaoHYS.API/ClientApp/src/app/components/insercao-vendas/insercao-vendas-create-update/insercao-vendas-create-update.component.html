@@ -44,20 +44,34 @@
             <mat-form-field fxFlex="auto">
               <mat-label>Tipo de Documento</mat-label>
 
-              <mat-select id="documentFocus" [(ngModel)]="faturaModel.documentType" required>
+              <!-- <mat-select id="documentFocus" [(ngModel)]="faturaModel.documentType" required>
                 <mat-option *ngFor="let item of listOfInvoiceTypes" [value]="item.typeKey">{{item.typeKey}} -
                   {{item.description}}
 
                 </mat-option>
-              </mat-select>
+              </mat-select> -->
+              <input type="text"  id="documentFocus" placeholder="Tipo de Documento"  matInput [formControl]="myControlInvoiceTypes" [matAutocomplete]="auto" [(ngModel)]="faturaModel.documentType">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsInvoiceTypes | async" [value]="option.typeKey">
+                  {{option.typeKey}} -
+                  {{option.description}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
             <mat-form-field fxFlex="auto">
               <mat-label>Série</mat-label>
-              <mat-select [(ngModel)]="faturaModel.serie" required>
+              <!-- <mat-select [(ngModel)]="faturaModel.serie" required>
                 <mat-option *ngFor="let item of listOfSeries" [value]="item.serieKey">{{item.serieKey}} -
                   {{item.description}}
                 </mat-option>
-              </mat-select>
+              </mat-select> -->
+              <input type="text" placeholder="Série"  matInput [formControl]="myControlSerie" [matAutocomplete]="autoSerie" [(ngModel)]="faturaModel.serie">
+              <mat-autocomplete #autoSerie="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsSeries | async" [value]="option.serieKey">
+                  {{option.serieKey}} -
+                  {{option.description}}
+                </mat-option>
+              </mat-autocomplete>
               
             </mat-form-field>
             <mat-form-field fxFlex="auto">
@@ -85,23 +99,36 @@
           <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
             <mat-form-field fxFlex="auto">
               <mat-label>Cliente</mat-label>
-              <mat-select [(ngModel)]="faturaModel.buyerCustomerParty" required>
+              <!-- <mat-select [(ngModel)]="faturaModel.buyerCustomerParty" required>
                 <mat-option *ngFor="let item of listOfClientes" [value]="item.partyKey">{{item.partyKey}} -
                   {{item.name}}
 
                 </mat-option>
-              </mat-select>
-
+              </mat-select> -->
+              <input type="text" placeholder="Cliente"  matInput [formControl]="myControlCliente" [matAutocomplete]="autoCliente" [(ngModel)]="faturaModel.buyerCustomerParty">
+              <mat-autocomplete #autoCliente="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsCliente | async" [value]="option.partyKey">
+                  {{option.partyKey}} -
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
             <mat-form-field fxFlex="auto">
               <mat-label>Condição de Pagamento</mat-label>
-              <mat-select [(ngModel)]="faturaModel.paymentTerm" required>
+              <!-- <mat-select [(ngModel)]="faturaModel.paymentTerm" required>
                 <mat-option *ngFor="let item of listOfPaymentTerms" [value]="item.paymentTermKey">
                   {{item.paymentTermKey}} -
                   {{item.description}}
 
                 </mat-option>
-              </mat-select>
+              </mat-select> -->
+              <input type="text" placeholder="Condição de Pagamento"  matInput [formControl]="myControlPaymentTerms" [matAutocomplete]="autoPaymentTerms" [(ngModel)]="faturaModel.paymentTerm">
+              <mat-autocomplete #autoPaymentTerms="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsPaymentTerms | async" [value]="option.paymentTermKey">
+                  {{option.paymentTermKey}} -
+                  {{option.description}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Desconto</mat-label>
@@ -120,13 +147,20 @@
 
             <mat-form-field fxFlex="auto">
               <mat-label>Método de Pagamento</mat-label>
-              <mat-select [(ngModel)]="faturaModel.paymentMethod" required>
+              <!-- <mat-select [(ngModel)]="faturaModel.paymentMethod" required>
                 <mat-option *ngFor="let item of listOfPaymentMethod" [value]="item.paymentMethodsKey">
                   {{item.paymentMethodsKey}} -
                   {{item.description}}
 
                 </mat-option>
-              </mat-select>
+              </mat-select> -->
+              <input type="text" placeholder="Método de Pagamento"  matInput [formControl]="myControlPaymentMethods" [matAutocomplete]="autoPaymentMethods" [(ngModel)]="faturaModel.paymentMethod">
+              <mat-autocomplete #autoPaymentMethods="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsPaymentMethods | async" [value]="option.paymentMethodsKey">
+                  {{option.paymentMethodsKey}} -
+                  {{option.description}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
           </div>
         </div>
@@ -163,11 +197,18 @@
                     </tr>
                     <tr *ngFor="let itemArtigo of faturaModel.documentLines; let id = index">
                       <td [ngClass]="cssClasses" style="width: 300px" mat-cell>
-                        <mat-select [(ngModel)]="itemArtigo.salesItem" (selectionChange)="changeArtigoVenda($event, itemArtigo)" required>
+                        <!-- <mat-select [(ngModel)]="itemArtigo.salesItem" (selectionChange)="changeArtigoVenda($event, itemArtigo)" required>
                           <mat-option *ngFor="let item of listOfArtigoVenda" [value]="item.ItemKey">
                             {{item.ItemKey}} - {{item.description}} 
                           </mat-option>
-                        </mat-select>
+                        </mat-select> -->
+                        <input type="text" placeholder="Artigo"  matInput [formControl]="myControlArtigoVenda" [matAutocomplete]="autoArtigoVenda" [(ngModel)]="itemArtigo.salesItem">
+                        <mat-autocomplete #autoArtigoVenda="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptionsArtigoVenda | async" [value]="option.ItemKey">
+                            {{option.ItemKey}} -
+                            {{option.description}}
+                          </mat-option>
+                        </mat-autocomplete>
                       </td>
                       <td>
                         <mat-select [(ngModel)]="itemArtigo.warehouse" required>
